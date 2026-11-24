@@ -6,6 +6,7 @@ import type {GeometryCollection, Topology} from 'topojson-specification';
 import {AbsoluteFill, Easing, interpolate, random, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 import landTopo from 'world-atlas/land-50m.json';
 import {Canvas, Layer} from '../src/components/Camera';
+import {fitFontSize} from '../src/lib/anim';
 import {FONT_TITLE} from '../src/theme';
 import {Particles} from './primitives/Environment';
 import type {SceneProps} from './types';
@@ -210,8 +211,10 @@ export const MapScene: React.FC<SceneProps> = ({visual, durationInFrames, p, ind
 						style={{
 							fontFamily: FONT_TITLE,
 							fontWeight: 900,
-							fontSize: 60,
+							fontSize: fitFontSize(spec.title, 900, 60, 0.85),
 							color: '#f0e2c0',
+							maxWidth: 940,
+							textAlign: 'center',
 							letterSpacing: 6,
 							padding: '14px 36px',
 							background: 'rgba(10,5,2,0.78)',

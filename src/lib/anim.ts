@@ -39,3 +39,12 @@ export const fadeInOut = (frame: number, duration: number, inF = 8, outF = 8) =>
 	});
 
 export const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+
+/**
+ * Schriftgröße so wählen, dass das längste Wort in die Breite passt
+ * (Cinzel-Großbuchstaben ≈ 0,8 em breit).
+ */
+export const fitFontSize = (text: string, maxWidth: number, maxSize: number, charWidth = 0.8) => {
+	const longest = Math.max(1, ...text.split(/\s+/).map((w) => w.length));
+	return Math.min(maxSize, Math.floor(maxWidth / (longest * charWidth)));
+};

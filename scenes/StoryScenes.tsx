@@ -1,6 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, Easing, interpolate, random, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 import {Canvas, Layer} from '../src/components/Camera';
+import {fitFontSize} from '../src/lib/anim';
 import {FONT_TITLE} from '../src/theme';
 import {Figure, RimLight} from './characters/Figure';
 import {Flame, Lightning, Particles} from './primitives/Environment';
@@ -84,7 +85,7 @@ export const PortraitScene: React.FC<SceneProps> = ({visual, p, index}) => {
 							background: 'rgba(0,0,0,0.45)',
 						}}
 					>
-						<div style={{fontFamily: FONT_TITLE, fontWeight: 900, fontSize: 84, color: '#f0e6d0', letterSpacing: 4, lineHeight: 1.05}}>
+						<div style={{fontFamily: FONT_TITLE, fontWeight: 900, fontSize: fitFontSize(visual.text, 820, 84), color: '#f0e6d0', letterSpacing: 4, lineHeight: 1.05}}>
 							{visual.text}
 						</div>
 						{visual.subtext && (
@@ -172,7 +173,10 @@ export const DocumentScene: React.FC<SceneProps> = ({visual, durationInFrames, p
 						style={{
 							fontFamily: FONT_TITLE,
 							fontWeight: 900,
-							fontSize: visual.text.length > 10 ? 96 : 170,
+							fontSize: visual.text.length <= 20
+								? Math.min(fitFontSize(visual.text, 660, 160), Math.floor(660 / (visual.text.length * 0.62)))
+								: fitFontSize(visual.text, 660, 160),
+							whiteSpace: visual.text.length <= 20 ? 'nowrap' : 'normal',
 							color: p.ink,
 							transform: `scale(${0.6 + 0.4 * textIn}) rotate(-3deg)`,
 							opacity: textIn,
@@ -266,7 +270,7 @@ export const TitleScene: React.FC<SceneProps> = ({visual, p, index}) => {
 										style={{
 											fontFamily: FONT_TITLE,
 											fontWeight: 900,
-											fontSize: text.length > 18 ? 110 : 140,
+											fontSize: fitFontSize(text, 960, 140),
 											color: wi === words.length - 1 ? p.accent : '#f2e8d8',
 											display: 'inline-block',
 											transform: `scale(${2.2 - 1.2 * s}) translateY(${(1 - s) * -40}px)`,

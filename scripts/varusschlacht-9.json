@@ -1,0 +1,72 @@
+{
+  "id": "varusschlacht-9",
+  "title": "Die Varusschlacht: Roms dunkelste Stunde",
+  "status": "draft",
+  "category": "Kriege und Schlachten",
+  "topic": "Varusschlacht im Jahr 9 n. Chr.",
+  "description": "Drei römische Legionen, ausgelöscht von einem Mann, dem Rom vertraute: Arminius. #darkhistory #geschichte #römer #varusschlacht",
+  "hashtags": ["darkhistory", "geschichte", "römer", "varusschlacht", "arminius", "germanen"],
+  "sources": [
+    "Velleius Paterculus, Historia Romana II 117–119 (Arminius im Ritterrang, Tod des Varus)",
+    "Sueton, Divus Augustus 23 (Augustus: „Quintili Vare, legiones redde!“)",
+    "Cassius Dio, Römische Geschichte 56,18–22",
+    "Encyclopaedia Britannica: Battle of the Teutoburg Forest; Arminius",
+    "Museum und Park Kalkriese: Die Varusschlacht (kalkriese-varusschlacht.de) – Ort wahrscheinlich, aber umstritten"
+  ],
+  "voice": {"engine": "chatterbox", "reference": "piper:de_DE-thorsten-high", "exaggeration": 0.6, "cfgWeight": 0.5, "effect": "clear", "seed": 9},
+  "music": {"seed": 9, "key": "a"},
+  "scenes": [
+    {
+      "narration": "Drei römische Legionen. Ausgelöscht – von einem Mann, dem Rom vertraute.",
+      "emphasis": ["Ausgelöscht", "vertraute"],
+      "visual": {"type": "title", "text": "DIE VARUSSCHLACHT", "subtext": "9 N. CHR.", "mood": "blood"}
+    },
+    {
+      "narration": "Arminius. Ein germanischer Fürstensohn, der in der römischen Armee diente – und es bis zum Ritter brachte.",
+      "emphasis": ["Ritter"],
+      "visual": {"type": "portrait", "text": "ARMINIUS", "subtext": "FÜRST DER CHERUSKER", "mood": "night", "characters": [{"kind": "noble", "action": "idle"}]}
+    },
+    {
+      "narration": "Im Herbst des Jahres 9 marschiert Statthalter Varus mit über fünfzehntausend Mann durch Germanien.",
+      "emphasis": ["fünfzehntausend"],
+      "visual": {
+        "type": "map",
+        "map": {
+          "bounds": [5.6, 51.3, 10.0, 53.2],
+          "title": "VERMUTETE MARSCHROUTE",
+          "markers": [
+            {"lon": 9.0, "lat": 52.2, "label": "Weser"},
+            {"lon": 8.13, "lat": 52.41, "label": "Kalkriese"},
+            {"lon": 6.45, "lat": 51.66, "label": "Rhein"}
+          ],
+          "route": [[9.0, 52.2], [8.6, 52.33], [8.35, 52.38], [8.13, 52.41]]
+        }
+      }
+    },
+    {
+      "narration": "Doch Arminius lockt ihn in eine Falle. Zwischen Wald und Sumpf greifen die Germanen an.",
+      "emphasis": ["Falle"],
+      "visual": {"type": "battle", "mood": "storm", "characters": [{"kind": "soldier"}, {"kind": "viking"}]}
+    },
+    {
+      "narration": "Nach Tagen des Gemetzels stürzt sich Varus in sein eigenes Schwert. Seine Legionen werden fast vollständig vernichtet.",
+      "emphasis": ["Schwert", "vernichtet"],
+      "visual": {"type": "document", "text": "3 LEGIONEN", "subtext": "fast vollständig vernichtet", "mood": "gold"}
+    },
+    {
+      "narration": "Kaiser Augustus soll daraufhin seinen Kopf gegen eine Tür geschlagen haben: Varus, gib mir meine Legionen zurück!",
+      "emphasis": ["zurück"],
+      "pace": 1.05,
+      "visual": {"type": "portrait", "text": "AUGUSTUS", "subtext": "KAISER VON ROM", "mood": "gold", "characters": [{"kind": "king", "action": "raiseArm"}]}
+    },
+    {
+      "narration": "Die Nummern dieser drei Legionen hat Rom nie wieder vergeben…",
+      "emphasis": ["nie"],
+      "visual": {"type": "document", "text": "XVII · XVIII · XIX", "subtext": "nie wieder vergeben", "mood": "gold"}
+    },
+    {
+      "narration": "Folge Dark History für mehr dunkle Geschichte.",
+      "visual": {"type": "castle", "mood": "night", "characters": [{"kind": "soldier", "action": "march", "x": 0.15}]}
+    }
+  ]
+}
