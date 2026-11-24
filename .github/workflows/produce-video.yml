@@ -77,6 +77,12 @@ jobs:
         timeout-minutes: 15
         run: pip install --extra-index-url https://download.pytorch.org/whl/cpu -r requirements.txt
 
+      - name: Sprach-Engines prüfen
+        run: |
+          python -c "import piper; print('Piper OK')"
+          python -c "import perth, importlib; m = importlib.import_module('perth.perth_net.perth_net_implicit.perth_watermarker'); print('Perth OK', perth.PerthImplicitWatermarker)" || pip list | grep -i -E "perth|setuptools|torch"
+          python -c "from chatterbox.mtl_tts import ChatterboxMultilingualTTS; import faster_whisper; print('Chatterbox + Whisper OK')"
+
       - name: FFmpeg installieren (statischer Build)
         timeout-minutes: 5
         run: |

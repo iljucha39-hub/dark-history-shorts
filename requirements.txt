@@ -9,3 +9,5 @@ chatterbox-tts==0.1.7
 # faster-whisper (MIT): Wort-Zeitstempel für Chatterbox-Untertitel
 faster-whisper==1.2.1
 numpy>=1.26
+# resemble-perth (Wasserzeichen von Chatterbox) braucht pkg_resources
+setuptools<80
