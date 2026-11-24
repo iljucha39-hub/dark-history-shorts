@@ -16,7 +16,7 @@
     "engine": "chatterbox",
     "exaggeration": 0.9,
     "cfgWeight": 0.3,
-    "effect": "room",
+    "effect": "none",
     "seed": 1347
   },
   "music": {

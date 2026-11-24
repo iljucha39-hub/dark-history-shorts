@@ -39,7 +39,7 @@ class ChatterboxEngine:
             self.model.prepare_conditionals(reference, exaggeration=exaggeration)
         from faster_whisper import WhisperModel
 
-        self.asr = WhisperModel("small", device="cpu", compute_type="int8")
+        self.asr = WhisperModel("base", device="cpu", compute_type="int8")
         self.calls = 0
         self.retries = 0
 

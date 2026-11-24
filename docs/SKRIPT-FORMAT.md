@@ -13,7 +13,7 @@ Vollständiges Beispiel: [`scripts/beispiel-pest-1347.json`](../scripts/beispiel
   "sources": ["Quelle 1", "Quelle 2"],
   // Standard (Stimme „X2“): Chatterbox, ausdrucksstark
   "voice": {"engine": "chatterbox", "exaggeration": 0.9, "cfgWeight": 0.3,
-            "effect": "room", "seed": 1347},     // seed: andere Zahl = andere Betonung
+            "effect": "none", "seed": 1347},     // seed: andere Zahl = andere Betonung
   // Alternative Piper (schneller, monotoner):
   // "voice": {"model": "de_DE-thorsten-high", "lengthScale": 1.08, "noiseScale": 0.85,
   //           "noiseW": 1.0, "effect": "dark", "speaker": "whisper"}

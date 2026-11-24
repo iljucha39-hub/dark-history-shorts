@@ -108,6 +108,8 @@ jobs:
 
       - name: Video produzieren
         timeout-minutes: 40
+        env:
+          TQDM_DISABLE: '1'
         run: node pipeline/produce.mjs "${{ matrix.script }}"
 
       - name: ID bestimmen
