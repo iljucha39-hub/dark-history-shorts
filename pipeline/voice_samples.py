@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
 Erzeugt Stimmproben (MP3) zum Vergleichen am iPhone.
-  python pipeline/voice_samples.py --out output/stimmproben
-Jede Variante = Stimme + Sprecher + Tempo + Effekt (pipeline/voice-effects.json).
-Die gewählte Variante wird im Skript unter "voice" eingetragen.
+  python pipeline/voice_samples.py --engine piper      --out output/stimmproben
+  python pipeline/voice_samples.py --engine chatterbox --out output/stimmproben
+Piper: schnell, offline (ONNX). Chatterbox Multilingual (MIT): ausdrucksstärker,
+deutlich langsamer auf CPU, Stimme per Referenz-Audio wählbar.
 """
 from __future__ import annotations
 
@@ -11,72 +12,132 @@ import argparse
 import json
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 import numpy as np  # noqa: E402
-
-from tts import display_tokens, load_voice, speaker_id, split_sentences, synth_sentence, write_wav  # noqa: E402
 
 TEXT = (
     "Oktober dreizehnhundertsiebenundvierzig. Schiffe laufen in Messina ein. "
     "Die Besatzung? Tot – oder im Sterben. Und niemand ahnt, was sie mitgebracht haben…"
 )
 
-# (Kennung, Beschreibung, Modell, Sprecher, Tempo, Effekt, noiseScale, noiseW)
-VARIANTS = [
-    ("A", "Aktuell: Thorsten, Standard (monoton)", "de_DE-thorsten-high", None, 1.0, "none", None, None),
-    ("B", "Thorsten, lebendiger, tiefer + Hall", "de_DE-thorsten-high", None, 1.08, "dark", 0.85, 1.0),
-    ("C", "Thorsten, sehr lebendig, tiefer + Hall", "de_DE-thorsten-high", None, 1.08, "dark", 1.0, 1.2),
-    ("D", "Thorsten, sehr lebendig, sehr tief + Hall", "de_DE-thorsten-high", None, 1.12, "deep", 1.0, 1.2),
-    ("E", "Thorsten emotional: Flüstern + Raum", "de_DE-thorsten_emotional-medium", "whisper", 1.05, "room", 0.8, 1.0),
-    ("F", "Thorsten emotional: wütend/eindringlich, tiefer", "de_DE-thorsten_emotional-medium", "angry", 1.08, "dark", 0.8, 1.0),
-    ("G", "Thorsten emotional: überrascht/erzählend, tiefer", "de_DE-thorsten_emotional-medium", "surprised", 1.08, "dark", 0.8, 1.0),
-    ("H", "Kerstin (weiblich), lebendiger + Raum", "de_DE-kerstin-low", None, 1.05, "room", 0.85, 1.0),
+# Piper: (Kennung, Beschreibung, Modell, Sprecher, Tempo, Effekt, noiseScale, noiseW)
+PIPER = [
+    ("K", "Piper Karlsson (männlich)", "de_DE-karlsson-low", None, 1.05, "dark", 0.85, 1.0),
+    ("P", "Piper Pavoque (männlich)", "de_DE-pavoque-low", None, 1.05, "dark", 0.85, 1.0),
+    ("R", "Piper Ramona (weiblich)", "de_DE-ramona-low", None, 1.05, "room", 0.85, 1.0),
+    ("M1", "Piper MLS Sprecher 1", "de_DE-mls-medium", 1, 1.05, "dark", 0.85, 1.0),
+    ("M2", "Piper MLS Sprecher 2", "de_DE-mls-medium", 5, 1.05, "dark", 0.85, 1.0),
+    ("M3", "Piper MLS Sprecher 3", "de_DE-mls-medium", 9, 1.05, "dark", 0.85, 1.0),
 ]
+
+# Chatterbox: (Kennung, Beschreibung, Referenzstimme, exaggeration, cfg_weight, Effekt)
+# Referenz "default" = eingebaute Stimme; sonst wird die Klangfarbe aus einer Piper-Probe übernommen.
+CHATTERBOX = [
+    ("X1", "Chatterbox Standardstimme, ausdrucksstark", "default", 0.6, 0.4, "room"),
+    ("X2", "Chatterbox Standardstimme, sehr dramatisch", "default", 0.9, 0.3, "room"),
+    ("X3", "Chatterbox männlich (Thorsten-Klangfarbe), dramatisch", "de_DE-thorsten_emotional-medium:surprised", 0.8, 0.3, "dark"),
+    ("X4", "Chatterbox weiblich (Kerstin-Klangfarbe), dramatisch", "de_DE-kerstin-low", 0.8, 0.3, "room"),
+    ("X5", "Chatterbox männlich (Karlsson-Klangfarbe), dramatisch", "de_DE-karlsson-low", 0.8, 0.3, "dark"),
+]
+
+
+def effects() -> dict:
+    return json.loads((Path(__file__).parent / "voice-effects.json").read_text(encoding="utf-8"))
+
+
+def to_mp3(wav: Path, mp3: Path, fx: str, sr: int):
+    filt = effects()[fx].replace("{sr}", str(sr)) + ",loudnorm=I=-16:TP=-1.5"
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(wav), "-af", filt, "-ar", "44100",
+                    "-b:a", "160k", str(mp3)], check=True)
+
+
+def piper_render(model: str, speaker, scale: float, noise, noise_w, voice_dir: Path, out_wav: Path, cache: dict) -> int:
+    from tts import display_tokens, load_voice, speaker_id, split_sentences, synth_sentence, write_wav
+
+    if model not in cache:
+        cache[model] = load_voice(model, voice_dir)
+    voice = cache[model]
+    spk = speaker_id(voice, speaker)
+    parts = []
+    sr = voice.config.sample_rate
+    for sent in split_sentences(display_tokens(TEXT)):
+        audio, _, sr = synth_sentence(voice, " ".join(sent), scale, spk, noise, noise_w)
+        last = sent[-1]
+        pause = 0.65 if last.endswith(("…", "...")) else 0.35 if last.endswith("?") else 0.22
+        parts += [audio, np.zeros(int(pause * sr), dtype=np.float32)]
+    write_wav(out_wav, np.concatenate(parts), sr)
+    return sr
+
+
+def run_piper(out: Path, voice_dir: Path, lines: list[str]):
+    cache: dict = {}
+    for key, desc, model, speaker, scale, fx, noise, noise_w in PIPER:
+        try:
+            wav = out / f"{key}.wav"
+            sr = piper_render(model, speaker, scale, noise, noise_w, voice_dir, wav, cache)
+            to_mp3(wav, out / f"Probe-{key}.mp3", fx, sr)
+            wav.unlink()
+            setting = {"model": model, "lengthScale": scale, "effect": fx, "noiseScale": noise, "noiseW": noise_w}
+            if speaker is not None:
+                setting["speaker"] = speaker
+            lines.append(f"| **{key}** | {desc} | `{json.dumps(setting, ensure_ascii=False)}` |")
+            print(f"[stimmen] {key}: {desc} ✓", flush=True)
+        except Exception as e:  # noqa: BLE001
+            lines.append(f"| {key} | {desc} | ❌ {e} |")
+            print(f"[stimmen] {key}: FEHLER {e}", flush=True)
+
+
+def run_chatterbox(out: Path, voice_dir: Path, lines: list[str]):
+    import torchaudio
+    from chatterbox.mtl_tts import ChatterboxMultilingualTTS
+
+    t0 = time.time()
+    model = ChatterboxMultilingualTTS.from_pretrained(device="cpu")
+    print(f"[chatterbox] Modell geladen in {time.time() - t0:.0f}s", flush=True)
+    cache: dict = {}
+    for key, desc, ref, exag, cfg, fx in CHATTERBOX:
+        try:
+            prompt = None
+            if ref != "default":
+                m, _, spk = ref.partition(":")
+                prompt = out / f"ref-{key}.wav"
+                piper_render(m, spk or None, 1.0, None, None, voice_dir, prompt, cache)
+            t = time.time()
+            wav = model.generate(TEXT, language_id="de", audio_prompt_path=str(prompt) if prompt else None,
+                                 exaggeration=exag, cfg_weight=cfg)
+            secs = wav.shape[-1] / model.sr
+            raw = out / f"{key}.wav"
+            torchaudio.save(str(raw), wav, model.sr)
+            to_mp3(raw, out / f"Probe-{key}.mp3", fx, model.sr)
+            raw.unlink()
+            if prompt:
+                prompt.unlink()
+            took = time.time() - t
+            setting = {"engine": "chatterbox", "reference": ref, "exaggeration": exag, "cfgWeight": cfg, "effect": fx}
+            lines.append(f"| **{key}** | {desc} – {secs:.0f} s Audio in {took:.0f} s Rechenzeit | `{json.dumps(setting, ensure_ascii=False)}` |")
+            print(f"[chatterbox] {key}: {desc} ✓ ({secs:.1f}s Audio, {took:.0f}s)", flush=True)
+        except Exception as e:  # noqa: BLE001
+            lines.append(f"| {key} | {desc} | ❌ {e} |")
+            print(f"[chatterbox] {key}: FEHLER {e}", flush=True)
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
+    ap.add_argument("--engine", choices=["piper", "chatterbox"], default="piper")
     ap.add_argument("--out", default="output/stimmproben")
     ap.add_argument("--voice-dir", default=".voices")
     args = ap.parse_args()
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
-    effects = json.loads((Path(__file__).parent / "voice-effects.json").read_text(encoding="utf-8"))
-    voices: dict[str, object] = {}
-    lines = ["# Stimmproben", "", f"Text: „{TEXT}“", "", "| Probe | Beschreibung | Einstellung im Skript |", "|---|---|---|"]
-    for key, desc, model, speaker, scale, fx, noise, noise_w in VARIANTS:
-        try:
-            if model not in voices:
-                voices[model] = load_voice(model, Path(args.voice_dir))
-            voice = voices[model]
-            spk = speaker_id(voice, speaker)
-            parts = []
-            for sent in split_sentences(display_tokens(TEXT)):
-                audio, _, sr = synth_sentence(voice, " ".join(sent), scale, spk, noise, noise_w)
-                last = sent[-1]
-                pause = 0.65 if last.endswith(("…", "...")) else 0.35 if last.endswith("?") else 0.22
-                parts += [audio, np.zeros(int(pause * sr), dtype=np.float32)]
-            wav = out / f"{key}.wav"
-            write_wav(wav, np.concatenate(parts), sr)
-            mp3 = out / f"Probe-{key}.mp3"
-            filt = effects[fx].replace("{sr}", str(sr)) + ",loudnorm=I=-16:TP=-1.5"
-            subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(wav), "-af", filt, "-ar", "44100",
-                            "-b:a", "160k", str(mp3)], check=True)
-            wav.unlink()
-            setting = {"model": model, "lengthScale": scale, "effect": fx}
-            if speaker:
-                setting["speaker"] = speaker
-            if noise is not None:
-                setting["noiseScale"] = noise
-                setting["noiseW"] = noise_w
-            lines.append(f"| **{key}** | {desc} | `\"voice\": {json.dumps(setting, ensure_ascii=False)}` |")
-            print(f"[stimmen] {key}: {desc} ✓", flush=True)
-        except Exception as e:  # einzelne Stimme nicht verfügbar → weiter
-            lines.append(f"| {key} | {desc} | ❌ fehlgeschlagen: {e} |")
-            print(f"[stimmen] {key}: FEHLER {e}", flush=True)
-    (out / "stimmproben.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    lines = [f"### {args.engine}", "", "| Probe | Beschreibung | Einstellung |", "|---|---|---|"]
+    if args.engine == "piper":
+        run_piper(out, Path(args.voice_dir), lines)
+    else:
+        run_chatterbox(out, Path(args.voice_dir), lines)
+    (out / f"stimmproben-{args.engine}.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     return 0
 
 

@@ -12,34 +12,62 @@ permissions:
 
 jobs:
   samples:
+    name: Proben ${{ matrix.engine }}
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [piper, chatterbox]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          cache: pip
-      - name: Python-Pakete installieren
-        run: pip install -r requirements.txt
       - name: FFmpeg installieren (statischer Build)
         run: |
           curl -sSL --retry 3 -o /tmp/ffmpeg.tar.xz https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz
           mkdir -p /tmp/ffmpeg && tar -xJf /tmp/ffmpeg.tar.xz -C /tmp/ffmpeg --strip-components=1
           echo "/tmp/ffmpeg/bin" >> "$GITHUB_PATH"
-      - name: Stimmenmodelle aus Cache
+      - name: Pakete installieren
+        run: |
+          if [ "${{ matrix.engine }}" = "chatterbox" ]; then
+            pip install torch==2.6.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+            pip install chatterbox-tts==0.1.7
+          fi
+          pip install "piper-tts[alignment]==1.8.0"
+      - name: Modelle aus Cache
         uses: actions/cache@v4
         with:
-          path: .voices
-          key: piper-voices-samples-v1
+          path: |
+            .voices
+            ~/.cache/huggingface
+          key: voice-samples-${{ matrix.engine }}-v2
       - name: Proben erzeugen
-        run: python pipeline/voice_samples.py --out output/stimmproben
+        run: python pipeline/voice_samples.py --engine ${{ matrix.engine }} --out output/stimmproben
       - name: Zusammenfassung
-        run: cat output/stimmproben/stimmproben.md >> "$GITHUB_STEP_SUMMARY"
+        run: cat output/stimmproben/stimmproben-${{ matrix.engine }}.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: proben-${{ matrix.engine }}
+          path: output/stimmproben/
+
+  release:
+    needs: samples
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: proben
+          merge-multiple: true
       - name: Als Release veröffentlichen
         env:
           GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
         run: |
-          gh release delete stimmproben --cleanup-tag -y 2>/dev/null || true
-          gh release create stimmproben --target "${{ github.sha }}" --title "🎙️ Stimmproben" \
-            --notes-file output/stimmproben/stimmproben.md output/stimmproben/*.mp3
+          ls -la proben
+          cat proben/*.md > notes.md
+          gh release delete stimmproben-2 --cleanup-tag -y 2>/dev/null || true
+          gh release create stimmproben-2 --target "${{ github.sha }}" --title "🎙️ Stimmproben Runde 2" \
+            --notes-file notes.md proben/*.mp3
