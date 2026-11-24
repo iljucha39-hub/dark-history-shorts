@@ -152,10 +152,22 @@ def load_voice(model: str, voice_dir: Path):
     return PiperVoice.load(str(path), include_alignments=True)
 
 
-def synth_sentence(voice, text: str, length_scale: float):
+def speaker_id(voice, speaker) -> int | None:
+    """Sprecher per Name (z. B. "whisper") oder Nummer für Mehrsprecher-Stimmen."""
+    if speaker is None or voice is None:
+        return None
+    if isinstance(speaker, int):
+        return speaker
+    ids = getattr(voice.config, "speaker_id_map", None) or {}
+    if speaker not in ids:
+        raise SystemExit(f"[tts] Sprecher '{speaker}' unbekannt. Verfügbar: {', '.join(ids) or '—'}")
+    return ids[speaker]
+
+
+def synth_sentence(voice, text: str, length_scale: float, speaker: int | None = None):
     from piper import SynthesisConfig
 
-    cfg = SynthesisConfig(length_scale=length_scale, normalize_audio=True, volume=0.95)
+    cfg = SynthesisConfig(length_scale=length_scale, normalize_audio=True, volume=0.95, speaker_id=speaker)
     audio_parts = []
     alignments = []
     ok = True
@@ -173,6 +185,7 @@ def synth_sentence(voice, text: str, length_scale: float):
 
 
 def build(script: dict, voice, length_scale: float, fallback: bool):
+    spk = speaker_id(voice, (script.get("voice") or {}).get("speaker"))
     pron = script.get("pronunciations", {}) or {}
     sr = voice.config.sample_rate if voice else 22050
     pieces: list[np.ndarray] = []
@@ -196,7 +209,7 @@ def build(script: dict, voice, length_scale: float, fallback: bool):
             spoken_counts = [max(1, len([w for w in s.split() if not PUNCT_ONLY.match(w)])) for s in spoken]
             text = " ".join(spoken)
             if voice is not None:
-                audio, align, sr = synth_sentence(voice, text, length_scale)
+                audio, align, sr = synth_sentence(voice, text, length_scale, spk)
             else:  # Platzhalter: Stille mit geschätzter Dauer (nur lokale Tests)
                 dur = sum(len(s) for s in spoken) / 14.0 + 0.2
                 audio, align = np.zeros(int(dur * sr), dtype=np.float32), None

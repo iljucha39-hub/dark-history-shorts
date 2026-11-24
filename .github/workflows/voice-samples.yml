@@ -1,0 +1,45 @@
+name: Stimmproben erzeugen
+
+on:
+  push:
+    paths:
+      - 'pipeline/voice_samples.py'
+      - 'pipeline/voice-effects.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  samples:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Python-Pakete installieren
+        run: pip install -r requirements.txt
+      - name: FFmpeg installieren (statischer Build)
+        run: |
+          curl -sSL --retry 3 -o /tmp/ffmpeg.tar.xz https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz
+          mkdir -p /tmp/ffmpeg && tar -xJf /tmp/ffmpeg.tar.xz -C /tmp/ffmpeg --strip-components=1
+          echo "/tmp/ffmpeg/bin" >> "$GITHUB_PATH"
+      - name: Stimmenmodelle aus Cache
+        uses: actions/cache@v4
+        with:
+          path: .voices
+          key: piper-voices-samples-v1
+      - name: Proben erzeugen
+        run: python pipeline/voice_samples.py --out output/stimmproben
+      - name: Zusammenfassung
+        run: cat output/stimmproben/stimmproben.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Als Release veröffentlichen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete stimmproben --cleanup-tag -y 2>/dev/null || true
+          gh release create stimmproben --target "${{ github.sha }}" --title "🎙️ Stimmproben" \
+            --notes-file output/stimmproben/stimmproben.md output/stimmproben/*.mp3

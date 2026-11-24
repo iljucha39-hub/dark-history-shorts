@@ -134,6 +134,10 @@ async function produce(scriptFile, serveUrl) {
 
 	// 3) Mix: Musik wird unter der Stimme abgesenkt (Sidechain), Lautheit -14 LUFS
 	const mixFile = path.join(genDir, 'mix.wav');
+	const effects = JSON.parse(fs.readFileSync(path.join(ROOT, 'pipeline', 'voice-effects.json'), 'utf8'));
+	const fxName = script.voice?.effect ?? 'none';
+	if (!effects[fxName] || fxName.startsWith('_')) throw new Error(`Unbekannter Stimm-Effekt "${fxName}"`);
+	const voiceFx = effects[fxName].replaceAll('{sr}', String(timeline.meta.sampleRate));
 	await step('Audio-Mix (FFmpeg)', () =>
 		run('ffmpeg', [
 			'-y', '-v', 'error',
@@ -141,7 +145,7 @@ async function produce(scriptFile, serveUrl) {
 			'-i', musicFile,
 			'-filter_complex',
 			[
-				'[0:a]aresample=48000,aformat=channel_layouts=stereo,highpass=f=70,acompressor=threshold=0.125:ratio=3:attack=5:release=80,asplit=2[voice][sc]',
+				`[0:a]${voiceFx},aresample=48000,aformat=channel_layouts=stereo,highpass=f=70,acompressor=threshold=0.125:ratio=3:attack=5:release=80,asplit=2[voice][sc]`,
 				'[1:a]aresample=48000,aformat=channel_layouts=stereo,volume=0.55[mus]',
 				'[mus][sc]sidechaincompress=threshold=0.04:ratio=6:attack=15:release=350[duck]',
 				'[voice][duck]amix=inputs=2:duration=longest:normalize=0,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[out]',
@@ -246,7 +250,7 @@ ${checks.map(([n, p, v]) => `| ${n} | ${p === null ? '– (Teilrender)' : p ? '�
 
 - Dateigröße: ${info.sizeMB.toFixed(1)} MB, Video: ${info.videoCodec}, Audio: ${info.audioCodec}
 - Lautheit: ${lufs !== null ? `${lufs.toFixed(1)} LUFS (Ziel −14)` : 'nicht messbar'}
-- Stimme: ${timeline.meta.voice}, Sprechtempo (lengthScale): ${timeline.meta.lengthScale}${timeline.meta.autoAdjusted ? ' (automatisch angepasst)' : ''}
+- Stimme: ${timeline.meta.voice}${script.voice?.speaker ? ` (Sprecher: ${script.voice.speaker})` : ''}, Effekt: ${fxName}, Sprechtempo (lengthScale): ${timeline.meta.lengthScale}${timeline.meta.autoAdjusted ? ' (automatisch angepasst)' : ''}
 - Untertitel-Timing: ${timeline.meta.wordsAligned} Wörter exakt (Phonem-Alignment), ${timeline.meta.wordsEstimated} geschätzt
 - Musik: ${script.music?.file ? `eigene Datei ${script.music.file}` : `synthetisch (Seed ${script.music?.seed ?? 1}, Tonart ${script.music?.key ?? 'd'})`}
 
