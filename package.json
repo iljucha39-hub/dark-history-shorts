@@ -1,0 +1,33 @@
+{
+  "name": "dark-history-shorts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Automatisierte Produktion von Dark-History-Shorts (TikTok/YouTube) mit Remotion, Piper-TTS und GitHub Actions",
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "validate": "node pipeline/validate.mjs",
+    "produce": "node pipeline/produce.mjs"
+  },
+  "dependencies": {
+    "@fontsource/cinzel": "5.3.0",
+    "@fontsource/montserrat": "5.3.0",
+    "@remotion/bundler": "4.0.540",
+    "@remotion/cli": "4.0.540",
+    "@remotion/fonts": "4.0.540",
+    "@remotion/renderer": "4.0.540",
+    "d3-geo": "3.1.2",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.540",
+    "topojson-client": "3.1.0",
+    "world-atlas": "2.0.2"
+  },
+  "devDependencies": {
+    "@types/d3-geo": "3.1.1",
+    "@types/react": "19.2.2",
+    "@types/topojson-client": "3.1.5",
+    "typescript": "5.9.3"
+  }
+}

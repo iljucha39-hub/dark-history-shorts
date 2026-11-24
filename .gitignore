@@ -155,3 +155,14 @@ vite.config.ts.timestamp-*
 .nx/cache
 .nx/workspace-data
 .nx/migrate-runs
+
+# --- Dark History Shorts: generierte Dateien ---
+assets/generated/
+audio/*/
+!audio/music/
+output/*/
+subtitles/*.json
+subtitles/*.srt
+.voices/
+__pycache__/
+*.pyc

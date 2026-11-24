@@ -1,0 +1,90 @@
+{
+  "id": "beispiel-pest-1347",
+  "title": "Der Schwarze Tod erreicht Europa",
+  "status": "approved",
+  "category": "Mittelalter",
+  "topic": "Ankunft der Pest in Messina 1347",
+  "description": "Oktober 1347: Schiffe aus Caffa bringen den Schwarzen Tod nach Europa. #darkhistory #geschichte #mittelalter",
+  "hashtags": ["darkhistory", "geschichte", "mittelalter", "pest", "schwarzertod"],
+  "sources": [
+    "Ole J. Benedictow: The Black Death 1346–1353. The Complete History, Boydell Press 2004",
+    "Mark Wheelis: Biological Warfare at the 1346 Siege of Caffa, Emerging Infectious Diseases 8(9), 2002",
+    "Encyclopaedia Britannica: Black Death",
+    "Science History Institute / diverse Museen: Schnabelmaske der Pestärzte (17. Jahrhundert)"
+  ],
+  "voice": {"model": "de_DE-thorsten-high", "lengthScale": 1.0},
+  "music": {"seed": 1347, "key": "d"},
+  "scenes": [
+    {
+      "narration": "Oktober 1347. Schiffe laufen in Messina ein. Die Besatzung ist tot – oder liegt im Sterben.",
+      "emphasis": ["tot", "Sterben"],
+      "visual": {"type": "title", "text": "DER SCHWARZE TOD", "subtext": "MESSINA · 1347", "mood": "blood"}
+    },
+    {
+      "narration": "Sie kommen aus Caffa am Schwarzen Meer. Dort sollen Belagerer Pestleichen über die Stadtmauer geschleudert haben.",
+      "emphasis": ["Pestleichen"],
+      "visual": {
+        "type": "map",
+        "map": {
+          "bounds": [8, 34, 40, 49],
+          "title": "DER WEG DER PEST",
+          "markers": [
+            {"lon": 35.38, "lat": 45.03, "label": "Caffa"},
+            {"lon": 28.98, "lat": 41.01, "label": "Konstantinopel"},
+            {"lon": 15.55, "lat": 38.19, "label": "Messina"}
+          ],
+          "route": [[35.38, 45.03], [31.5, 43.0], [28.98, 41.01], [26.0, 39.5], [24.0, 37.2], [20.0, 36.8], [15.55, 38.19]]
+        }
+      }
+    },
+    {
+      "narration": "An Bord: Ratten, Flöhe und ein unsichtbarer Killer. Das Bakterium Yersinia pestis.",
+      "emphasis": ["Killer"],
+      "visual": {"type": "sea", "mood": "storm"}
+    },
+    {
+      "narration": "Fieber, schwarze Beulen, und nach wenigen Tagen der Tod. Die Menschen beten – vergeblich.",
+      "emphasis": ["Beulen", "Tod"],
+      "visual": {
+        "type": "village",
+        "mood": "fog",
+        "characters": [
+          {"kind": "monk", "action": "pray", "x": 0.25},
+          {"kind": "peasant", "action": "cower", "x": 0.62, "facing": "left"},
+          {"kind": "peasant", "action": "walk", "x": 0.85, "facing": "left", "scale": 0.8}
+        ]
+      }
+    },
+    {
+      "narration": "In nur vier Jahren erreicht die Seuche fast ganz Europa.",
+      "emphasis": ["Europa"],
+      "visual": {
+        "type": "map",
+        "map": {
+          "bounds": [-10, 35, 30, 62],
+          "markers": [{"lon": 15.55, "lat": 38.19, "label": "Messina"}],
+          "spreadFrom": 0
+        }
+      }
+    },
+    {
+      "narration": "Zwischen einem Drittel und der Hälfte aller Menschen in Europa stirbt.",
+      "emphasis": ["Hälfte"],
+      "visual": {"type": "document", "text": "1 VON 3", "subtext": "Europäern stirbt – oder mehr"}
+    },
+    {
+      "narration": "Und die berühmten Pestärzte mit Schnabelmaske? Die gab es erst rund dreihundert Jahre später.",
+      "emphasis": ["später"],
+      "visual": {
+        "type": "portrait",
+        "text": "PESTARZT",
+        "subtext": "17. JAHRHUNDERT",
+        "characters": [{"kind": "plagueDoctor", "action": "idle"}]
+      }
+    },
+    {
+      "narration": "Folge Dark History für mehr dunkle Geschichte.",
+      "visual": {"type": "castle", "mood": "night", "characters": [{"kind": "knight", "action": "walk", "x": 0.15}]}
+    }
+  ]
+}

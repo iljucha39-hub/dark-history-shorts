@@ -1,0 +1,132 @@
+name: Video produzieren
+
+on:
+  push:
+    paths:
+      - 'scripts/*.json'
+  workflow_dispatch:
+    inputs:
+      scripts:
+        description: 'Video-IDs oder Pfade, kommagetrennt (z. B. beispiel-pest-1347) – oder "all"'
+        required: true
+        default: 'all'
+      release:
+        description: 'MP4 zusätzlich als GitHub Release veröffentlichen (direkter Download am iPhone)'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write   # für das optionale Release mit MP4-Download
+
+concurrency:
+  group: video-production-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    name: Aufträge ermitteln
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+      count: ${{ steps.plan.outputs.count }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - id: plan
+        env:
+          SCRIPTS: ${{ github.event.inputs.scripts }}
+          BEFORE: ${{ github.event.before }}
+          SHA: ${{ github.sha }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: node pipeline/plan.mjs
+
+  render:
+    name: Rendern ${{ matrix.script }}
+    needs: plan
+    if: needs.plan.outputs.count != '0'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        script: ${{ fromJson(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Abhängigkeiten installieren
+        run: |
+          npm ci
+          pip install -r requirements.txt
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
+          ffmpeg -version | head -1
+
+      - name: Skript prüfen
+        run: node pipeline/validate.mjs "${{ matrix.script }}"
+
+      - name: Stimmenmodell aus Cache
+        uses: actions/cache@v4
+        with:
+          path: .voices
+          key: piper-voices-v1-${{ hashFiles('requirements.txt') }}
+
+      - name: Remotion-Browser installieren
+        run: npx remotion browser ensure
+
+      - name: Video produzieren
+        run: node pipeline/produce.mjs "${{ matrix.script }}"
+
+      - name: ID bestimmen
+        id: meta
+        if: always()
+        run: echo "id=$(basename '${{ matrix.script }}' .json)" >> "$GITHUB_OUTPUT"
+
+      - name: Produktionsbericht in Zusammenfassung
+        if: always()
+        run: |
+          f="output/${{ steps.meta.outputs.id }}/bericht.md"
+          if [ -f "$f" ]; then cat "$f" >> "$GITHUB_STEP_SUMMARY"; else echo "## ❌ ${{ matrix.script }}: Produktion fehlgeschlagen – siehe Log" >> "$GITHUB_STEP_SUMMARY"; fi
+
+      - name: Artifact hochladen
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: video-${{ steps.meta.outputs.id }}
+          path: |
+            output/${{ steps.meta.outputs.id }}/*.mp4
+            output/${{ steps.meta.outputs.id }}/cover.jpg
+            output/${{ steps.meta.outputs.id }}/bericht.md
+            output/${{ steps.meta.outputs.id }}/beschreibung.txt
+            output/${{ steps.meta.outputs.id }}/*.srt
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Als Release veröffentlichen (direkter MP4-Download)
+        if: success() && (github.event_name == 'push' || github.event.inputs.release == 'true')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          id="${{ steps.meta.outputs.id }}"
+          tag="video-$id"
+          title=$(node -e "console.log(require('./${{ matrix.script }}').title)")
+          gh release delete "$tag" --cleanup-tag -y 2>/dev/null || true
+          gh release create "$tag" \
+            --target "${{ github.sha }}" \
+            --title "🎬 $title" \
+            --notes-file "output/$id/bericht.md" \
+            "output/$id/$id.mp4" "output/$id/cover.jpg" "output/$id/beschreibung.txt" "output/$id/$id.srt"
+          echo "📥 Download: ${{ github.server_url }}/${{ github.repository }}/releases/tag/$tag" >> "$GITHUB_STEP_SUMMARY"
