@@ -19,8 +19,8 @@ sys.path.insert(0, str(Path(__file__).parent))
 import numpy as np  # noqa: E402
 
 TEXT = (
-    "Oktober dreizehnhundertsiebenundvierzig. Schiffe laufen in Messina ein. "
-    "Die Besatzung? Tot – oder im Sterben. Und niemand ahnt, was sie mitgebracht haben…"
+    "Dieses Schiff wurde mitten im Atlantik gefunden – ohne einen einzigen Menschen an Bord. "
+    "Der Kapitän, seine Frau, ihre kleine Tochter: verschwunden. Bis heute weiß niemand, warum…"
 )
 
 # Piper: (Kennung, Beschreibung, Modell, Sprecher, Tempo, Effekt, noiseScale, noiseW)
@@ -35,13 +35,15 @@ PIPER = [
 
 # Chatterbox: (Kennung, Beschreibung, Referenzstimme, exaggeration, cfg_weight, Effekt)
 # Referenz "default" = eingebaute Stimme; sonst wird die Klangfarbe aus einer Piper-Probe übernommen.
+# (Kennung, Beschreibung, Referenzstimme, exaggeration, cfg_weight, Effekt, Tempo)
 CHATTERBOX = [
-    ("C1", "Thorsten-Klangfarbe, klar & ruhig", "de_DE-thorsten-high", 0.6, 0.5, "clear"),
-    ("C2", "Thorsten-Klangfarbe, klar & lebendig", "de_DE-thorsten-high", 0.75, 0.45, "clear"),
-    ("C3", "Karlsson-Klangfarbe, klar & lebendig", "de_DE-karlsson-low", 0.75, 0.45, "clear"),
-    ("C4", "MLS-Sprecher (männlich), klar & lebendig", "de_DE-mls-medium:5", 0.75, 0.45, "clear"),
-    ("C5", "Kerstin (weiblich), klar & lebendig", "de_DE-kerstin-low", 0.75, 0.45, "clear"),
-    ("C6", "Standardstimme (wie X2), aber klarer", "default", 0.6, 0.5, "clear"),
+    ("V1", "C1 wie im Varusschlacht-Video (ohne Beschleunigung)", "de_DE-thorsten-high", 0.6, 0.5, "clear", 1.0),
+    ("V2", "C1 mit neuer, sauberer Beschleunigung (+8 %)", "de_DE-thorsten-high", 0.6, 0.5, "clear", 1.08),
+    ("V3", "Hörbuch-Sprecher A", "de_DE-mls-medium:0", 0.6, 0.5, "clear", 1.0),
+    ("V4", "Hörbuch-Sprecher B", "de_DE-mls-medium:3", 0.6, 0.5, "clear", 1.0),
+    ("V5", "Hörbuch-Sprecher C", "de_DE-mls-medium:8", 0.6, 0.5, "clear", 1.0),
+    ("V6", "Hörbuch-Sprecher D", "de_DE-mls-medium:12", 0.6, 0.5, "clear", 1.0),
+    ("V7", "Chatterbox-Standardstimme, ruhig & klar", "default", 0.5, 0.5, "clear", 1.0),
 ]
 
 
@@ -92,14 +94,13 @@ def run_piper(out: Path, voice_dir: Path, lines: list[str]):
 
 
 def run_chatterbox(out: Path, voice_dir: Path, lines: list[str]):
-    import torchaudio
     from chatterbox.mtl_tts import ChatterboxMultilingualTTS
 
     t0 = time.time()
     model = ChatterboxMultilingualTTS.from_pretrained(device="cpu")
     print(f"[chatterbox] Modell geladen in {time.time() - t0:.0f}s", flush=True)
     cache: dict = {}
-    for key, desc, ref, exag, cfg, fx in CHATTERBOX:
+    for key, desc, ref, exag, cfg, fx, tempo in CHATTERBOX:
         try:
             prompt = None
             if ref != "default":
@@ -109,15 +110,21 @@ def run_chatterbox(out: Path, voice_dir: Path, lines: list[str]):
             t = time.time()
             wav = model.generate(TEXT, language_id="de", audio_prompt_path=str(prompt) if prompt else None,
                                  exaggeration=exag, cfg_weight=cfg)
-            secs = wav.shape[-1] / model.sr
+            audio = wav.squeeze(0).cpu().numpy().astype("float32")
+            if tempo != 1.0:
+                from tts import time_stretch
+                audio = time_stretch(audio, model.sr, 1.0 / tempo)
+            secs = len(audio) / model.sr
             raw = out / f"{key}.wav"
-            torchaudio.save(str(raw), wav, model.sr)
+            from tts import write_wav
+            write_wav(raw, audio, model.sr)
             to_mp3(raw, out / f"Probe-{key}.mp3", fx, model.sr)
             raw.unlink()
             if prompt:
                 prompt.unlink()
             took = time.time() - t
-            setting = {"engine": "chatterbox", "reference": ref, "exaggeration": exag, "cfgWeight": cfg, "effect": fx}
+            setting = {"engine": "chatterbox", "reference": ref if ref == "default" else f"piper:{ref}",
+                       "exaggeration": exag, "cfgWeight": cfg, "effect": fx, "speed": tempo}
             lines.append(f"| **{key}** | {desc} – {secs:.0f} s Audio in {took:.0f} s Rechenzeit | `{json.dumps(setting, ensure_ascii=False)}` |")
             print(f"[chatterbox] {key}: {desc} ✓ ({secs:.1f}s Audio, {took:.0f}s)", flush=True)
         except Exception as e:  # noqa: BLE001

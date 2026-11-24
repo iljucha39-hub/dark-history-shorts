@@ -327,6 +327,24 @@ def write_wav(path: Path, audio: np.ndarray, sr: int):
         w.writeframes(pcm.tobytes())
 
 
+def time_stretch(audio: np.ndarray, sr: int, factor: float) -> np.ndarray:
+    """Tempo ändern ohne Tonhöhe (factor > 1 = langsamer) mit FFmpeg „atempo“ –
+    klingt bei Sprache deutlich natürlicher als ein Phase-Vocoder."""
+    import subprocess
+    import tempfile
+
+    if abs(factor - 1.0) < 0.005:
+        return audio
+    with tempfile.TemporaryDirectory() as d:
+        src, dst = Path(d) / "in.wav", Path(d) / "out.wav"
+        write_wav(src, audio, sr)
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(src), "-af", f"atempo={1.0 / factor:.5f}",
+                        "-ar", str(sr), "-ac", "1", str(dst)], check=True)
+        with wave.open(str(dst), "rb") as w:
+            pcm = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16)
+    return (pcm.astype(np.float32) / 32767.0)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--script", required=True)
@@ -356,9 +374,7 @@ def main() -> int:
             engine.length_scale *= factor
             audio, sr, tl, stats = build(script, engine)
         else:
-            import librosa
-
-            audio = librosa.effects.time_stretch(audio, rate=1.0 / factor).astype(np.float32)
+            audio = time_stretch(audio, sr, factor)
             for w in tl["words"]:
                 w["start"], w["end"] = round(w["start"] * factor, 3), round(w["end"] * factor, 3)
             for sc in tl["scenes"]:

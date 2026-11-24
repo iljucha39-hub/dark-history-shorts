@@ -86,9 +86,9 @@ class ChatterboxEngine:
 
     def stretch(self, audio: np.ndarray, spans, factor: float):
         """Zeitdehnung ohne Tonhöhenänderung (factor > 1 = langsamer)."""
-        import librosa
+        from tts import time_stretch
 
-        out = librosa.effects.time_stretch(audio, rate=1.0 / factor).astype(np.float32)
+        out = time_stretch(audio, self.sr, factor)
         if spans:
             ratio = len(out) / max(1, len(audio))
             spans = [(int(a * ratio), int(b * ratio)) for a, b in spans]
