@@ -24,6 +24,7 @@
   "exaggeration": 0.6,
   "cfgWeight": 0.5,
   "effect": "clear",
+  "speed": 1.08,
   "seed": 1991
  },
  "music": {
@@ -32,21 +33,21 @@
  },
  "scenes": [
   {
-   "narration": "Ein Mordfall. Über fünftausend Jahre alt. Das Opfer: Ötzi.",
+   "narration": "Dieser Mordfall ist über fünftausend Jahre alt – und bis heute nicht aufgeklärt.",
    "emphasis": [
     "Mordfall"
    ],
    "visual": {
     "type": "title",
-    "text": "ÖTZI",
-    "subtext": "DER MANN AUS DEM EIS",
+    "text": "MORD IM EIS",
+    "subtext": "ÖTZI",
     "mood": "fog"
    }
   },
   {
-   "narration": "September 1991. Zwei Wanderer entdecken in den Ötztaler Alpen eine Leiche im Eis.",
+   "narration": "1991 finden Wanderer in den Ötztaler Alpen einen Toten im Eis.",
    "emphasis": [
-    "Leiche"
+    "Toten"
    ],
    "visual": {
     "type": "map",
@@ -79,9 +80,9 @@
    }
   },
   {
-   "narration": "Es ist ein Mann, der vor rund fünftausenddreihundert Jahren starb – mit etwa fünfundvierzig.",
+   "narration": "Ötzi. Er starb vor rund 5.300 Jahren.",
    "emphasis": [
-    "fünftausenddreihundert"
+    "Ötzi"
    ],
    "visual": {
     "type": "portrait",
@@ -97,7 +98,7 @@
    }
   },
   {
-   "narration": "Zehn Jahre nach dem Fund zeigen Röntgenbilder: In seiner linken Schulter steckt eine Pfeilspitze.",
+   "narration": "Zehn Jahre nach dem Fund zeigt ein Röntgenbild: In seiner Schulter steckt eine Pfeilspitze.",
    "emphasis": [
     "Pfeilspitze"
    ],
@@ -109,7 +110,7 @@
    }
   },
   {
-   "narration": "Der Pfeil kam wohl von hinten und verletzte eine große Arterie. Ötzi verblutete.",
+   "narration": "Der Pfeil kam wohl von hinten. Ötzi verblutete.",
    "emphasis": [
     "verblutete"
    ],
@@ -128,7 +129,7 @@
    }
   },
   {
-   "narration": "Neben ihm lag ein wertvolles Kupferbeil. Ein Raubmord war es also wohl nicht.",
+   "narration": "Sein wertvolles Kupferbeil ließ der Täter liegen. Ein Raub war es also wohl nicht.",
    "emphasis": [
     "Kupferbeil"
    ],
@@ -140,30 +141,32 @@
    }
   },
   {
-   "narration": "Wer ihn tötete – und warum –, wird wohl für immer ein Rätsel bleiben…",
+   "narration": "Wer war der Täter? Und warum musste Ötzi sterben?",
    "emphasis": [
-    "Rätsel"
+    "Täter"
    ],
    "visual": {
     "type": "title",
-    "text": "UNGELÖST",
+    "text": "WER?",
     "mood": "fog",
     "lightning": false
    }
   },
   {
-   "narration": "Folge Dark History für mehr dunkle Geschichte.",
+   "narration": "Eine Antwort gibt es nicht. Seit über fünftausend Jahren…",
+   "emphasis": [
+    "fünftausend"
+   ],
    "visual": {
-    "type": "castle",
+    "type": "title",
+    "text": "UNGELÖST",
+    "subtext": "SEIT 5.300 JAHREN",
     "mood": "night",
-    "characters": [
-     {
-      "kind": "monk",
-      "action": "walk",
-      "x": 0.15
-     }
-    ]
+    "lightning": false
    }
   }
- ]
+ ],
+ "pronunciations": {
+  "5.300": "fünftausenddreihundert"
+ }
 }

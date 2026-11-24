@@ -25,6 +25,7 @@
   "exaggeration": 0.6,
   "cfgWeight": 0.5,
   "effect": "clear",
+  "speed": 1.08,
   "seed": 1307
  },
  "music": {
@@ -37,9 +38,10 @@
  },
  "scenes": [
   {
-   "narration": "Freitag, der Dreizehnte. Ein Tag, der einen ganzen Ritterorden vernichtete.",
+   "narration": "Freitag, der Dreizehnte: An einem einzigen Morgen wird ein ganzer Ritterorden verhaftet.",
    "emphasis": [
-    "vernichtete"
+    "einzigen",
+    "verhaftet"
    ],
    "visual": {
     "type": "title",
@@ -49,7 +51,7 @@
    }
   },
   {
-   "narration": "Die Templer: reiche, mächtige Kreuzritter – und Geldgeber des französischen Königs.",
+   "narration": "Die Templer: reich, mächtig – und Geldgeber des französischen Königs.",
    "emphasis": [
     "Geldgeber"
    ],
@@ -67,9 +69,9 @@
    }
   },
   {
-   "narration": "König Philipp der Vierte steht tief in ihrer Schuld. Und er schlägt zu.",
+   "narration": "Philipp der Vierte schuldet ihnen viel Geld. Also schlägt er zu.",
    "emphasis": [
-    "Schuld"
+    "schuldet"
    ],
    "visual": {
     "type": "portrait",
@@ -85,9 +87,9 @@
    }
   },
   {
-   "narration": "Am dreizehnten Oktober 1307 lässt er in ganz Frankreich Templer verhaften – alle gleichzeitig.",
+   "narration": "Am dreizehnten Oktober 1307 lässt er Templer in ganz Frankreich festnehmen.",
    "emphasis": [
-    "gleichzeitig"
+    "festnehmen"
    ],
    "visual": {
     "type": "castle",
@@ -107,7 +109,7 @@
    }
   },
   {
-   "narration": "Unter Folter gestehen viele absurde Vorwürfe: Ketzerei, Götzendienst, Gotteslästerung.",
+   "narration": "Unter Folter gestehen sie Ketzerei und Gotteslästerung.",
    "emphasis": [
     "Folter"
    ],
@@ -130,21 +132,8 @@
    }
   },
   {
-   "narration": "Unter dem Druck des Königs löst Papst Clemens der Fünfte den Orden 1312 auf.",
+   "narration": "1314 brennt Großmeister Jacques de Molay auf dem Scheiterhaufen.",
    "emphasis": [
-    "auf"
-   ],
-   "visual": {
-    "type": "document",
-    "text": "1312",
-    "subtext": "Orden aufgelöst",
-    "mood": "gold"
-   }
-  },
-  {
-   "narration": "1314 stirbt Großmeister Jacques de Molay auf dem Scheiterhaufen. Der Legende nach verflucht er König und Papst – beide sterben noch im selben Jahr.",
-   "emphasis": [
-    "verflucht",
     "Scheiterhaufen"
    ],
    "visual": {
@@ -167,17 +156,27 @@
    }
   },
   {
-   "narration": "Folge Dark History für mehr dunkle Geschichte.",
+   "narration": "Der Legende nach verflucht er König und Papst. Beide sterben noch im selben Jahr.",
+   "emphasis": [
+    "verflucht"
+   ],
    "visual": {
-    "type": "castle",
-    "mood": "night",
-    "characters": [
-     {
-      "kind": "monk",
-      "action": "walk",
-      "x": 0.15
-     }
-    ]
+    "type": "title",
+    "text": "DER FLUCH",
+    "subtext": "1314",
+    "mood": "fire"
+   }
+  },
+  {
+   "narration": "Manche sehen darin den Ursprung des Unglückstags Freitag, der Dreizehnte. Belegt ist das nicht…",
+   "emphasis": [
+    "Unglückstags"
+   ],
+   "visual": {
+    "type": "document",
+    "text": "FREITAG, 13.",
+    "subtext": "Unglückstag?",
+    "mood": "gold"
    }
   }
  ]

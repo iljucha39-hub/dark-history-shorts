@@ -24,6 +24,7 @@
   "exaggeration": 0.6,
   "cfgWeight": 0.5,
   "effect": "clear",
+  "speed": 1.08,
   "seed": 1872
  },
  "music": {
@@ -32,21 +33,22 @@
  },
  "scenes": [
   {
-   "narration": "Ein Schiff mitten im Atlantik. Die Segel gesetzt – aber niemand an Bord.",
+   "narration": "Dieses Schiff wurde mitten im Atlantik gefunden – ohne einen einzigen Menschen an Bord.",
    "emphasis": [
-    "niemand"
+    "ohne",
+    "einzigen"
    ],
    "visual": {
     "type": "title",
-    "text": "DIE MARY CELESTE",
-    "subtext": "1872",
+    "text": "NIEMAND AN BORD",
+    "subtext": "MARY CELESTE · 1872",
     "mood": "storm"
    }
   },
   {
-   "narration": "Dezember 1872. Östlich der Azoren entdeckt die Crew der Dei Gratia ein treibendes Schiff.",
+   "narration": "Dezember 1872, östlich der Azoren: die Mary Celeste.",
    "emphasis": [
-    "treibendes"
+    "Azoren"
    ],
    "visual": {
     "type": "map",
@@ -101,9 +103,9 @@
    }
   },
   {
-   "narration": "Es ist die Mary Celeste, unterwegs von New York nach Genua. Ladung: über siebzehnhundert Fässer Alkohol.",
+   "narration": "Die Segel gesetzt. Die Ladung unberührt: siebzehnhundert Fässer Alkohol.",
    "emphasis": [
-    "Alkohol"
+    "unberührt"
    ],
    "visual": {
     "type": "sea",
@@ -113,7 +115,7 @@
    }
   },
   {
-   "narration": "Doch an Bord: niemand. Kapitän Briggs, seine Frau, die kleine Tochter und sieben Seeleute – verschwunden.",
+   "narration": "Doch der Kapitän, seine Frau, ihre kleine Tochter und sieben Seeleute: verschwunden.",
    "emphasis": [
     "verschwunden"
    ],
@@ -125,21 +127,21 @@
    }
   },
   {
-   "narration": "Das Rettungsboot fehlt. Der letzte Eintrag im Logbuch stammt vom fünfundzwanzigsten November.",
+   "narration": "Der letzte Eintrag im Logbuch: rund zehn Tage vor dem Fund.",
    "emphasis": [
-    "Rettungsboot"
+    "Logbuch"
    ],
    "visual": {
     "type": "document",
-    "text": "25. NOVEMBER",
-    "subtext": "letzter Eintrag im Logbuch",
+    "text": "LOGBUCH",
+    "subtext": "letzter Eintrag: 25. November",
     "mood": "gold"
    }
   },
   {
-   "narration": "Meuterei? Piraten? Ein Unglück? Die Ermittler in Gibraltar finden keine Spur eines Verbrechens.",
+   "narration": "Das Rettungsboot fehlt. Keine Spur von Kampf oder Verbrechen.",
    "emphasis": [
-    "keine"
+    "Rettungsboot"
    ],
    "visual": {
     "type": "sea",
@@ -148,29 +150,28 @@
    }
   },
   {
-   "narration": "Bis heute weiß niemand, warum sie ein seetüchtiges Schiff verließen…",
+   "narration": "Warum verlassen zehn Menschen ein seetüchtiges Schiff?",
    "emphasis": [
-    "niemand"
+    "Warum"
    ],
    "visual": {
     "type": "title",
-    "text": "UNGELÖST",
+    "text": "WARUM?",
     "mood": "night",
     "lightning": false
    }
   },
   {
-   "narration": "Folge Dark History für mehr dunkle Geschichte.",
+   "narration": "Eine Antwort gibt es bis heute nicht…",
+   "emphasis": [
+    "nicht"
+   ],
    "visual": {
-    "type": "castle",
+    "type": "sea",
     "mood": "night",
-    "characters": [
-     {
-      "kind": "monk",
-      "action": "walk",
-      "x": 0.15
-     }
-    ]
+    "rain": false,
+    "lightning": false,
+    "camera": "pullOut"
    }
   }
  ]

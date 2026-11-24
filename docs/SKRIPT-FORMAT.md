@@ -13,7 +13,7 @@ Vollständiges Beispiel: [`scripts/beispiel-pest-1347.json`](../scripts/beispiel
   "sources": ["Quelle 1", "Quelle 2"],
   // Standard (Stimme „X2“): Chatterbox, ausdrucksstark
   "voice": {"engine": "chatterbox", "exaggeration": 0.9, "cfgWeight": 0.3,
-            "effect": "none", "seed": 1347},     // seed: andere Zahl = andere Betonung
+            "effect": "clear", "speed": 1.08, "seed": 1347},  // speed: Sprechtempo; seed: Betonung
   // Alternative Piper (schneller, monotoner):
   // "voice": {"model": "de_DE-thorsten-high", "lengthScale": 1.08, "noiseScale": 0.85,
   //           "noiseW": 1.0, "effect": "dark", "speaker": "whisper"}
@@ -46,9 +46,11 @@ Vollständiges Beispiel: [`scripts/beispiel-pest-1347.json`](../scripts/beispiel
 - `x`: 0–1 (Position), `facing`: `left`/`right`, `travel`: Laufstrecke in Bildbreiten
 
 ## Regeln
-- 6–10 Szenen, Gesamtdauer 35–60 s (≈ 95–135 Wörter). Liegt die Sprachdauer außerhalb,
-  wird das Sprechtempo automatisch um bis zu ±15 % angepasst.
-- Szene 1 ist der Hook – kurz und sofort spannend.
+- Shorts-Stil: 7–10 Szenen, Ziel 30–40 s (≈ 65–85 Wörter mit `"speed": 1.08`). Erlaubt sind 28–45 s;
+  außerhalb wird das Tempo automatisch um bis zu ±15 % angepasst.
+- Szene 1 ist der Hook – Schock-Fakt oder Frage sofort; der Bildtitel ist die Kernaussage.
+- Kein „Folge …“ am Ende: der letzte Satz führt zurück zum Anfang (Loop).
+- Längere Szenen werden automatisch alle ~2,5 s mit neuer Kameraeinstellung „geschnitten“.
 - `pace` pro Szene: 1.1 = 10 % langsamer (Enthüllung), 0.95 = schneller (Action).
 - Satzende mit `…` = dramatische Pause (0,65 s), mit `?` = kurze Spannungspause.
 - `emphasis`-Wörter werden in den Untertiteln rot hervorgehoben.

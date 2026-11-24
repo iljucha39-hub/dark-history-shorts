@@ -107,7 +107,7 @@ def main() -> int:
 
     # Ein-/Ausblenden
     fade_in = np.clip(t / 0.05, 0, 1)
-    fade_out = np.clip((dur - t) / 2.5, 0, 1)
+    fade_out = np.clip((dur - t) / 0.8, 0, 1)  # kurz: Video soll loopen
     mix *= fade_in * fade_out
     mix /= np.max(np.abs(mix)) + 1e-9
     mix *= 0.8

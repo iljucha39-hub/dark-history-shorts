@@ -72,15 +72,40 @@ export const cameraAt = (
 	return s;
 };
 
+const CUT_MOVES: CameraMove[] = ['pushIn', 'panRight', 'tiltUp', 'panLeft', 'pullOut', 'tiltDown'];
+/** Länge eines Kamera-Abschnitts in Frames (≈ 2,5 s bei 30 FPS) */
+export const CUT_FRAMES = 75;
+
 export const CameraProvider: React.FC<{
 	move: CameraMove;
 	durationInFrames: number;
 	/** 0..1 Kamerawackeln (Schlachten, Explosionen) */
 	shake?: number;
+	/** Szene in Abschnitte mit wechselnder Kameraeinstellung schneiden (schnelleres Tempo) */
+	cuts?: boolean;
 	children: React.ReactNode;
-}> = ({move, durationInFrames, shake = 0, children}) => {
+}> = ({move, durationInFrames, shake = 0, cuts = false, children}) => {
 	const frame = useCurrentFrame();
-	const cam = cameraAt(move, frame, durationInFrames, shake);
+	let cam: CameraState;
+	if (!cuts || durationInFrames < CUT_FRAMES * 1.5) {
+		cam = cameraAt(move, frame, durationInFrames, shake);
+	} else {
+		// Abschnitte; ein zu kurzer Rest wird dem letzten Abschnitt zugeschlagen
+		const n = Math.max(1, Math.floor(durationInFrames / CUT_FRAMES));
+		const seg = Math.min(n - 1, Math.floor(frame / CUT_FRAMES));
+		const segStart = seg * CUT_FRAMES;
+		const segLen = seg === n - 1 ? durationInFrames - segStart : CUT_FRAMES;
+		const startIdx = Math.max(0, CUT_MOVES.indexOf(move));
+		const m = seg === 0 ? move : CUT_MOVES[(startIdx + seg * 2) % CUT_MOVES.length];
+		cam = cameraAt(m, frame - segStart, segLen, shake);
+		// Zoom-Ruck am Schnitt
+		if (seg > 0) {
+			const k = frame - segStart;
+			cam.zoom *= 1 + 0.07 * Math.max(0, 1 - k / 6);
+		}
+		// jeder zweite Abschnitt enger (Nahaufnahme-Gefühl)
+		if (seg % 2 === 1) cam.zoom *= 1.12;
+	}
 	return <CameraContext.Provider value={cam}>{children}</CameraContext.Provider>;
 };
 

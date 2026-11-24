@@ -22,10 +22,10 @@ from pathlib import Path
 import numpy as np
 
 LEAD_IN = 0.15      # Stille vor dem ersten Wort (Hook sofort!)
-SENTENCE_GAP = 0.22 # Pause zwischen Sätzen
-SCENE_GAP = 0.40    # Pause zwischen Szenen
-TAIL = 1.0          # Ausklang am Ende
-MIN_DUR, MAX_DUR = 35.0, 60.0
+SENTENCE_GAP = 0.15 # Pause zwischen Sätzen
+SCENE_GAP = 0.22    # Pause zwischen Szenen (kurz = mehr Tempo)
+TAIL = 0.35         # kurzer Ausklang – das Video soll in den Anfang „loopen“
+MIN_DUR, MAX_DUR = 28.0, 45.0  # Shorts-Ziel: 30–40 s
 
 PUNCT_ONLY = re.compile(r"^[\W_]+$", re.UNICODE)
 SENT_END = re.compile(r"[.!?…]+[\"'»«“”)]*$")
@@ -274,7 +274,9 @@ def build(script: dict, engine):
             spoken_words = [w for s in spoken for w in s.split() if not PUNCT_ONLY.match(w)]
             if engine is not None:
                 # "pace" pro Szene: <1 schneller, >1 langsamer (z. B. dramatische Enthüllung)
-                audio, spans, sr = engine.synth(text, spoken_words, float(scene.get("pace", 1.0)))
+                # "speed" (global, z. B. 1.08 = 8 % schneller) und "pace" (pro Szene)
+                speed = float((script.get("voice") or {}).get("speed", 1.0))
+                audio, spans, sr = engine.synth(text, spoken_words, float(scene.get("pace", 1.0)) / speed)
             else:  # Platzhalter: Stille mit geschätzter Dauer (nur lokale Tests)
                 dur = sum(len(s) for s in spoken) / 14.0 + 0.2
                 audio, spans = np.zeros(int(dur * sr), dtype=np.float32), None
@@ -301,7 +303,7 @@ def build(script: dict, engine):
             if k < len(sents) - 1:
                 last = sent[-1]
                 # "…" = dramatische Pause, Frage = kurze Spannungspause
-                silence(0.65 if last.endswith(("…", "...")) else 0.35 if last.endswith("?") else SENTENCE_GAP)
+                silence(0.5 if last.endswith(("…", "...")) else 0.28 if last.endswith("?") else SENTENCE_GAP)
         n_end = t
         scenes.append({"narrationStart": round(n_start, 3), "narrationEnd": round(n_end, 3)})
         if si < len(script["scenes"]) - 1:
@@ -349,7 +351,7 @@ def main() -> int:
         target = MAX_DUR - 1.5 if tl["duration"] > MAX_DUR else MIN_DUR + 1.0
         speech = tl["duration"] - LEAD_IN - TAIL
         factor = max(0.85, min(1.15, (target - LEAD_IN - TAIL) / speech))
-        print(f"[tts] Dauer {tl['duration']:.1f}s außerhalb 35–60s → Tempo-Faktor {factor:.2f}", flush=True)
+        print(f"[tts] Dauer {tl['duration']:.1f}s außerhalb {MIN_DUR:.0f}–{MAX_DUR:.0f}s → Tempo-Faktor {factor:.2f}", flush=True)
         if engine.name == "piper":
             engine.length_scale *= factor
             audio, sr, tl, stats = build(script, engine)

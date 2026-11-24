@@ -14,11 +14,13 @@ Wenn der Nutzer `NEUES VIDEO` schreibt (optional mit Themenwunsch):
 2. **Recherche**: Fakten per Websuche prüfen. Nur belegbare Aussagen; Umstrittenes mit
    „angeblich“, „laut Chronist …“ kennzeichnen. Quellen in `sources` eintragen.
 3. **Skript** `scripts/<id>.json` mit `"status": "draft"` schreiben (Format: `docs/SKRIPT-FORMAT.md`):
-   - 6–10 Szenen, 85–115 Wörter gesamt (≈ 35–60 s mit Stimme C1)
-   - Szene 1 = Hook (max. ~12 Wörter, sofort packend), letzte Szene = kurzer Abschluss/CTA
+   - **Shorts-Stil (Reichweite!)**: 7–10 Szenen, **65–85 Wörter (≈ 30–40 s)**, kurze Sätze, jede Szene 1 Satz.
+   - **Hook (Szene 1)**: schockierender Fakt oder Frage in den ersten Worten, max. ~14 Wörter;
+     der Titeltext im Bild (`visual.text`) ist die Kernbehauptung („NIEMAND AN BORD“), nicht nur der Name.
+   - **Kein „Folge …“-Abschluss.** Der letzte Satz führt inhaltlich zurück zum Hook (Loop-Effekt).
    - Jahreszahlen als Ziffern sind ok (1100–1999 werden korrekt ausgesprochen)
    - Stimme immer (vom Nutzer gewählte Stimme „C1“, klar, ohne Hall):
-     `"voice": {"engine": "chatterbox", "reference": "piper:de_DE-thorsten-high", "exaggeration": 0.6, "cfgWeight": 0.5, "effect": "clear", "seed": <Zahl>}`
+     `"voice": {"engine": "chatterbox", "reference": "piper:de_DE-thorsten-high", "exaggeration": 0.6, "cfgWeight": 0.5, "effect": "clear", "speed": 1.08, "seed": <Zahl>}`
 4. `node pipeline/validate.mjs scripts/<id>.json` und `node pipeline/preview.mjs scripts/<id>.json`
    (lokal mit `REMOTION_BROWSER=/opt/pw-browsers/chromium_headless_shell`) ausführen,
    Vorschaubild `output/<id>/vorschau.jpg` ansehen und dem Nutzer Skript + Vorschau zeigen.

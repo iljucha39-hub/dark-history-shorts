@@ -15,7 +15,7 @@ const WORDS_PER_SECOND = 2.5; // grobe Schätzung für Piper/Thorsten bei length
 
 export const estimateSeconds = (script) => {
 	const words = script.scenes.reduce((a, s) => a + s.narration.split(/\s+/).filter(Boolean).length, 0);
-	return {words, seconds: words / WORDS_PER_SECOND + script.scenes.length * 0.45 + 1.2};
+	return {words, seconds: words / WORDS_PER_SECOND / (script.voice?.speed ?? 1) + script.scenes.length * 0.25 + 0.5};
 };
 
 /** @returns {{errors: string[], warnings: string[]}} */
@@ -64,8 +64,12 @@ export const validateScript = (script, file) => {
 	}
 	if (!script.sources?.length) warn('Keine Quellen angegeben ("sources")');
 	const est = estimateSeconds(script);
-	if (est.seconds < 33 || est.seconds > 63) {
-		warn(`Geschätzte Dauer ${est.seconds.toFixed(0)} s (${est.words} Wörter) liegt außerhalb 35–60 s – Sprechtempo wird automatisch angepasst (max. ±15 %)`);
+	if (est.seconds < 26 || est.seconds > 47) {
+		warn(`Geschätzte Dauer ${est.seconds.toFixed(0)} s (${est.words} Wörter) liegt außerhalb 30–40 s (Ziel) – Sprechtempo wird automatisch angepasst (max. ±15 %)`);
+	}
+	const last = script.scenes[script.scenes.length - 1];
+	if (last && /folge|abonnier|like/i.test(last.narration)) {
+		warn('Letzte Szene ist ein Aufruf („Folge …“) – besser: Schluss-Satz, der in den Hook zurückführt (Loop)');
 	}
 	return {errors, warnings};
 };

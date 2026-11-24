@@ -126,7 +126,7 @@ async function produce(scriptFile, serveUrl) {
 	await step('Musik', () => {
 		const own = script.music?.file ? path.join(ROOT, script.music.file) : null;
 		if (own && fs.existsSync(own)) {
-			run('ffmpeg', ['-y', '-v', 'error', '-stream_loop', '-1', '-i', own, '-t', String(timeline.duration), '-af', `afade=t=out:st=${Math.max(0, timeline.duration - 2.5)}:d=2.5`, '-ar', '44100', '-ac', '2', musicFile]);
+			run('ffmpeg', ['-y', '-v', 'error', '-stream_loop', '-1', '-i', own, '-t', String(timeline.duration), '-af', `afade=t=out:st=${Math.max(0, timeline.duration - 0.8)}:d=0.8`, '-ar', '44100', '-ac', '2', musicFile]);
 		} else {
 			run(PY, ['pipeline/music.py', '--timeline', path.join(audioDir, 'timeline.json'), '--out', musicFile, '--seed', String(script.music?.seed ?? 1), '--key', script.music?.key ?? 'd']);
 		}
@@ -222,7 +222,7 @@ async function produce(scriptFile, serveUrl) {
 	const checks = [
 		['Auflösung 1080×1920', info.width === 1080 && info.height === 1920, `${info.width}×${info.height}`],
 		['30 FPS', Math.abs(info.fps - 30) < 0.01, `${info.fps.toFixed(2)}`],
-		['Dauer 35–60 s', frameRange ? null : info.duration >= 35 && info.duration <= 60.5, `${info.duration.toFixed(2)} s`],
+		['Dauer 28–45 s (Ziel 30–40)', frameRange ? null : info.duration >= 28 && info.duration <= 45.5, `${info.duration.toFixed(2)} s`],
 		['Tonspur vorhanden', Boolean(info.audioCodec), info.audioCodec ?? '—'],
 		['Echte Stimme (kein Platzhalter)', !String(timeline.meta.voice).startsWith('PLATZHALTER'), timeline.meta.voice],
 		['Szenenanzahl 6–10', script.scenes.length >= 6 && script.scenes.length <= 10, String(script.scenes.length)],

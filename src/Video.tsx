@@ -42,7 +42,7 @@ const SceneSlot: React.FC<{scene: ScriptScene; index: number; durationInFrames: 
 	}
 	return (
 		<AbsoluteFill style={{overflow: 'hidden', ...style}}>
-			<CameraProvider move={move} durationInFrames={durationInFrames} shake={shake}>
+			<CameraProvider move={move} durationInFrames={durationInFrames} shake={shake} cuts={v.type !== 'title'}>
 				<Comp visual={v} durationInFrames={durationInFrames} p={p} index={index} />
 			</CameraProvider>
 			{flash > 0 && <AbsoluteFill style={{background: '#fff', opacity: flash}} />}
