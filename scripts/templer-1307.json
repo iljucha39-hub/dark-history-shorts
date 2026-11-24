@@ -1,0 +1,184 @@
+{
+ "id": "templer-1307",
+ "title": "Freitag, der 13.: Das Ende der Templer",
+ "status": "draft",
+ "category": "Dunkle Kapitel",
+ "topic": "Verhaftung der Templer am 13. Oktober 1307",
+ "description": "Freitag, der 13. Oktober 1307: Der König von Frankreich lässt die Templer verhaften. #darkhistory #geschichte #templer #mittelalter",
+ "hashtags": [
+  "darkhistory",
+  "geschichte",
+  "templer",
+  "mittelalter",
+  "freitagder13"
+ ],
+ "sources": [
+  "Encyclopaedia Britannica: Templars",
+  "History Today: Knights Templar Arrested in France",
+  "History.com: Mass arrests of the Knights Templar; How the Knights Templar fell",
+  "TU Dresden, Templerlexikon: Prozess und Auflösung (Konzil von Vienne 1312)",
+  "Hérodote.net: 13 octobre 1307"
+ ],
+ "voice": {
+  "engine": "chatterbox",
+  "reference": "piper:de_DE-thorsten-high",
+  "exaggeration": 0.6,
+  "cfgWeight": 0.5,
+  "effect": "clear",
+  "seed": 1307
+ },
+ "music": {
+  "seed": 1307,
+  "key": "d"
+ },
+ "pronunciations": {
+  "Jacques": "Schack",
+  "Molay": "Molä"
+ },
+ "scenes": [
+  {
+   "narration": "Freitag, der Dreizehnte. Ein Tag, der einen ganzen Ritterorden vernichtete.",
+   "emphasis": [
+    "vernichtete"
+   ],
+   "visual": {
+    "type": "title",
+    "text": "FREITAG, DER 13.",
+    "subtext": "OKTOBER 1307",
+    "mood": "blood"
+   }
+  },
+  {
+   "narration": "Die Templer: reiche, mächtige Kreuzritter – und Geldgeber des französischen Königs.",
+   "emphasis": [
+    "Geldgeber"
+   ],
+   "visual": {
+    "type": "portrait",
+    "text": "DIE TEMPLER",
+    "subtext": "RITTERORDEN",
+    "mood": "night",
+    "characters": [
+     {
+      "kind": "knight",
+      "action": "idle"
+     }
+    ]
+   }
+  },
+  {
+   "narration": "König Philipp der Vierte steht tief in ihrer Schuld. Und er schlägt zu.",
+   "emphasis": [
+    "Schuld"
+   ],
+   "visual": {
+    "type": "portrait",
+    "text": "PHILIPP IV.",
+    "subtext": "KÖNIG VON FRANKREICH",
+    "mood": "gold",
+    "characters": [
+     {
+      "kind": "king",
+      "action": "point"
+     }
+    ]
+   }
+  },
+  {
+   "narration": "Am dreizehnten Oktober 1307 lässt er in ganz Frankreich Templer verhaften – alle gleichzeitig.",
+   "emphasis": [
+    "gleichzeitig"
+   ],
+   "visual": {
+    "type": "castle",
+    "mood": "night",
+    "characters": [
+     {
+      "kind": "soldier",
+      "action": "march",
+      "x": 0.1
+     },
+     {
+      "kind": "soldier",
+      "action": "march",
+      "x": 0.3
+     }
+    ]
+   }
+  },
+  {
+   "narration": "Unter Folter gestehen viele absurde Vorwürfe: Ketzerei, Götzendienst, Gotteslästerung.",
+   "emphasis": [
+    "Folter"
+   ],
+   "visual": {
+    "type": "dungeon",
+    "mood": "fire",
+    "characters": [
+     {
+      "kind": "executioner",
+      "action": "idle",
+      "x": 0.7,
+      "facing": "left"
+     },
+     {
+      "kind": "knight",
+      "action": "cower",
+      "x": 0.35
+     }
+    ]
+   }
+  },
+  {
+   "narration": "Unter dem Druck des Königs löst Papst Clemens der Fünfte den Orden 1312 auf.",
+   "emphasis": [
+    "auf"
+   ],
+   "visual": {
+    "type": "document",
+    "text": "1312",
+    "subtext": "Orden aufgelöst",
+    "mood": "gold"
+   }
+  },
+  {
+   "narration": "1314 stirbt Großmeister Jacques de Molay auf dem Scheiterhaufen. Der Legende nach verflucht er König und Papst – beide sterben noch im selben Jahr.",
+   "emphasis": [
+    "verflucht",
+    "Scheiterhaufen"
+   ],
+   "visual": {
+    "type": "village",
+    "mood": "fire",
+    "fire": true,
+    "characters": [
+     {
+      "kind": "monk",
+      "action": "pray",
+      "x": 0.3
+     },
+     {
+      "kind": "peasant",
+      "action": "cower",
+      "x": 0.7,
+      "facing": "left"
+     }
+    ]
+   }
+  },
+  {
+   "narration": "Folge Dark History für mehr dunkle Geschichte.",
+   "visual": {
+    "type": "castle",
+    "mood": "night",
+    "characters": [
+     {
+      "kind": "monk",
+      "action": "walk",
+      "x": 0.15
+     }
+    ]
+   }
+  }
+ ]
+}

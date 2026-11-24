@@ -54,6 +54,9 @@ export const Captions: React.FC<{words: WordTiming[]; scenes: ScriptScene[]}> = 
 	const chunk = chunks.find((c) => t >= c.start - 0.05 && t < c.end);
 	if (!chunk) return null;
 	const pop = spring({frame: frame - Math.round(chunk.start * fps), fps, config: {damping: 14, stiffness: 260, mass: 0.6}});
+	// Lange Wörter (z. B. „fünfundzwanzigsten“) verkleinern, damit nichts über den Rand ragt
+	const longest = Math.max(...chunk.words.map((w) => w.text.length));
+	const fontSize = Math.min(88, Math.floor(860 / (longest * 0.74)));
 	return (
 		<AbsoluteFill style={{justifyContent: 'flex-start', alignItems: 'center', paddingTop: 1010}}>
 			<div
@@ -78,7 +81,7 @@ export const Captions: React.FC<{words: WordTiming[]; scenes: ScriptScene[]}> = 
 							style={{
 								fontFamily: FONT_CAPTION,
 								fontWeight: 900,
-								fontSize: 88,
+								fontSize,
 								lineHeight: 1.12,
 								textTransform: 'uppercase',
 								color,

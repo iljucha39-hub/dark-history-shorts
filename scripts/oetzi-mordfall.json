@@ -1,0 +1,169 @@
+{
+ "id": "oetzi-mordfall",
+ "title": "Ötzi: Der älteste Mordfall der Alpen",
+ "status": "draft",
+ "category": "Mythen & Mysterien",
+ "topic": "Ötzi, der Mann aus dem Eis",
+ "description": "Über 5.000 Jahre alt und immer noch ungelöst: Wer hat Ötzi getötet? #darkhistory #geschichte #ötzi #mordfall",
+ "hashtags": [
+  "darkhistory",
+  "geschichte",
+  "ötzi",
+  "mordfall",
+  "steinzeit"
+ ],
+ "sources": [
+  "Südtiroler Archäologiemuseum (iceman.it): Exkurs Mordfall Ötzi",
+  "wissenschaft.de: Wissenschaftler: Gletschermann Ötzi von Pfeil getroffen; Was Ötzi umbrachte",
+  "Deutsches Ärzteblatt: Ötzi – abnorme Armhaltung nach Pfeilverletzung",
+  "Planet Wissen: Die Gletschermumie Ötzi"
+ ],
+ "voice": {
+  "engine": "chatterbox",
+  "reference": "piper:de_DE-thorsten-high",
+  "exaggeration": 0.6,
+  "cfgWeight": 0.5,
+  "effect": "clear",
+  "seed": 1991
+ },
+ "music": {
+  "seed": 1991,
+  "key": "c"
+ },
+ "scenes": [
+  {
+   "narration": "Ein Mordfall. Über fünftausend Jahre alt. Das Opfer: Ötzi.",
+   "emphasis": [
+    "Mordfall"
+   ],
+   "visual": {
+    "type": "title",
+    "text": "ÖTZI",
+    "subtext": "DER MANN AUS DEM EIS",
+    "mood": "fog"
+   }
+  },
+  {
+   "narration": "September 1991. Zwei Wanderer entdecken in den Ötztaler Alpen eine Leiche im Eis.",
+   "emphasis": [
+    "Leiche"
+   ],
+   "visual": {
+    "type": "map",
+    "map": {
+     "bounds": [
+      9.6,
+      46.0,
+      12.4,
+      47.6
+     ],
+     "title": "FUNDORT TISENJOCH",
+     "markers": [
+      {
+       "lon": 10.84,
+       "lat": 46.78,
+       "label": "Fundort"
+      },
+      {
+       "lon": 11.4,
+       "lat": 47.27,
+       "label": "Innsbruck"
+      },
+      {
+       "lon": 11.35,
+       "lat": 46.5,
+       "label": "Bozen"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Es ist ein Mann, der vor rund fünftausenddreihundert Jahren starb – mit etwa fünfundvierzig.",
+   "emphasis": [
+    "fünftausenddreihundert"
+   ],
+   "visual": {
+    "type": "portrait",
+    "text": "ÖTZI",
+    "subtext": "KUPFERSTEINZEIT",
+    "mood": "fog",
+    "characters": [
+     {
+      "kind": "archer",
+      "action": "idle"
+     }
+    ]
+   }
+  },
+  {
+   "narration": "Zehn Jahre nach dem Fund zeigen Röntgenbilder: In seiner linken Schulter steckt eine Pfeilspitze.",
+   "emphasis": [
+    "Pfeilspitze"
+   ],
+   "visual": {
+    "type": "document",
+    "text": "PFEILSPITZE",
+    "subtext": "in der linken Schulter",
+    "mood": "gold"
+   }
+  },
+  {
+   "narration": "Der Pfeil kam wohl von hinten und verletzte eine große Arterie. Ötzi verblutete.",
+   "emphasis": [
+    "verblutete"
+   ],
+   "visual": {
+    "type": "portrait",
+    "text": "DER TÄTER?",
+    "subtext": "UNBEKANNT",
+    "mood": "night",
+    "characters": [
+     {
+      "kind": "archer",
+      "action": "idle",
+      "facing": "left"
+     }
+    ]
+   }
+  },
+  {
+   "narration": "Neben ihm lag ein wertvolles Kupferbeil. Ein Raubmord war es also wohl nicht.",
+   "emphasis": [
+    "Kupferbeil"
+   ],
+   "visual": {
+    "type": "document",
+    "text": "KUPFERBEIL",
+    "subtext": "nicht gestohlen",
+    "mood": "gold"
+   }
+  },
+  {
+   "narration": "Wer ihn tötete – und warum –, wird wohl für immer ein Rätsel bleiben…",
+   "emphasis": [
+    "Rätsel"
+   ],
+   "visual": {
+    "type": "title",
+    "text": "UNGELÖST",
+    "mood": "fog",
+    "lightning": false
+   }
+  },
+  {
+   "narration": "Folge Dark History für mehr dunkle Geschichte.",
+   "visual": {
+    "type": "castle",
+    "mood": "night",
+    "characters": [
+     {
+      "kind": "monk",
+      "action": "walk",
+      "x": 0.15
+     }
+    ]
+   }
+  }
+ ]
+}

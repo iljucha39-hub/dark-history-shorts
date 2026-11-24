@@ -1,0 +1,177 @@
+{
+ "id": "mary-celeste-1872",
+ "title": "Die Mary Celeste: Das Geisterschiff",
+ "status": "draft",
+ "category": "Mysterien",
+ "topic": "Die verlassene Mary Celeste (1872)",
+ "description": "Ein Schiff treibt im Atlantik – mit gesetzten Segeln, aber ohne Menschen. Bis heute ungelöst. #darkhistory #geschichte #mysterium #maryceleste",
+ "hashtags": [
+  "darkhistory",
+  "geschichte",
+  "mysterium",
+  "maryceleste",
+  "geisterschiff"
+ ],
+ "sources": [
+  "Encyclopaedia Britannica: Mary Celeste",
+  "Royal Museums Greenwich: The mystery of the Mary Celeste",
+  "Smithsonian Magazine (2024): An abandoned merchant ship was discovered floating in the Atlantic in 1872",
+  "History.com: The mystery of the Mary Celeste"
+ ],
+ "voice": {
+  "engine": "chatterbox",
+  "reference": "piper:de_DE-thorsten-high",
+  "exaggeration": 0.6,
+  "cfgWeight": 0.5,
+  "effect": "clear",
+  "seed": 1872
+ },
+ "music": {
+  "seed": 1872,
+  "key": "e"
+ },
+ "scenes": [
+  {
+   "narration": "Ein Schiff mitten im Atlantik. Die Segel gesetzt – aber niemand an Bord.",
+   "emphasis": [
+    "niemand"
+   ],
+   "visual": {
+    "type": "title",
+    "text": "DIE MARY CELESTE",
+    "subtext": "1872",
+    "mood": "storm"
+   }
+  },
+  {
+   "narration": "Dezember 1872. Östlich der Azoren entdeckt die Crew der Dei Gratia ein treibendes Schiff.",
+   "emphasis": [
+    "treibendes"
+   ],
+   "visual": {
+    "type": "map",
+    "map": {
+     "bounds": [
+      -86,
+      28,
+      14,
+      50
+     ],
+     "title": "FUNDORT IM ATLANTIK",
+     "markers": [
+      {
+       "lon": -74.0,
+       "lat": 40.7,
+       "label": "New York"
+      },
+      {
+       "lon": -17.5,
+       "lat": 38.2,
+       "label": "Fundort"
+      },
+      {
+       "lon": 8.93,
+       "lat": 44.4,
+       "label": "Genua"
+      }
+     ],
+     "route": [
+      [
+       -74.0,
+       40.7
+      ],
+      [
+       -55,
+       40
+      ],
+      [
+       -35,
+       38.5
+      ],
+      [
+       -25.5,
+       37.8
+      ],
+      [
+       -17.5,
+       38.2
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "narration": "Es ist die Mary Celeste, unterwegs von New York nach Genua. Ladung: über siebzehnhundert Fässer Alkohol.",
+   "emphasis": [
+    "Alkohol"
+   ],
+   "visual": {
+    "type": "sea",
+    "mood": "fog",
+    "rain": false,
+    "lightning": false
+   }
+  },
+  {
+   "narration": "Doch an Bord: niemand. Kapitän Briggs, seine Frau, die kleine Tochter und sieben Seeleute – verschwunden.",
+   "emphasis": [
+    "verschwunden"
+   ],
+   "visual": {
+    "type": "document",
+    "text": "10 MENSCHEN",
+    "subtext": "spurlos verschwunden",
+    "mood": "gold"
+   }
+  },
+  {
+   "narration": "Das Rettungsboot fehlt. Der letzte Eintrag im Logbuch stammt vom fünfundzwanzigsten November.",
+   "emphasis": [
+    "Rettungsboot"
+   ],
+   "visual": {
+    "type": "document",
+    "text": "25. NOVEMBER",
+    "subtext": "letzter Eintrag im Logbuch",
+    "mood": "gold"
+   }
+  },
+  {
+   "narration": "Meuterei? Piraten? Ein Unglück? Die Ermittler in Gibraltar finden keine Spur eines Verbrechens.",
+   "emphasis": [
+    "keine"
+   ],
+   "visual": {
+    "type": "sea",
+    "mood": "storm",
+    "camera": "pushIn"
+   }
+  },
+  {
+   "narration": "Bis heute weiß niemand, warum sie ein seetüchtiges Schiff verließen…",
+   "emphasis": [
+    "niemand"
+   ],
+   "visual": {
+    "type": "title",
+    "text": "UNGELÖST",
+    "mood": "night",
+    "lightning": false
+   }
+  },
+  {
+   "narration": "Folge Dark History für mehr dunkle Geschichte.",
+   "visual": {
+    "type": "castle",
+    "mood": "night",
+    "characters": [
+     {
+      "kind": "monk",
+      "action": "walk",
+      "x": 0.15
+     }
+    ]
+   }
+  }
+ ]
+}
