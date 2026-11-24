@@ -4,6 +4,10 @@ on:
   push:
     paths:
       - 'scripts/*.json'
+      - 'pipeline/**'
+      - 'src/**'
+      - 'scenes/**'
+      - '.github/workflows/produce-video.yml'
   workflow_dispatch:
     inputs:
       scripts:
@@ -17,10 +21,6 @@ on:
 
 permissions:
   contents: write   # für das optionale Release mit MP4-Download
-
-concurrency:
-  group: video-production-${{ github.ref }}
-  cancel-in-progress: false
 
 jobs:
   plan:
@@ -42,6 +42,7 @@ jobs:
           BEFORE: ${{ github.event.before }}
           SHA: ${{ github.sha }}
           DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
         run: node pipeline/plan.mjs
 
   render:
@@ -68,12 +69,21 @@ jobs:
           python-version: '3.12'
           cache: pip
 
-      - name: Abhängigkeiten installieren
+      - name: Node-Pakete installieren
+        timeout-minutes: 10
+        run: npm ci --no-audit --no-fund
+
+      - name: Python-Pakete installieren (Piper TTS)
+        timeout-minutes: 10
+        run: pip install -r requirements.txt
+
+      - name: FFmpeg installieren (statischer Build)
+        timeout-minutes: 5
         run: |
-          npm ci
-          pip install -r requirements.txt
-          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
-          ffmpeg -version | head -1
+          curl -sSL --retry 3 -o /tmp/ffmpeg.tar.xz https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz
+          mkdir -p /tmp/ffmpeg && tar -xJf /tmp/ffmpeg.tar.xz -C /tmp/ffmpeg --strip-components=1
+          echo "/tmp/ffmpeg/bin" >> "$GITHUB_PATH"
+          /tmp/ffmpeg/bin/ffmpeg -version | head -1
 
       - name: Skript prüfen
         run: node pipeline/validate.mjs "${{ matrix.script }}"
@@ -85,9 +95,11 @@ jobs:
           key: piper-voices-v1-${{ hashFiles('requirements.txt') }}
 
       - name: Remotion-Browser installieren
+        timeout-minutes: 5
         run: npx remotion browser ensure
 
       - name: Video produzieren
+        timeout-minutes: 40
         run: node pipeline/produce.mjs "${{ matrix.script }}"
 
       - name: ID bestimmen

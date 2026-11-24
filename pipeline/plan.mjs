@@ -3,6 +3,8 @@
  * Bestimmt, welche Skripte gerendert werden (für GitHub Actions).
  *   Push:     alle in diesem Push neu/geänderten scripts/*.json mit "status": "approved"
  *   Manuell:  SCRIPTS="a,b" (IDs oder Pfade) oder SCRIPTS="all" (alle freigegebenen)
+ *   Commit-Nachricht mit [render:<id>] oder [render:all] erzwingt ein Rendering
+ *   (z. B. nach Änderungen an Szenen/Pipeline).
  * Ausgabe: matrix=["scripts/a.json", ...] in $GITHUB_OUTPUT
  */
 import {execSync} from 'node:child_process';
@@ -26,7 +28,8 @@ const approved = (f) => {
 };
 
 let files = [];
-const input = (process.env.SCRIPTS ?? '').trim();
+const forced = [...(process.env.COMMIT_MSG ?? '').matchAll(/\[render:([a-z0-9,-]+)\]/g)].map((m) => m[1]).join(',');
+const input = (process.env.SCRIPTS ?? '').trim() || forced;
 if (input) {
 	files =
 		input === 'all'

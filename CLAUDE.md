@@ -33,4 +33,5 @@ Wenn der Nutzer `NEUES VIDEO` schreibt (optional mit Themenwunsch):
 - `assets/` – Remotion-Public-Ordner (Fonts); `assets/generated/` wird erzeugt
 - Piper-Stimmen kommen von huggingface.co – im Claude-Cloud-Container blockiert, in GitHub Actions verfügbar.
   Lokal deshalb nur `PLACEHOLDER_TTS=1` (Stille) zum Testen.
+- Neu rendern ohne Skriptänderung: `[render:<id>]` oder `[render:all]` in die Commit-Nachricht schreiben.
 - Keine Modellnamen in Commits/Code erwähnen.
