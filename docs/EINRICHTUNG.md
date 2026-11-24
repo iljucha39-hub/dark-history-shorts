@@ -2,13 +2,12 @@
 
 Diese Schritte kann Claude nicht selbst erledigen. Alle gehen im mobilen Browser (Safari) auf github.com.
 
-## 1. GitHub Actions erlauben (einmalig)
-1. Repository öffnen → **Settings** → **Actions** → **General**
-   (in Safari ggf. „Desktop-Website anfordern“ über das **aA**-Menü).
-2. „Actions permissions“: **Allow all actions and reusable workflows**.
-3. „Workflow permissions“: **Read and write permissions** → **Save**.
-   Nötig, damit der Workflow das fertige Video als **Release** (direkter MP4-Download) veröffentlichen kann.
-   Ohne diese Einstellung gibt es das Video nur als Artifact (ZIP).
+## 1. GitHub Actions
+Keine Einstellung nötig: Actions sind bei neuen Repositories aktiv, und der Workflow fordert
+die benötigten Schreibrechte (für das Release mit MP4-Download) selbst an.
+Nur falls ein Lauf mit „Resource not accessible by integration“ beim Release scheitert:
+`github.com/<du>/dark-history-shorts/settings/actions` öffnen (Safari: **aA** → „Desktop-Website
+anfordern“), ganz unten „Workflow permissions“ → **Read and write permissions** → **Save**.
 
 ## 2. Video herunterladen
 - **Release (empfohlen):** `github.com/<du>/dark-history-shorts/releases` → Video antippen →
