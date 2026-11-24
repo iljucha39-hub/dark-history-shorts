@@ -8,8 +8,8 @@ Kommunikation auf Deutsch, kurz und mobilfreundlich.
 
 Wenn der Nutzer `NEUES VIDEO` schreibt (optional mit Themenwunsch):
 
-1. **Thema**: 3 Themenvorschläge (Dark History: Mittelalter, Kriege, Mysterien, vergessene Personen,
-   unglaubliche Fakten). Bereits produzierte Themen in `scripts/` nicht wiederholen.
+1. **Thema**: 3 Themenvorschläge, bevorzugt aus `docs/THEMEN.md` (Themenvorrat). Bereits produzierte
+   Themen nicht wiederholen; nach der Produktion das Thema dort abhaken (`[x]` + Skript-ID).
    Hat der Nutzer ein Thema genannt, direkt Schritt 2.
 2. **Recherche**: Fakten per Websuche prüfen. Nur belegbare Aussagen; Umstrittenes mit
    „angeblich“, „laut Chronist …“ kennzeichnen. Quellen in `sources` eintragen.
@@ -24,6 +24,8 @@ Wenn der Nutzer `NEUES VIDEO` schreibt (optional mit Themenwunsch):
    Vorschaubild `output/<id>/vorschau.jpg` ansehen und dem Nutzer Skript + Vorschau zeigen.
 5. **Freigabe**: Erst wenn der Nutzer zustimmt, `"status": "approved"` setzen, committen und pushen.
    Der Push startet den Workflow `.github/workflows/produce-video.yml` automatisch.
+   Mehrere Videos auf einmal: mehrere Skripte freigeben und in einem Push committen –
+   der Workflow rendert sie parallel (max. 2 gleichzeitig).
 6. Workflow-Lauf mit den GitHub-Tools verfolgen; am Ende dem Nutzer den Release-Link
    (`…/releases/tag/video-<id>`) bzw. den Link zum Actions-Lauf geben.
 
