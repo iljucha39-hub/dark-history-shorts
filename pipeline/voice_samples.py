@@ -36,11 +36,12 @@ PIPER = [
 # Chatterbox: (Kennung, Beschreibung, Referenzstimme, exaggeration, cfg_weight, Effekt)
 # Referenz "default" = eingebaute Stimme; sonst wird die Klangfarbe aus einer Piper-Probe übernommen.
 CHATTERBOX = [
-    ("X1", "Chatterbox Standardstimme, ausdrucksstark", "default", 0.6, 0.4, "room"),
-    ("X2", "Chatterbox Standardstimme, sehr dramatisch", "default", 0.9, 0.3, "room"),
-    ("X3", "Chatterbox männlich (Thorsten-Klangfarbe), dramatisch", "de_DE-thorsten_emotional-medium:surprised", 0.8, 0.3, "dark"),
-    ("X4", "Chatterbox weiblich (Kerstin-Klangfarbe), dramatisch", "de_DE-kerstin-low", 0.8, 0.3, "room"),
-    ("X5", "Chatterbox männlich (Karlsson-Klangfarbe), dramatisch", "de_DE-karlsson-low", 0.8, 0.3, "dark"),
+    ("C1", "Thorsten-Klangfarbe, klar & ruhig", "de_DE-thorsten-high", 0.6, 0.5, "clear"),
+    ("C2", "Thorsten-Klangfarbe, klar & lebendig", "de_DE-thorsten-high", 0.75, 0.45, "clear"),
+    ("C3", "Karlsson-Klangfarbe, klar & lebendig", "de_DE-karlsson-low", 0.75, 0.45, "clear"),
+    ("C4", "MLS-Sprecher (männlich), klar & lebendig", "de_DE-mls-medium:5", 0.75, 0.45, "clear"),
+    ("C5", "Kerstin (weiblich), klar & lebendig", "de_DE-kerstin-low", 0.75, 0.45, "clear"),
+    ("C6", "Standardstimme (wie X2), aber klarer", "default", 0.6, 0.5, "clear"),
 ]
 
 
@@ -104,7 +105,7 @@ def run_chatterbox(out: Path, voice_dir: Path, lines: list[str]):
             if ref != "default":
                 m, _, spk = ref.partition(":")
                 prompt = out / f"ref-{key}.wav"
-                piper_render(m, spk or None, 1.0, None, None, voice_dir, prompt, cache)
+                piper_render(m, int(spk) if spk.isdigit() else (spk or None), 1.0, None, None, voice_dir, prompt, cache)
             t = time.time()
             wav = model.generate(TEXT, language_id="de", audio_prompt_path=str(prompt) if prompt else None,
                                  exaggeration=exag, cfg_weight=cfg)

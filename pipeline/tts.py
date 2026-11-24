@@ -205,16 +205,41 @@ class PiperEngine:
         return audio, (spans if len(spans) == len(words) else None), sr
 
 
+REFERENCE_TEXT = (
+    "Die Geschichte ist voller Geheimnisse. Manche wurden gelöst, andere bleiben bis heute im Dunkeln. "
+    "Hören Sie genau hin, denn was jetzt folgt, ist wirklich passiert."
+)
+
+
+def make_reference(spec: str, voice_dir: Path) -> str:
+    """Referenz-Audio für Chatterbox aus einer Piper-Stimme erzeugen, z. B. "de_DE-thorsten-high" oder "de_DE-mls-medium:5"."""
+    model, _, spk = spec.partition(":")
+    out = voice_dir / f"ref-{model}-{spk or 'x'}.wav"
+    if not out.exists():
+        voice = load_voice(model, voice_dir)
+        sid = speaker_id(voice, int(spk) if spk.isdigit() else (spk or None))
+        parts = []
+        for sent in split_sentences(display_tokens(REFERENCE_TEXT)):
+            audio, _, sr = synth_sentence(voice, " ".join(sent), 1.0, sid)
+            parts += [audio, np.zeros(int(0.25 * sr), dtype=np.float32)]
+        write_wav(out, np.concatenate(parts), voice.config.sample_rate)
+    print(f"[tts] Referenzstimme: {spec}", flush=True)
+    return str(out)
+
+
 def make_engine(script: dict, voice_dir: Path, length_scale: float | None = None):
     vcfg = script.get("voice") or {}
     if vcfg.get("engine") == "chatterbox":
         from tts_chatterbox import ChatterboxEngine
 
         print("[tts] Lade Chatterbox + Whisper …", flush=True)
+        ref = vcfg.get("reference")
+        if ref and ref.startswith("piper:"):
+            ref = make_reference(ref[len("piper:"):], voice_dir)
         return ChatterboxEngine(exaggeration=float(vcfg.get("exaggeration", 0.9)),
                                 cfg_weight=float(vcfg.get("cfgWeight", 0.3)),
                                 temperature=float(vcfg.get("temperature", 0.8)),
-                                reference=vcfg.get("reference"),
+                                reference=ref,
                                 seed=int(vcfg.get("seed", 1)))
     model = vcfg.get("model", "de_DE-thorsten-high")
     ls = length_scale if length_scale is not None else float(vcfg.get("lengthScale", 1.0))

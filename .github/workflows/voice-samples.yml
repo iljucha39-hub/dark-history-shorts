@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        engine: [piper, chatterbox]
+        engine: [chatterbox]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -68,6 +68,6 @@ jobs:
         run: |
           ls -la proben
           cat proben/*.md > notes.md
-          gh release delete stimmproben-2 --cleanup-tag -y 2>/dev/null || true
-          gh release create stimmproben-2 --target "${{ github.sha }}" --title "🎙️ Stimmproben Runde 2" \
+          gh release delete stimmproben-3 --cleanup-tag -y 2>/dev/null || true
+          gh release create stimmproben-3 --target "${{ github.sha }}" --title "🎙️ Stimmproben Runde 3 (klar, ohne Hall)" \
             --notes-file notes.md proben/*.mp3
