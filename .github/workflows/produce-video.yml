@@ -134,6 +134,7 @@ jobs:
             output/${{ steps.meta.outputs.id }}/bericht.md
             output/${{ steps.meta.outputs.id }}/beschreibung.txt
             output/${{ steps.meta.outputs.id }}/*.srt
+            output/${{ steps.meta.outputs.id }}/stimme.mp3
           if-no-files-found: warn
           retention-days: 30
 
@@ -150,5 +151,5 @@ jobs:
             --target "${{ github.sha }}" \
             --title "🎬 $title" \
             --notes-file "output/$id/bericht.md" \
-            "output/$id/$id.mp4" "output/$id/cover.jpg" "output/$id/beschreibung.txt" "output/$id/$id.srt"
+            "output/$id/$id.mp4" "output/$id/cover.jpg" "output/$id/beschreibung.txt" "output/$id/$id.srt" "output/$id/stimme.mp3"
           echo "📥 Download: ${{ github.server_url }}/${{ github.repository }}/releases/tag/$tag" >> "$GITHUB_STEP_SUMMARY"

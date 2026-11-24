@@ -19,7 +19,7 @@ Wenn der Nutzer `NEUES VIDEO` schreibt (optional mit Themenwunsch):
      der Titeltext im Bild (`visual.text`) ist die Kernbehauptung („NIEMAND AN BORD“), nicht nur der Name.
    - **Kein „Folge …“-Abschluss.** Der letzte Satz führt inhaltlich zurück zum Hook (Loop-Effekt).
    - Jahreszahlen als Ziffern sind ok (1100–1999 werden korrekt ausgesprochen)
-   - Stimme immer (vom Nutzer gewählte Stimme „C1“, klar, ohne Hall):
+   - Stimme immer (vom Nutzer gewählte Stimme „V2“ = C1 + 8 % schneller, klar, ohne Hall):
      `"voice": {"engine": "chatterbox", "reference": "piper:de_DE-thorsten-high", "exaggeration": 0.6, "cfgWeight": 0.5, "effect": "clear", "speed": 1.08, "seed": <Zahl>}`
 4. `node pipeline/validate.mjs scripts/<id>.json` und `node pipeline/preview.mjs scripts/<id>.json`
    (lokal mit `REMOTION_BROWSER=/opt/pw-browsers/chromium_headless_shell`) ausführen,

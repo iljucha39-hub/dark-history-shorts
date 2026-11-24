@@ -145,14 +145,17 @@ async function produce(scriptFile, serveUrl) {
 			'-i', musicFile,
 			'-filter_complex',
 			[
-				`[0:a]${voiceFx},aresample=48000,aformat=channel_layouts=stereo,highpass=f=70,acompressor=threshold=0.125:ratio=3:attack=5:release=80,asplit=2[voice][sc]`,
-				'[1:a]aresample=48000,aformat=channel_layouts=stereo,volume=0.55[mus]',
-				'[mus][sc]sidechaincompress=threshold=0.04:ratio=6:attack=15:release=350[duck]',
+				`[0:a]${voiceFx},aresample=48000,aformat=channel_layouts=stereo,asplit=2[voice][sc]`,
+				'[1:a]aresample=48000,aformat=channel_layouts=stereo,volume=0.35[mus]',
+				'[mus][sc]sidechaincompress=threshold=0.03:ratio=10:attack=10:release=400[duck]',
 				'[voice][duck]amix=inputs=2:duration=longest:normalize=0,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[out]',
 			].join(';'),
 			'-map', '[out]', '-ar', '48000', '-ac', '2', mixFile,
 		]),
 	);
+
+	// Reine Sprachspur zum Vergleich mit den Stimmproben (ohne Musik)
+	run('ffmpeg', ['-y', '-v', 'error', '-i', path.join(audioDir, 'narration.wav'), '-af', `${voiceFx},loudnorm=I=-16:TP=-1.5`, '-ar', '44100', '-b:a', '160k', path.join(outDir, 'stimme.mp3')]);
 
 	// 4) Untertitel-Dateien
 	fs.writeFileSync(path.join(ROOT, 'subtitles', `${id}.json`), JSON.stringify(timeline.words, null, 1));

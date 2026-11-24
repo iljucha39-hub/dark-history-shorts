@@ -205,24 +205,16 @@ class PiperEngine:
         return audio, (spans if len(spans) == len(words) else None), sr
 
 
-REFERENCE_TEXT = (
-    "Die Geschichte ist voller Geheimnisse. Manche wurden gelöst, andere bleiben bis heute im Dunkeln. "
-    "Hören Sie genau hin, denn was jetzt folgt, ist wirklich passiert."
-)
-
-
 def make_reference(spec: str, voice_dir: Path) -> str:
-    """Referenz-Audio für Chatterbox aus einer Piper-Stimme erzeugen, z. B. "de_DE-thorsten-high" oder "de_DE-mls-medium:5"."""
+    """Referenz-Audio für Chatterbox aus einer Piper-Stimme erzeugen, z. B. "de_DE-thorsten-high".
+    Identisch zu den Stimmproben (gleicher Text, gleiche Pausen) – damit das Video so klingt wie die Probe."""
+    from voice_samples import piper_render
+
     model, _, spk = spec.partition(":")
-    out = voice_dir / f"ref-{model}-{spk or 'x'}.wav"
+    out = voice_dir / f"ref-v2-{model}-{spk or 'x'}.wav"
     if not out.exists():
-        voice = load_voice(model, voice_dir)
-        sid = speaker_id(voice, int(spk) if spk.isdigit() else (spk or None))
-        parts = []
-        for sent in split_sentences(display_tokens(REFERENCE_TEXT)):
-            audio, _, sr = synth_sentence(voice, " ".join(sent), 1.0, sid)
-            parts += [audio, np.zeros(int(0.25 * sr), dtype=np.float32)]
-        write_wav(out, np.concatenate(parts), voice.config.sample_rate)
+        voice_dir.mkdir(parents=True, exist_ok=True)
+        piper_render(model, int(spk) if spk.isdigit() else (spk or None), 1.0, None, None, voice_dir, out, {})
     print(f"[tts] Referenzstimme: {spec}", flush=True)
     return str(out)
 
