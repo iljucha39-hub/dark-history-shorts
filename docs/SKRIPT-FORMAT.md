@@ -11,10 +11,13 @@ Vollständiges Beispiel: [`scripts/beispiel-pest-1347.json`](../scripts/beispiel
   "description": "Text für TikTok/YouTube",
   "hashtags": ["darkhistory", "geschichte"],
   "sources": ["Quelle 1", "Quelle 2"],
-  "voice": {"model": "de_DE-thorsten-high", "lengthScale": 1.0},
+  "voice": {"model": "de_DE-thorsten-high", "lengthScale": 1.08,
+            "noiseScale": 0.85, "noiseW": 1.0,   // Ausdruck: höher = weniger monoton
+            "effect": "dark",                    // none | dark | deep | room
+            "speaker": "whisper"},               // nur bei Mehrsprecher-Stimmen
   "music": {"seed": 1347, "key": "d"},          // oder {"file": "audio/music/eigene.mp3"}
   "pronunciations": {"Vlad": "Wlad"},           // nur für die Aussprache
-  "scenes": [ { "narration": "…", "emphasis": ["Tod"], "visual": { … } } ]
+  "scenes": [ { "narration": "…", "emphasis": ["Tod"], "pace": 1.1, "visual": { … } } ]
 }
 ```
 
@@ -44,4 +47,6 @@ Vollständiges Beispiel: [`scripts/beispiel-pest-1347.json`](../scripts/beispiel
 - 6–10 Szenen, Gesamtdauer 35–60 s (≈ 95–135 Wörter). Liegt die Sprachdauer außerhalb,
   wird das Sprechtempo automatisch um bis zu ±15 % angepasst.
 - Szene 1 ist der Hook – kurz und sofort spannend.
+- `pace` pro Szene: 1.1 = 10 % langsamer (Enthüllung), 0.95 = schneller (Action).
+- Satzende mit `…` = dramatische Pause (0,65 s), mit `?` = kurze Spannungspause.
 - `emphasis`-Wörter werden in den Untertiteln rot hervorgehoben.

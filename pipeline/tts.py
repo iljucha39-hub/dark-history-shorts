@@ -164,10 +164,13 @@ def speaker_id(voice, speaker) -> int | None:
     return ids[speaker]
 
 
-def synth_sentence(voice, text: str, length_scale: float, speaker: int | None = None):
+def synth_sentence(voice, text: str, length_scale: float, speaker: int | None = None,
+                   noise: float | None = None, noise_w: float | None = None):
+    """noise = Tonhöhen-/Klangvariation, noise_w = Rhythmusvariation (höher = lebendiger)."""
     from piper import SynthesisConfig
 
-    cfg = SynthesisConfig(length_scale=length_scale, normalize_audio=True, volume=0.95, speaker_id=speaker)
+    cfg = SynthesisConfig(length_scale=length_scale, normalize_audio=True, volume=0.95, speaker_id=speaker,
+                          noise_scale=noise, noise_w_scale=noise_w)
     audio_parts = []
     alignments = []
     ok = True
@@ -185,7 +188,9 @@ def synth_sentence(voice, text: str, length_scale: float, speaker: int | None = 
 
 
 def build(script: dict, voice, length_scale: float, fallback: bool):
-    spk = speaker_id(voice, (script.get("voice") or {}).get("speaker"))
+    vcfg = script.get("voice") or {}
+    spk = speaker_id(voice, vcfg.get("speaker"))
+    noise, noise_w = vcfg.get("noiseScale"), vcfg.get("noiseW")
     pron = script.get("pronunciations", {}) or {}
     sr = voice.config.sample_rate if voice else 22050
     pieces: list[np.ndarray] = []
@@ -209,7 +214,9 @@ def build(script: dict, voice, length_scale: float, fallback: bool):
             spoken_counts = [max(1, len([w for w in s.split() if not PUNCT_ONLY.match(w)])) for s in spoken]
             text = " ".join(spoken)
             if voice is not None:
-                audio, align, sr = synth_sentence(voice, text, length_scale, spk)
+                # "pace" pro Szene: <1 schneller, >1 langsamer (z. B. dramatische Enthüllung)
+                audio, align, sr = synth_sentence(voice, text, length_scale * float(scene.get("pace", 1.0)),
+                                                  spk, noise, noise_w)
             else:  # Platzhalter: Stille mit geschätzter Dauer (nur lokale Tests)
                 dur = sum(len(s) for s in spoken) / 14.0 + 0.2
                 audio, align = np.zeros(int(dur * sr), dtype=np.float32), None
@@ -235,7 +242,9 @@ def build(script: dict, voice, length_scale: float, fallback: bool):
             pieces.append(audio.astype(np.float32))
             t += len(audio) / sr
             if k < len(sents) - 1:
-                silence(SENTENCE_GAP)
+                last = sent[-1]
+                # "…" = dramatische Pause, Frage = kurze Spannungspause
+                silence(0.65 if last.endswith(("…", "...")) else 0.35 if last.endswith("?") else SENTENCE_GAP)
         n_end = t
         scenes.append({"narrationStart": round(n_start, 3), "narrationEnd": round(n_end, 3)})
         if si < len(script["scenes"]) - 1:

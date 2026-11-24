@@ -16,22 +16,23 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 import numpy as np  # noqa: E402
 
-from tts import load_voice, speaker_id, synth_sentence, write_wav  # noqa: E402
+from tts import display_tokens, load_voice, speaker_id, split_sentences, synth_sentence, write_wav  # noqa: E402
 
 TEXT = (
     "Oktober dreizehnhundertsiebenundvierzig. Schiffe laufen in Messina ein. "
-    "Die Besatzung ist tot – oder liegt im Sterben. Niemand ahnt, was sie mitgebracht haben."
+    "Die Besatzung? Tot – oder im Sterben. Und niemand ahnt, was sie mitgebracht haben…"
 )
 
-# (Kennung, Beschreibung, Modell, Sprecher, Tempo, Effekt)
+# (Kennung, Beschreibung, Modell, Sprecher, Tempo, Effekt, noiseScale, noiseW)
 VARIANTS = [
-    ("A", "Aktuell: Thorsten (hoch), normal", "de_DE-thorsten-high", None, 1.0, "none"),
-    ("B", "Thorsten (hoch), langsamer, tiefer + Hall", "de_DE-thorsten-high", None, 1.12, "dark"),
-    ("C", "Thorsten (hoch), langsam, sehr tief + Hall", "de_DE-thorsten-high", None, 1.15, "deep"),
-    ("D", "Thorsten (mittel), langsamer, tiefer + Hall", "de_DE-thorsten-medium", None, 1.1, "dark"),
-    ("E", "Thorsten emotional: Flüstern + Raum", "de_DE-thorsten_emotional-medium", "whisper", 1.05, "room"),
-    ("F", "Thorsten emotional: neutral, tiefer + Hall", "de_DE-thorsten_emotional-medium", "neutral", 1.1, "dark"),
-    ("G", "Kerstin (weiblich), langsamer + Raum", "de_DE-kerstin-low", None, 1.08, "room"),
+    ("A", "Aktuell: Thorsten, Standard (monoton)", "de_DE-thorsten-high", None, 1.0, "none", None, None),
+    ("B", "Thorsten, lebendiger, tiefer + Hall", "de_DE-thorsten-high", None, 1.08, "dark", 0.85, 1.0),
+    ("C", "Thorsten, sehr lebendig, tiefer + Hall", "de_DE-thorsten-high", None, 1.08, "dark", 1.0, 1.2),
+    ("D", "Thorsten, sehr lebendig, sehr tief + Hall", "de_DE-thorsten-high", None, 1.12, "deep", 1.0, 1.2),
+    ("E", "Thorsten emotional: Flüstern + Raum", "de_DE-thorsten_emotional-medium", "whisper", 1.05, "room", 0.8, 1.0),
+    ("F", "Thorsten emotional: wütend/eindringlich, tiefer", "de_DE-thorsten_emotional-medium", "angry", 1.08, "dark", 0.8, 1.0),
+    ("G", "Thorsten emotional: überrascht/erzählend, tiefer", "de_DE-thorsten_emotional-medium", "surprised", 1.08, "dark", 0.8, 1.0),
+    ("H", "Kerstin (weiblich), lebendiger + Raum", "de_DE-kerstin-low", None, 1.05, "room", 0.85, 1.0),
 ]
 
 
@@ -45,16 +46,18 @@ def main() -> int:
     effects = json.loads((Path(__file__).parent / "voice-effects.json").read_text(encoding="utf-8"))
     voices: dict[str, object] = {}
     lines = ["# Stimmproben", "", f"Text: „{TEXT}“", "", "| Probe | Beschreibung | Einstellung im Skript |", "|---|---|---|"]
-    for key, desc, model, speaker, scale, fx in VARIANTS:
+    for key, desc, model, speaker, scale, fx, noise, noise_w in VARIANTS:
         try:
             if model not in voices:
                 voices[model] = load_voice(model, Path(args.voice_dir))
             voice = voices[model]
             spk = speaker_id(voice, speaker)
             parts = []
-            for sent in [s.strip() + "." for s in TEXT.split(".") if s.strip()]:
-                audio, _, sr = synth_sentence(voice, sent, scale, spk)
-                parts += [audio, np.zeros(int(0.22 * sr), dtype=np.float32)]
+            for sent in split_sentences(display_tokens(TEXT)):
+                audio, _, sr = synth_sentence(voice, " ".join(sent), scale, spk, noise, noise_w)
+                last = sent[-1]
+                pause = 0.65 if last.endswith(("…", "...")) else 0.35 if last.endswith("?") else 0.22
+                parts += [audio, np.zeros(int(pause * sr), dtype=np.float32)]
             wav = out / f"{key}.wav"
             write_wav(wav, np.concatenate(parts), sr)
             mp3 = out / f"Probe-{key}.mp3"
@@ -65,6 +68,9 @@ def main() -> int:
             setting = {"model": model, "lengthScale": scale, "effect": fx}
             if speaker:
                 setting["speaker"] = speaker
+            if noise is not None:
+                setting["noiseScale"] = noise
+                setting["noiseW"] = noise_w
             lines.append(f"| **{key}** | {desc} | `\"voice\": {json.dumps(setting, ensure_ascii=False)}` |")
             print(f"[stimmen] {key}: {desc} ✓", flush=True)
         except Exception as e:  # einzelne Stimme nicht verfügbar → weiter
