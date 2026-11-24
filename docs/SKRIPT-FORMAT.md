@@ -11,10 +11,12 @@ Vollständiges Beispiel: [`scripts/beispiel-pest-1347.json`](../scripts/beispiel
   "description": "Text für TikTok/YouTube",
   "hashtags": ["darkhistory", "geschichte"],
   "sources": ["Quelle 1", "Quelle 2"],
-  "voice": {"model": "de_DE-thorsten-high", "lengthScale": 1.08,
-            "noiseScale": 0.85, "noiseW": 1.0,   // Ausdruck: höher = weniger monoton
-            "effect": "dark",                    // none | dark | deep | room
-            "speaker": "whisper"},               // nur bei Mehrsprecher-Stimmen
+  // Standard (Stimme „X2“): Chatterbox, ausdrucksstark
+  "voice": {"engine": "chatterbox", "exaggeration": 0.9, "cfgWeight": 0.3,
+            "effect": "room", "seed": 1347},     // seed: andere Zahl = andere Betonung
+  // Alternative Piper (schneller, monotoner):
+  // "voice": {"model": "de_DE-thorsten-high", "lengthScale": 1.08, "noiseScale": 0.85,
+  //           "noiseW": 1.0, "effect": "dark", "speaker": "whisper"}
   "music": {"seed": 1347, "key": "d"},          // oder {"file": "audio/music/eigene.mp3"}
   "pronunciations": {"Vlad": "Wlad"},           // nur für die Aussprache
   "scenes": [ { "narration": "…", "emphasis": ["Tod"], "pace": 1.1, "visual": { … } } ]

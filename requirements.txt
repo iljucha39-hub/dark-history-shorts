@@ -1,3 +1,11 @@
-# Sprachsynthese (Open Source, lokal) – inkl. Phonem-Alignment für Untertitel
+# Sprachsynthese (Open Source, lokal, CPU) – Installation siehe Workflow:
+#   pip install --extra-index-url https://download.pytorch.org/whl/cpu -r requirements.txt
+# Piper (GPL-3.0): schnelle Offline-Stimmen inkl. Phonem-Alignment
 piper-tts[alignment]==1.8.0
+# Chatterbox Multilingual (MIT): ausdrucksstarke Stimme
+torch==2.6.0
+torchaudio==2.6.0
+chatterbox-tts==0.1.7
+# faster-whisper (MIT): Wort-Zeitstempel für Chatterbox-Untertitel
+faster-whisper==1.2.1
 numpy>=1.26

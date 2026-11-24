@@ -17,6 +17,8 @@ Wenn der Nutzer `NEUES VIDEO` schreibt (optional mit Themenwunsch):
    - 6–10 Szenen, 95–135 Wörter gesamt (≈ 35–60 s)
    - Szene 1 = Hook (max. ~12 Wörter, sofort packend), letzte Szene = kurzer Abschluss/CTA
    - Jahreszahlen als Ziffern sind ok (1100–1999 werden korrekt ausgesprochen)
+   - Stimme immer: `"voice": {"engine": "chatterbox", "exaggeration": 0.9, "cfgWeight": 0.3, "effect": "room", "seed": <Zahl>}`
+     (vom Nutzer gewählte Stimme „X2“)
 4. `node pipeline/validate.mjs scripts/<id>.json` und `node pipeline/preview.mjs scripts/<id>.json`
    (lokal mit `REMOTION_BROWSER=/opt/pw-browsers/chromium_headless_shell`) ausführen,
    Vorschaubild `output/<id>/vorschau.jpg` ansehen und dem Nutzer Skript + Vorschau zeigen.
@@ -31,7 +33,8 @@ Wenn der Nutzer `NEUES VIDEO` schreibt (optional mit Themenwunsch):
 - `pipeline/` – Produktion: `validate.mjs`, `tts.py` (Piper), `music.py`, `produce.mjs`, `preview.mjs`, `plan.mjs`
 - `src/` – Remotion-Komposition, Kamera, Untertitel; `scenes/` – 2D-Szenenbibliothek
 - `assets/` – Remotion-Public-Ordner (Fonts); `assets/generated/` wird erzeugt
-- Piper-Stimmen kommen von huggingface.co – im Claude-Cloud-Container blockiert, in GitHub Actions verfügbar.
+- Stimmen: Chatterbox (Standard, `pipeline/tts_chatterbox.py`, Wort-Zeiten via faster-whisper) oder Piper.
+  Modelle kommen von huggingface.co – im Claude-Cloud-Container blockiert, in GitHub Actions verfügbar.
   Lokal deshalb nur `PLACEHOLDER_TTS=1` (Stille) zum Testen.
 - Neu rendern ohne Skriptänderung: `[render:<id>]` oder `[render:all]` in die Commit-Nachricht schreiben.
 - Keine Modellnamen in Commits/Code erwähnen.

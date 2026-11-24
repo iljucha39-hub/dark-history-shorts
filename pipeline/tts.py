@@ -187,12 +187,45 @@ def synth_sentence(voice, text: str, length_scale: float, speaker: int | None = 
     return audio, (alignments if ok else None), voice.config.sample_rate
 
 
-def build(script: dict, voice, length_scale: float, fallback: bool):
+class PiperEngine:
+    name = "piper"
+
+    def __init__(self, voice, length_scale: float, speaker, noise, noise_w):
+        self.voice = voice
+        self.length_scale = length_scale
+        self.speaker = speaker_id(voice, speaker)
+        self.noise, self.noise_w = noise, noise_w
+        self.sr = voice.config.sample_rate
+        self.retries = 0
+
+    def synth(self, text: str, words: list[str], pace: float = 1.0):
+        audio, align, sr = synth_sentence(self.voice, text, self.length_scale * pace, self.speaker,
+                                          self.noise, self.noise_w)
+        spans = word_spans_from_alignment(align) if align else []
+        return audio, (spans if len(spans) == len(words) else None), sr
+
+
+def make_engine(script: dict, voice_dir: Path, length_scale: float | None = None):
     vcfg = script.get("voice") or {}
-    spk = speaker_id(voice, vcfg.get("speaker"))
-    noise, noise_w = vcfg.get("noiseScale"), vcfg.get("noiseW")
+    if vcfg.get("engine") == "chatterbox":
+        from tts_chatterbox import ChatterboxEngine
+
+        print("[tts] Lade Chatterbox + Whisper …", flush=True)
+        return ChatterboxEngine(exaggeration=float(vcfg.get("exaggeration", 0.9)),
+                                cfg_weight=float(vcfg.get("cfgWeight", 0.3)),
+                                temperature=float(vcfg.get("temperature", 0.8)),
+                                reference=vcfg.get("reference"),
+                                seed=int(vcfg.get("seed", 1)))
+    model = vcfg.get("model", "de_DE-thorsten-high")
+    ls = length_scale if length_scale is not None else float(vcfg.get("lengthScale", 1.0))
+    return PiperEngine(load_voice(model, voice_dir), ls, vcfg.get("speaker"),
+                       vcfg.get("noiseScale"), vcfg.get("noiseW"))
+
+
+def build(script: dict, engine):
+    """engine=None → Platzhalter (Stille, geschätzte Zeiten) für lokale Tests."""
     pron = script.get("pronunciations", {}) or {}
-    sr = voice.config.sample_rate if voice else 22050
+    sr = engine.sr if engine else 22050
     pieces: list[np.ndarray] = []
     words: list[dict] = []
     scenes: list[dict] = []
@@ -213,14 +246,13 @@ def build(script: dict, voice, length_scale: float, fallback: bool):
             spoken = [spoken_form(tok, pron) for tok in sent]
             spoken_counts = [max(1, len([w for w in s.split() if not PUNCT_ONLY.match(w)])) for s in spoken]
             text = " ".join(spoken)
-            if voice is not None:
+            spoken_words = [w for s in spoken for w in s.split() if not PUNCT_ONLY.match(w)]
+            if engine is not None:
                 # "pace" pro Szene: <1 schneller, >1 langsamer (z. B. dramatische Enthüllung)
-                audio, align, sr = synth_sentence(voice, text, length_scale * float(scene.get("pace", 1.0)),
-                                                  spk, noise, noise_w)
+                audio, spans, sr = engine.synth(text, spoken_words, float(scene.get("pace", 1.0)))
             else:  # Platzhalter: Stille mit geschätzter Dauer (nur lokale Tests)
                 dur = sum(len(s) for s in spoken) / 14.0 + 0.2
-                audio, align = np.zeros(int(dur * sr), dtype=np.float32), None
-            spans = word_spans_from_alignment(align) if align else []
+                audio, spans = np.zeros(int(dur * sr), dtype=np.float32), None
             if spans and len(spans) == sum(spoken_counts):
                 tok_spans = []
                 idx = 0
@@ -229,7 +261,7 @@ def build(script: dict, voice, length_scale: float, fallback: bool):
                     idx += c
                 stats["aligned"] += len(sent)
             else:
-                b0, b1 = speech_bounds(audio, sr) if voice is not None else (0, len(audio))
+                b0, b1 = speech_bounds(audio, sr) if engine is not None else (0, len(audio))
                 tok_spans = proportional_spans([len(s) + 2 for s in spoken], b0, b1)
                 stats["estimated"] += len(sent)
             for tok, (a, b) in zip(sent, tok_spans):
@@ -279,33 +311,52 @@ def main() -> int:
 
     script = json.loads(Path(args.script).read_text(encoding="utf-8"))
     vcfg = script.get("voice", {}) or {}
-    model = vcfg.get("model", "de_DE-thorsten-high")
-    length_scale = float(vcfg.get("lengthScale", 1.0))
     out = Path(args.out_dir)
     out.mkdir(parents=True, exist_ok=True)
 
-    voice = None if args.placeholder else load_voice(model, Path(args.voice_dir))
-    audio, sr, tl, stats = build(script, voice, length_scale, args.placeholder)
+    engine = None if args.placeholder else make_engine(script, Path(args.voice_dir))
+    audio, sr, tl, stats = build(script, engine)
 
-    # Dauer automatisch in den Zielbereich 35–60 s bringen (Sprechtempo ±15 %)
+    # Dauer automatisch in den Zielbereich 35–60 s bringen (Tempo max. ±15 %)
     adjusted = False
-    if voice is not None and (tl["duration"] > MAX_DUR or tl["duration"] < MIN_DUR):
+    tempo = 1.0
+    if engine is not None and (tl["duration"] > MAX_DUR or tl["duration"] < MIN_DUR):
         target = MAX_DUR - 1.5 if tl["duration"] > MAX_DUR else MIN_DUR + 1.0
         speech = tl["duration"] - LEAD_IN - TAIL
-        factor = (target - (tl["duration"] - speech)) / speech
-        new_scale = max(0.85, min(1.15, length_scale * factor))
-        if abs(new_scale - length_scale) > 0.01:
-            print(f"[tts] Dauer {tl['duration']:.1f}s außerhalb 35–60s → lengthScale {length_scale:.2f} → {new_scale:.2f}", flush=True)
-            length_scale = new_scale
-            audio, sr, tl, stats = build(script, voice, length_scale, False)
-            adjusted = True
+        factor = max(0.85, min(1.15, (target - LEAD_IN - TAIL) / speech))
+        print(f"[tts] Dauer {tl['duration']:.1f}s außerhalb 35–60s → Tempo-Faktor {factor:.2f}", flush=True)
+        if engine.name == "piper":
+            engine.length_scale *= factor
+            audio, sr, tl, stats = build(script, engine)
+        else:
+            import librosa
+
+            audio = librosa.effects.time_stretch(audio, rate=1.0 / factor).astype(np.float32)
+            for w in tl["words"]:
+                w["start"], w["end"] = round(w["start"] * factor, 3), round(w["end"] * factor, 3)
+            for sc in tl["scenes"]:
+                for k in ("start", "end", "narrationStart", "narrationEnd"):
+                    sc[k] = round(sc[k] * factor, 3)
+            tl["duration"] = round(len(audio) / sr, 3)
+            tl["scenes"][-1]["end"] = tl["duration"]
+        tempo = factor
+        adjusted = True
 
     write_wav(out / "narration.wav", audio, sr)
     tl["fps"] = args.fps
+    if engine is None:
+        voice_name = "PLATZHALTER (Stille)"
+    elif engine.name == "chatterbox":
+        voice_name = f"Chatterbox Multilingual (exaggeration {engine.exaggeration}, cfg {engine.cfg_weight})"
+    else:
+        voice_name = vcfg.get("model", "de_DE-thorsten-high")
     tl["meta"] = {
-        "voice": "PLATZHALTER (Stille)" if voice is None else model,
-        "lengthScale": round(length_scale, 3),
+        "voice": voice_name,
+        "engine": engine.name if engine else "placeholder",
+        "lengthScale": round(getattr(engine, "length_scale", 1.0) if engine else 1.0, 3),
+        "tempoFactor": round(tempo, 3),
         "autoAdjusted": adjusted,
+        "regenerated": getattr(engine, "retries", 0) if engine else 0,
         "wordsAligned": stats["aligned"],
         "wordsEstimated": stats["estimated"],
         "sampleRate": sr,

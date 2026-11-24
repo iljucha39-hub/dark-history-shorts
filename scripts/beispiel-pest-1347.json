@@ -12,13 +12,27 @@
     "Encyclopaedia Britannica: Black Death",
     "Science History Institute / diverse Museen: Schnabelmaske der Pestärzte (17. Jahrhundert)"
   ],
-  "voice": {"model": "de_DE-thorsten-high", "lengthScale": 1.0},
-  "music": {"seed": 1347, "key": "d"},
+  "voice": {
+    "engine": "chatterbox",
+    "exaggeration": 0.9,
+    "cfgWeight": 0.3,
+    "effect": "room",
+    "seed": 1347
+  },
+  "music": {
+    "seed": 1347,
+    "key": "d"
+  },
   "scenes": [
     {
-      "narration": "Oktober 1347. Schiffe laufen in Messina ein. Die Besatzung ist tot – oder liegt im Sterben.",
+      "narration": "Oktober 1347. Schiffe laufen in Messina ein. Die Besatzung? Tot – oder im Sterben.",
       "emphasis": ["tot", "Sterben"],
-      "visual": {"type": "title", "text": "DER SCHWARZE TOD", "subtext": "MESSINA · 1347", "mood": "blood"}
+      "visual": {
+        "type": "title",
+        "text": "DER SCHWARZE TOD",
+        "subtext": "MESSINA · 1347",
+        "mood": "blood"
+      }
     },
     {
       "narration": "Sie kommen aus Caffa am Schwarzen Meer. Dort sollen Belagerer Pestleichen über die Stadtmauer geschleudert haben.",
@@ -29,18 +43,41 @@
           "bounds": [8, 34, 40, 49],
           "title": "DER WEG DER PEST",
           "markers": [
-            {"lon": 35.38, "lat": 45.03, "label": "Caffa"},
-            {"lon": 28.98, "lat": 41.01, "label": "Konstantinopel"},
-            {"lon": 15.55, "lat": 38.19, "label": "Messina"}
+            {
+              "lon": 35.38,
+              "lat": 45.03,
+              "label": "Caffa"
+            },
+            {
+              "lon": 28.98,
+              "lat": 41.01,
+              "label": "Konstantinopel"
+            },
+            {
+              "lon": 15.55,
+              "lat": 38.19,
+              "label": "Messina"
+            }
           ],
-          "route": [[35.38, 45.03], [31.5, 43.0], [28.98, 41.01], [26.0, 39.5], [24.0, 37.2], [20.0, 36.8], [15.55, 38.19]]
+          "route": [
+            [35.38, 45.03],
+            [31.5, 43.0],
+            [28.98, 41.01],
+            [26.0, 39.5],
+            [24.0, 37.2],
+            [20.0, 36.8],
+            [15.55, 38.19]
+          ]
         }
       }
     },
     {
       "narration": "An Bord: Ratten, Flöhe und ein unsichtbarer Killer. Das Bakterium Yersinia pestis.",
       "emphasis": ["Killer"],
-      "visual": {"type": "sea", "mood": "storm"}
+      "visual": {
+        "type": "sea",
+        "mood": "storm"
+      }
     },
     {
       "narration": "Fieber, schwarze Beulen, und nach wenigen Tagen der Tod. Die Menschen beten – vergeblich.",
@@ -49,9 +86,24 @@
         "type": "village",
         "mood": "fog",
         "characters": [
-          {"kind": "monk", "action": "pray", "x": 0.25},
-          {"kind": "peasant", "action": "cower", "x": 0.62, "facing": "left"},
-          {"kind": "peasant", "action": "walk", "x": 0.85, "facing": "left", "scale": 0.8}
+          {
+            "kind": "monk",
+            "action": "pray",
+            "x": 0.25
+          },
+          {
+            "kind": "peasant",
+            "action": "cower",
+            "x": 0.62,
+            "facing": "left"
+          },
+          {
+            "kind": "peasant",
+            "action": "walk",
+            "x": 0.85,
+            "facing": "left",
+            "scale": 0.8
+          }
         ]
       }
     },
@@ -62,7 +114,13 @@
         "type": "map",
         "map": {
           "bounds": [-10, 35, 30, 62],
-          "markers": [{"lon": 15.55, "lat": 38.19, "label": "Messina"}],
+          "markers": [
+            {
+              "lon": 15.55,
+              "lat": 38.19,
+              "label": "Messina"
+            }
+          ],
           "spreadFrom": 0
         }
       }
@@ -70,7 +128,11 @@
     {
       "narration": "Zwischen einem Drittel und der Hälfte aller Menschen in Europa stirbt.",
       "emphasis": ["Hälfte"],
-      "visual": {"type": "document", "text": "1 VON 3", "subtext": "Europäern stirbt – oder mehr"}
+      "visual": {
+        "type": "document",
+        "text": "1 VON 3",
+        "subtext": "Europäern stirbt – oder mehr"
+      }
     },
     {
       "narration": "Und die berühmten Pestärzte mit Schnabelmaske? Die gab es erst rund dreihundert Jahre später.",
@@ -79,12 +141,27 @@
         "type": "portrait",
         "text": "PESTARZT",
         "subtext": "17. JAHRHUNDERT",
-        "characters": [{"kind": "plagueDoctor", "action": "idle"}]
+        "characters": [
+          {
+            "kind": "plagueDoctor",
+            "action": "idle"
+          }
+        ]
       }
     },
     {
       "narration": "Folge Dark History für mehr dunkle Geschichte.",
-      "visual": {"type": "castle", "mood": "night", "characters": [{"kind": "knight", "action": "walk", "x": 0.15}]}
+      "visual": {
+        "type": "castle",
+        "mood": "night",
+        "characters": [
+          {
+            "kind": "knight",
+            "action": "walk",
+            "x": 0.15
+          }
+        ]
+      }
     }
   ]
 }

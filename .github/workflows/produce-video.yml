@@ -73,9 +73,9 @@ jobs:
         timeout-minutes: 10
         run: npm ci --no-audit --no-fund
 
-      - name: Python-Pakete installieren (Piper TTS)
-        timeout-minutes: 10
-        run: pip install -r requirements.txt
+      - name: Python-Pakete installieren (Piper, Chatterbox, Whisper – CPU)
+        timeout-minutes: 15
+        run: pip install --extra-index-url https://download.pytorch.org/whl/cpu -r requirements.txt
 
       - name: FFmpeg installieren (statischer Build)
         timeout-minutes: 5
@@ -88,11 +88,13 @@ jobs:
       - name: Skript prüfen
         run: node pipeline/validate.mjs "${{ matrix.script }}"
 
-      - name: Stimmenmodell aus Cache
+      - name: Stimmenmodelle aus Cache
         uses: actions/cache@v4
         with:
-          path: .voices
-          key: piper-voices-v1-${{ hashFiles('requirements.txt') }}
+          path: |
+            .voices
+            ~/.cache/huggingface
+          key: voice-models-v2-${{ hashFiles('requirements.txt') }}
 
       - name: Remotion-Browser installieren
         timeout-minutes: 5
