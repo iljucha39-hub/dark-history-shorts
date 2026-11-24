@@ -14,11 +14,11 @@ Wenn der Nutzer `NEUES VIDEO` schreibt (optional mit Themenwunsch):
 2. **Recherche**: Fakten per Websuche prüfen. Nur belegbare Aussagen; Umstrittenes mit
    „angeblich“, „laut Chronist …“ kennzeichnen. Quellen in `sources` eintragen.
 3. **Skript** `scripts/<id>.json` mit `"status": "draft"` schreiben (Format: `docs/SKRIPT-FORMAT.md`):
-   - 6–10 Szenen, 85–115 Wörter gesamt (≈ 35–60 s mit Stimme X2)
+   - 6–10 Szenen, 85–115 Wörter gesamt (≈ 35–60 s mit Stimme C1)
    - Szene 1 = Hook (max. ~12 Wörter, sofort packend), letzte Szene = kurzer Abschluss/CTA
    - Jahreszahlen als Ziffern sind ok (1100–1999 werden korrekt ausgesprochen)
-   - Stimme immer: `"voice": {"engine": "chatterbox", "exaggeration": 0.9, "cfgWeight": 0.3, "effect": "none", "seed": <Zahl>}`
-     (vom Nutzer gewählte Stimme „X2“)
+   - Stimme immer (vom Nutzer gewählte Stimme „C1“, klar, ohne Hall):
+     `"voice": {"engine": "chatterbox", "reference": "piper:de_DE-thorsten-high", "exaggeration": 0.6, "cfgWeight": 0.5, "effect": "clear", "seed": <Zahl>}`
 4. `node pipeline/validate.mjs scripts/<id>.json` und `node pipeline/preview.mjs scripts/<id>.json`
    (lokal mit `REMOTION_BROWSER=/opt/pw-browsers/chromium_headless_shell`) ausführen,
    Vorschaubild `output/<id>/vorschau.jpg` ansehen und dem Nutzer Skript + Vorschau zeigen.
