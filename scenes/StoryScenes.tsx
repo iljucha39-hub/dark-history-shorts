@@ -42,6 +42,19 @@ export const PortraitScene: React.FC<SceneProps> = ({visual, p, index}) => {
 					<path d="M 160 1900 L 160 700 Q 540 160 920 700 L 920 1900" fill="none" stroke={p.rim} strokeOpacity={0.12} strokeWidth={4} />
 				</Canvas>
 			</Layer>
+			<Layer depth={0.5}>
+				<Canvas>
+					{/* Gegenlicht hinter der Figur */}
+					<defs>
+						<radialGradient id={`back${index}`}>
+							<stop offset="0" stopColor={p.glow} stopOpacity="0.55" />
+							<stop offset="0.5" stopColor={p.rim} stopOpacity="0.18" />
+							<stop offset="1" stopColor={p.rim} stopOpacity="0" />
+						</radialGradient>
+					</defs>
+					<ellipse cx={540} cy={1420} rx={420} ry={560} fill={`url(#back${index})`} />
+				</Canvas>
+			</Layer>
 			<Layer depth={0.7}>
 				<Canvas>
 					<RimLight id={`prim${index}`} color={p.rim} dx={5} dy={-3}>
@@ -49,8 +62,8 @@ export const PortraitScene: React.FC<SceneProps> = ({visual, p, index}) => {
 							kind={ch.kind}
 							action={ch.action ?? 'idle'}
 							x={540}
-							y={1980}
-							scale={4.6 * (ch.scale ?? 1)}
+							y={1880}
+							scale={3.1 * (ch.scale ?? 1)}
 							facing={ch.facing ?? 'right'}
 							p={p}
 						/>

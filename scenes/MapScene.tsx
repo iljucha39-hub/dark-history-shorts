@@ -75,40 +75,41 @@ export const MapScene: React.FC<SceneProps> = ({visual, durationInFrames, p, ind
 		spec.spreadFrom !== undefined && markers[spec.spreadFrom]
 			? project(markers[spec.spreadFrom].lon, markers[spec.spreadFrom].lat)
 			: null;
-	const clipId = `landclip${index}`;
 	const ink = p.ink;
 
 	return (
-		<AbsoluteFill style={{background: '#1a120a'}}>
+		<AbsoluteFill style={{background: '#081216'}}>
 			<Layer depth={0.5}>
 				<Canvas>
 					<defs>
-						<clipPath id={clipId}>
-							<path d={landPath} />
-						</clipPath>
+						<radialGradient id={`land${index}`} cx="50%" cy="45%" r="75%">
+							<stop offset="0" stopColor="#c9ab78" />
+							<stop offset="0.6" stopColor="#a88a5a" />
+							<stop offset="1" stopColor="#6e5634" />
+						</radialGradient>
 						<radialGradient id={`sea${index}`} cx="50%" cy="45%" r="70%">
-							<stop offset="0" stopColor="#5a4a30" />
-							<stop offset="1" stopColor="#1e160c" />
+							<stop offset="0" stopColor="#24404a" />
+							<stop offset="1" stopColor="#081216" />
 						</radialGradient>
 					</defs>
 					<rect x={-400} y={-400} width={1880} height={2720} fill={`url(#sea${index})`} />
-					{/* Wellenschraffur */}
-					{new Array(40).fill(0).map((_, i) => (
-						<path
-							key={i}
-							d={`M ${-300 + (i % 5) * 360} ${-200 + Math.floor(i / 5) * 300 + (i % 2) * 120} q 20 -12 40 0 q 20 12 40 0`}
-							stroke={p.paper}
-							strokeOpacity={0.18}
-							strokeWidth={3}
-							fill="none"
-						/>
-					))}
-					<path d={landPath} fill={p.paper} />
-					<path d={landPath} fill="none" stroke={ink} strokeWidth={3} strokeOpacity={0.8} />
-					<path d={landPath} fill="none" stroke={ink} strokeWidth={14} strokeOpacity={0.12} />
+					<path d={landPath} fill={`url(#land${index})`} />
+					{/* Pergament-Flecken auf dem Land */}
+					<g opacity={0.5}>
+						{new Array(26).fill(0).map((_, i) => (
+							<circle
+								key={i}
+								cx={-200 + random(`mp${i}`) * 1500}
+								cy={-200 + random(`mq${i}`) * 2300}
+								r={60 + random(`mr${i}`) * 200}
+								fill="#5a3e1c"
+								opacity={0.18}
+							/>
+						))}
+					</g>
 					{/* Ausbreitung (z. B. Pest) */}
 					{spread && (
-						<g clipPath={`url(#${clipId})`}>
+						<g>
 							<circle
 								cx={spread[0]}
 								cy={spread[1]}
@@ -123,6 +124,21 @@ export const MapScene: React.FC<SceneProps> = ({visual, durationInFrames, p, ind
 							})}
 						</g>
 					)}
+					{/* Meer als Maske darüber: Flecken und Ausbreitung bleiben nur auf dem Land */}
+					<path d={`M -400 -400 H 1480 V 2320 H -400 Z ${landPath}`} fillRule="evenodd" fill={`url(#sea${index})`} />
+					{/* Wellenschraffur */}
+					{new Array(40).fill(0).map((_, i) => (
+						<path
+							key={i}
+							d={`M ${-300 + (i % 5) * 360} ${-200 + Math.floor(i / 5) * 300 + (i % 2) * 120} q 20 -12 40 0 q 20 12 40 0`}
+							stroke="#7fa8b4"
+							strokeOpacity={0.25}
+							strokeWidth={3}
+							fill="none"
+						/>
+					))}
+					<path d={landPath} fill="none" stroke={ink} strokeWidth={3} strokeOpacity={0.8} />
+					<path d={landPath} fill="none" stroke={ink} strokeWidth={14} strokeOpacity={0.12} />
 					{routeD && (
 						<>
 							<path
@@ -189,15 +205,18 @@ export const MapScene: React.FC<SceneProps> = ({visual, durationInFrames, p, ind
 				</Canvas>
 			</Layer>
 			{spec.title && (
-				<AbsoluteFill style={{alignItems: 'center', paddingTop: 250}}>
+				<AbsoluteFill style={{alignItems: 'center', paddingTop: 230}}>
 					<div
 						style={{
 							fontFamily: FONT_TITLE,
 							fontWeight: 900,
-							fontSize: 64,
-							color: p.paper,
+							fontSize: 60,
+							color: '#f0e2c0',
 							letterSpacing: 6,
-							textShadow: '0 4px 20px #000',
+							padding: '14px 36px',
+							background: 'rgba(10,5,2,0.78)',
+							borderTop: '3px solid #8a6a3a',
+							borderBottom: '3px solid #8a6a3a',
 							opacity: interpolate(frame, [0, 12], [0, 1], {extrapolateRight: 'clamp'}),
 						}}
 					>
@@ -207,7 +226,7 @@ export const MapScene: React.FC<SceneProps> = ({visual, durationInFrames, p, ind
 			)}
 			<AbsoluteFill
 				style={{
-					boxShadow: 'inset 0 0 220px 80px rgba(20,10,4,0.95)',
+					boxShadow: 'inset 0 0 240px 100px rgba(4,8,10,0.95)',
 				}}
 			/>
 			<Particles kind="dust" count={20} />

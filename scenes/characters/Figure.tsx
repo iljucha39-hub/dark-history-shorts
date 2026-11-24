@@ -177,7 +177,7 @@ const LOOKS: Record<CharacterKind, Look> = {
 	queen: {body: '#24102e', limbs: CLOTH, head: 'crown', robe: '#1e0c26', hair: true},
 	monk: {body: '#2a2016', limbs: '#2a2016', head: 'cowl', robe: '#241b12', weapon: 'book'},
 	peasant: {body: '#2b2117', limbs: '#211a12', head: 'coif', weapon: 'pitchfork'},
-	plagueDoctor: {body: '#111', limbs: '#111', head: 'beak', robe: '#141210', weapon: 'staff', eyes: '#d8c070'},
+	plagueDoctor: {body: '#221d18', limbs: '#1c1814', head: 'beak', robe: '#26201a', weapon: 'staff', eyes: '#e8d080'},
 	executioner: {body: '#1a1010', limbs: '#3a2a22', head: 'executioner', weapon: 'axe', eyes: '#c8102e'},
 	noble: {body: '#1a2030', limbs: CLOTH, head: 'cap', cape: '#2a1030', weapon: 'sword', beard: true},
 	viking: {body: '#2a2218', limbs: '#221b13', head: 'nasal', weapon: 'axe', shield: 'round', beard: true},
@@ -293,7 +293,7 @@ const Head: React.FC<{look: Look; p: Palette; frame: number}> = ({look, p}) => {
 		case 'beak':
 			items.push(
 				<g key="h">
-					<path d="M -16 -4 Q -18 22 0 22 L 10 10 Q 50 34 58 30 Q 40 14 14 -2 Z" fill="#1a1814" />
+					<path d="M -16 -4 Q -18 22 0 22 L 10 10 Q 50 34 58 30 Q 40 14 14 -2 Z" fill="#4a3c2c" stroke="#8a7458" strokeWidth={1.5} />
 					<ellipse cx={-2} cy={-16} rx={36} ry={7} fill="#0e0d0b" />
 					<path d="M -16 -16 Q -14 -42 0 -42 Q 14 -42 16 -16 Z" fill="#0e0d0b" />
 				</g>,
