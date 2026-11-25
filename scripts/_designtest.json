@@ -1,0 +1,104 @@
+{
+ "id": "_designtest",
+ "title": "Designtest",
+ "status": "draft",
+ "voice": {
+  "engine": "chatterbox",
+  "speed": 1.3,
+  "pauses": "tight"
+ },
+ "scenes": [
+  {
+   "narration": "Er versetzte halb Europa in Angst und starb in seiner Hochzeitsnacht an Nasenbluten.",
+   "visual": {
+    "type": "closeup",
+    "mood": "sunset",
+    "hook": {
+     "top": "Gestorben an",
+     "main": "Nasenbluten"
+    },
+    "characters": [
+     {
+      "kind": "king",
+      "action": "idle",
+      "facing": "right"
+     }
+    ],
+    "flags": [
+     "#c8102e",
+     "#d8c890"
+    ]
+   }
+  },
+  {
+   "narration": "Wütende Adlige stürmen die Burg in Prag.",
+   "visual": {
+    "type": "castle",
+    "characters": [
+     {
+      "kind": "noble",
+      "action": "run",
+      "x": 0.1
+     }
+    ]
+   }
+  },
+  {
+   "narration": "Zwei Heere prallen aufeinander.",
+   "visual": {
+    "type": "battle",
+    "characters": [
+     {
+      "kind": "knight"
+     },
+     {
+      "kind": "viking"
+     }
+    ]
+   }
+  },
+  {
+   "narration": "Ich befehle euch nicht anzugreifen, ich befehle euch zu sterben.",
+   "visual": {
+    "type": "closeup",
+    "mood": "dusk",
+    "characters": [
+     {
+      "kind": "soldier",
+      "action": "idle",
+      "facing": "left"
+     }
+    ],
+    "flags": [
+     "#c8102e"
+    ]
+   }
+  },
+  {
+   "narration": "Das Dorf schläft nicht.",
+   "visual": {
+    "type": "village",
+    "characters": [
+     {
+      "kind": "monk",
+      "action": "walk",
+      "x": 0.2
+     }
+    ]
+   }
+  },
+  {
+   "narration": "Der Ritter wartet.",
+   "visual": {
+    "type": "closeup",
+    "mood": "sunset",
+    "characters": [
+     {
+      "kind": "knight",
+      "action": "idle"
+     }
+    ]
+   }
+  }
+ ]
+}

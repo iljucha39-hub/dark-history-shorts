@@ -10,7 +10,8 @@ export type SceneType =
 	| 'portrait'
 	| 'document'
 	| 'dungeon'
-	| 'sea';
+	| 'sea'
+	| 'closeup';
 
 export type CameraMove =
 	| 'pushIn'
@@ -22,7 +23,7 @@ export type CameraMove =
 	| 'drift'
 	| 'punchIn';
 
-export type Mood = 'night' | 'blood' | 'fog' | 'fire' | 'storm' | 'gold';
+export type Mood = 'night' | 'blood' | 'fog' | 'fire' | 'storm' | 'gold' | 'sunset' | 'dusk';
 
 export type CharacterKind =
 	| 'knight'
@@ -90,6 +91,10 @@ export interface SceneVisual {
 	fire?: boolean;
 	rain?: boolean;
 	lightning?: boolean;
+	/** Großer Titel über dem Bild (Cover-Stil): obere Zeile weiß, untere groß in Rot */
+	hook?: {top?: string; main: string};
+	/** Flaggen-/Bannerfarben im Hintergrund (closeup) */
+	flags?: string[];
 }
 
 export interface ScriptScene {

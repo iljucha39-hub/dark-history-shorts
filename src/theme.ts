@@ -22,6 +22,8 @@ export interface Palette {
 	fog: string;
 	paper: string;
 	ink: string;
+	/** Sonne statt Mond (groß, ohne Krater) */
+	sun?: boolean;
 }
 
 const base = {
@@ -31,6 +33,31 @@ const base = {
 };
 
 export const PALETTES: Record<Mood, Palette> = {
+	sunset: {
+		...base,
+		skyTop: '#2b1742',
+		skyMid: '#8c3b52',
+		skyBottom: '#f28c3c',
+		glow: '#ffd890',
+		far: '#6a2f45',
+		mid: '#341628',
+		near: '#12070c',
+		rim: '#ffb46e',
+		fog: '#d0836e',
+		sun: true,
+	},
+	dusk: {
+		...base,
+		skyTop: '#1c1d42',
+		skyMid: '#4d3d72',
+		skyBottom: '#d08a86',
+		glow: '#ffe6c0',
+		far: '#45385e',
+		mid: '#221d36',
+		near: '#09080f',
+		rim: '#f6c0aa',
+		fog: '#9a88aa',
+	},
 	night: {
 		...base,
 		skyTop: '#05070f',
@@ -110,3 +137,4 @@ export const palette = (mood: Mood | undefined): Palette =>
 
 export const FONT_TITLE = 'Cinzel';
 export const FONT_CAPTION = 'Montserrat';
+export const FONT_HOOK = 'Anton';

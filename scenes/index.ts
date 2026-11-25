@@ -1,6 +1,7 @@
 import type React from 'react';
 import type {SceneType} from '../src/types';
 import {BattleScene, CastleScene, DungeonScene, SeaScene, VillageScene} from './LandscapeScenes';
+import {CloseupScene} from './CloseupScene';
 import {MapScene} from './MapScene';
 import {DocumentScene, PortraitScene, TitleScene} from './StoryScenes';
 import type {SceneProps} from './types';
@@ -16,6 +17,7 @@ export const SCENES: Record<SceneType, React.FC<SceneProps>> = {
 	document: DocumentScene,
 	dungeon: DungeonScene,
 	sea: SeaScene,
+	closeup: CloseupScene,
 };
 
 export {DEFAULT_CAMERA, DEFAULT_MOOD} from './types';

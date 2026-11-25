@@ -4,6 +4,7 @@ import {DEFAULT_CAMERA, DEFAULT_MOOD, SCENES} from '../scenes';
 import {Vignette} from '../scenes/primitives/Environment';
 import {CameraProvider} from './components/Camera';
 import {Captions} from './components/Captions';
+import {HookOverlay} from './components/HookOverlay';
 import {FONT_TITLE, palette} from './theme';
 import type {ScriptScene, VideoProps} from './types';
 
@@ -45,6 +46,7 @@ const SceneSlot: React.FC<{scene: ScriptScene; index: number; durationInFrames: 
 			<CameraProvider move={move} durationInFrames={durationInFrames} shake={shake} cuts={v.type !== 'title'}>
 				<Comp visual={v} durationInFrames={durationInFrames} p={p} index={index} />
 			</CameraProvider>
+			{v.hook && <HookOverlay top={v.hook.top} main={v.hook.main} durationInFrames={durationInFrames} />}
 			{flash > 0 && <AbsoluteFill style={{background: '#fff', opacity: flash}} />}
 		</AbsoluteFill>
 	);
@@ -89,7 +91,7 @@ export const DarkHistoryVideo: React.FC<VideoProps> = ({script, timeline, audio}
 			})}
 			<Vignette />
 			<Branding />
-			<Captions words={timeline.words} scenes={script.scenes} />
+			<Captions words={timeline.words} scenes={script.scenes} hiddenScenes={script.scenes.map((sc) => Boolean(sc.visual.hook))} />
 			{audio && <Audio src={staticFile(audio)} />}
 		</AbsoluteFill>
 	);

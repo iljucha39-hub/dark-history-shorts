@@ -19,16 +19,18 @@ export const DEFAULT_CAMERA: Record<SceneVisual['type'], NonNullable<SceneVisual
 	document: 'drift',
 	dungeon: 'tiltDown',
 	sea: 'drift',
+	closeup: 'pushIn',
 };
 
 export const DEFAULT_MOOD: Record<SceneVisual['type'], NonNullable<SceneVisual['mood']>> = {
 	title: 'blood',
-	castle: 'night',
-	village: 'fog',
-	battle: 'blood',
+	castle: 'dusk',
+	village: 'sunset',
+	battle: 'sunset',
 	map: 'gold',
-	portrait: 'night',
+	portrait: 'sunset',
 	document: 'gold',
 	dungeon: 'fire',
-	sea: 'storm',
+	sea: 'dusk',
+	closeup: 'sunset',
 };

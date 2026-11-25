@@ -19,6 +19,11 @@ Wenn der Nutzer `NEUES VIDEO` schreibt (optional mit Themenwunsch):
      der Titeltext im Bild (`visual.text`) ist die Kernbehauptung („NIEMAND AN BORD“), nicht nur der Name.
      Hook-Muster: Widerspruch/Wendung („…und alle überlebten“), absurdes Detail („an Nasenbluten“),
      offene Frage/Spannung („Was dann geschah, …“). Keine Einleitung, kein Datum am Anfang.
+   - **Story statt Fakten**: eine Hauptfigur, ein Konflikt (Verrat, Übermacht, Rache, Befehl), eine Wendung.
+     Gern ein echtes Zitat als Hook („Ich befehle euch nicht anzugreifen – ich befehle euch zu sterben!“).
+   - **Szene 1 = Cover**: `"type": "closeup"` (Profil-Silhouette vor großer Sonne) mit
+     `"hook": {"top": "<2–3 Wörter weiß>", "main": "<1–2 Wörter groß in Rot>"}` – das ist zugleich das Vorschaubild.
+   - **Hell & warm**: Stimmungen `sunset`/`dusk` bevorzugen; `night`/`storm` nur gezielt. Hauptfigur mehrfach als `closeup`.
    - **Kein „Folge …“-Abschluss.** Der letzte Satz führt inhaltlich zurück zum Hook (Loop-Effekt).
    - Jahreszahlen als Ziffern sind ok (1100–1999 werden korrekt ausgesprochen)
    - Stimme immer (vom Nutzer gewählte Stimme „E1“: männlich, episch, ca. 1,2× schneller als vorher, durchgesprochen, ohne Hall):

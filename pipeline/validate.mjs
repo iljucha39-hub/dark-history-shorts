@@ -5,9 +5,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
-export const SCENE_TYPES = ['title', 'castle', 'village', 'battle', 'map', 'portrait', 'document', 'dungeon', 'sea'];
+export const SCENE_TYPES = ['title', 'castle', 'village', 'battle', 'map', 'portrait', 'document', 'dungeon', 'sea', 'closeup'];
 export const CAMERAS = ['pushIn', 'pullOut', 'panLeft', 'panRight', 'tiltUp', 'tiltDown', 'drift', 'punchIn'];
-export const MOODS = ['night', 'blood', 'fog', 'fire', 'storm', 'gold'];
+export const MOODS = ['night', 'blood', 'fog', 'fire', 'storm', 'gold', 'sunset', 'dusk'];
 export const KINDS = ['knight', 'soldier', 'archer', 'king', 'queen', 'monk', 'peasant', 'plagueDoctor', 'executioner', 'noble', 'viking'];
 export const ACTIONS = ['idle', 'walk', 'run', 'march', 'fight', 'point', 'cower', 'raiseArm', 'pray'];
 

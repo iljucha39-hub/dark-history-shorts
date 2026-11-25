@@ -42,7 +42,11 @@ export const chunkWords = (words: WordTiming[]): Chunk[] => {
 	return chunks;
 };
 
-export const Captions: React.FC<{words: WordTiming[]; scenes: ScriptScene[]}> = ({words, scenes}) => {
+export const Captions: React.FC<{words: WordTiming[]; scenes: ScriptScene[]; hiddenScenes?: boolean[]}> = ({
+	words,
+	scenes,
+	hiddenScenes = [],
+}) => {
 	const frame = useCurrentFrame();
 	const {fps} = useVideoConfig();
 	const t = frame / fps;
@@ -52,7 +56,7 @@ export const Captions: React.FC<{words: WordTiming[]; scenes: ScriptScene[]}> = 
 		[scenes],
 	);
 	const chunk = chunks.find((c) => t >= c.start - 0.05 && t < c.end);
-	if (!chunk) return null;
+	if (!chunk || hiddenScenes[chunk.words[0].scene]) return null;
 	const pop = spring({frame: frame - Math.round(chunk.start * fps), fps, config: {damping: 14, stiffness: 260, mass: 0.6}});
 	// Lange Wörter (z. B. „fünfundzwanzigsten“) verkleinern, damit nichts über den Rand ragt
 	const longest = Math.max(...chunk.words.map((w) => w.text.length));

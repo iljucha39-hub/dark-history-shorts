@@ -11,6 +11,7 @@
     "produce": "node pipeline/produce.mjs"
   },
   "dependencies": {
+    "@fontsource/anton": "5.3.0",
     "@fontsource/cinzel": "5.3.0",
     "@fontsource/montserrat": "5.3.0",
     "@remotion/bundler": "4.0.540",

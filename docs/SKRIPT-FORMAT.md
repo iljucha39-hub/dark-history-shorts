@@ -36,9 +36,13 @@ Vollständiges Beispiel: [`scripts/beispiel-pest-1347.json`](../scripts/beispiel
 | `document` | Pergament mit Zahl/Fakt, Kerze, Siegel | `text`, `subtext` |
 | `dungeon` | Kerker, Ketten, Fackel, Gefangener | `characters`, `fire` |
 | `sea` | Sturm auf See, schaukelndes Schiff, Regen, Blitze | `rain`, `lightning` |
+| `closeup` | Große Profil-Silhouette (Kopf & Schultern) vor riesiger Sonne/Mond, optional Flaggen | `characters[0]`, `flags: ["#c8102e"]` |
+
+**Cover-Titel** (`visual.hook`, für Szene 1): `{"top": "GESTORBEN AN", "main": "NASENBLUTEN"}` – dicke Schrift,
+oben weiß, unten groß in Rot. Während der Hook-Szene werden die Untertitel ausgeblendet.
 
 **Kamera** (`camera`): `pushIn`, `pullOut`, `panLeft`, `panRight`, `tiltUp`, `tiltDown`, `drift`, `punchIn`
-**Stimmung** (`mood`): `night`, `blood`, `fog`, `fire`, `storm`, `gold`
+**Stimmung** (`mood`): `sunset` (Abendrot, Sonne), `dusk` (Dämmerung, lila), `night`, `blood`, `fog`, `fire`, `storm`, `gold`
 
 **Figuren** (`characters: [{kind, action, x, scale, facing, travel}]`)
 - `kind`: `knight`, `soldier`, `archer`, `king`, `queen`, `monk`, `peasant`, `plagueDoctor`, `executioner`, `noble`, `viking`

@@ -56,7 +56,13 @@ export const Sky: React.FC<{
 								/>
 							);
 						})}
-					{moon && (
+					{moon && p.sun && (
+						<g>
+							<circle cx={moonX} cy={moonY + 260} r={700} fill={`url(#${gid}m)`} />
+							<circle cx={moonX} cy={moonY + 260} r={190} fill={p.glow} opacity={0.97} />
+						</g>
+					)}
+					{moon && !p.sun && (
 						<g>
 							<circle cx={moonX} cy={moonY} r={520} fill={`url(#${gid}m)`} />
 							<circle cx={moonX} cy={moonY} r={120} fill={p.glow} opacity={0.95} />
@@ -324,7 +330,7 @@ export const Smoke: React.FC<{x: number; y: number; color?: string; scale?: numb
 };
 
 /** Dunkle Bildränder für den filmischen Look */
-export const Vignette: React.FC<{strength?: number}> = ({strength = 0.85}) => (
+export const Vignette: React.FC<{strength?: number}> = ({strength = 0.55}) => (
 	<AbsoluteFill
 		style={{
 			background: `radial-gradient(ellipse 75% 60% at 50% 48%, rgba(0,0,0,0) 45%, rgba(0,0,0,${strength}) 100%)`,
