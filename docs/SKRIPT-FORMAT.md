@@ -11,9 +11,9 @@ Vollständiges Beispiel: [`scripts/beispiel-pest-1347.json`](../scripts/beispiel
   "description": "Text für TikTok/YouTube",
   "hashtags": ["darkhistory", "geschichte"],
   "sources": ["Quelle 1", "Quelle 2"],
-  // Standard (Stimme „X2“): Chatterbox, ausdrucksstark
-  "voice": {"engine": "chatterbox", "exaggeration": 0.9, "cfgWeight": 0.3,
-            "effect": "clear", "speed": 1.08, "seed": 1347},  // speed: Sprechtempo; seed: Betonung
+  // Standard (Stimme „E1“): episch, schnell, durchgesprochen
+  "voice": {"engine": "chatterbox", "reference": "piper:de_DE-thorsten-high", "exaggeration": 0.7,
+            "cfgWeight": 0.5, "effect": "epic", "speed": 1.3, "pauses": "tight", "seed": 1347},
   // Alternative Piper (schneller, monotoner):
   // "voice": {"model": "de_DE-thorsten-high", "lengthScale": 1.08, "noiseScale": 0.85,
   //           "noiseW": 1.0, "effect": "dark", "speaker": "whisper"}
@@ -46,7 +46,9 @@ Vollständiges Beispiel: [`scripts/beispiel-pest-1347.json`](../scripts/beispiel
 - `x`: 0–1 (Position), `facing`: `left`/`right`, `travel`: Laufstrecke in Bildbreiten
 
 ## Regeln
-- Shorts-Stil: 7–10 Szenen, Ziel 30–40 s (≈ 65–85 Wörter mit `"speed": 1.08`). Erlaubt sind 28–45 s;
+- `"pauses": "tight"` = durchgesprochen (fast keine Pausen), `"normal"` = mit Spannungspausen.
+- Effekte: `none`, `clear`, `epic` (etwas tiefer/voller, kein Hall), `dark`/`deep`/`room` (mit Hall).
+- Shorts-Stil: 7–10 Szenen, Ziel 30–40 s (≈ 80–100 Wörter mit Stimme E1). Erlaubt sind 28–45 s;
   außerhalb wird das Tempo automatisch um bis zu ±15 % angepasst.
 - Szene 1 ist der Hook – Schock-Fakt oder Frage sofort; der Bildtitel ist die Kernaussage.
 - Kein „Folge …“ am Ende: der letzte Satz führt zurück zum Anfang (Loop).

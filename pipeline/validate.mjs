@@ -15,7 +15,7 @@ const WORDS_PER_SECOND = 2.5; // grobe Schätzung für Piper/Thorsten bei length
 
 export const estimateSeconds = (script) => {
 	const words = script.scenes.reduce((a, s) => a + s.narration.split(/\s+/).filter(Boolean).length, 0);
-	return {words, seconds: words / WORDS_PER_SECOND / (script.voice?.speed ?? 1) + script.scenes.length * 0.25 + 0.5};
+	return {words, seconds: words / WORDS_PER_SECOND / (script.voice?.speed ?? 1) + script.scenes.length * (script.voice?.pauses === 'tight' ? 0.08 : 0.25) + 0.5};
 };
 
 /** @returns {{errors: string[], warnings: string[]}} */
