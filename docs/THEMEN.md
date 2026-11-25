@@ -35,5 +35,9 @@ hier sind nur Aufhänger. Erledigte Themen abhaken (`[x]`) und Skript-ID dahinte
 - [ ] **Der Kinderkreuzzug (1212)** – was davon Legende ist und was wahr. *map, village, sea*
 - [ ] **Der Große Brand von London (1666)** – vier Tage Feuer. *village (fire), map, document*
 
+## Neu
+- [ ] **Barbarossas Tod (1190)** – der mächtige Kaiser ertrinkt auf dem Kreuzzug in einem Fluss. *map, portrait, sea*
+- [ ] **Der Brief des Johannes Junius (1628)** – ein Bamberger Bürgermeister schreibt aus der Hexenhaft an seine Tochter. *dungeon, document, portrait*
+
 ## Mythen entlarvt
 - [ ] **Die Eiserne Jungfrau** – das berühmte Folterinstrument gab es im Mittelalter wohl gar nicht. *dungeon, document, portrait*

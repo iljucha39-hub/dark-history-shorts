@@ -17,6 +17,8 @@ Wenn der Nutzer `NEUES VIDEO` schreibt (optional mit Themenwunsch):
    - **Shorts-Stil (Reichweite!)**: 7–10 Szenen, **65–85 Wörter (≈ 30–40 s)**, kurze Sätze, jede Szene 1 Satz.
    - **Hook (Szene 1)**: schockierender Fakt oder Frage in den ersten Worten, max. ~14 Wörter;
      der Titeltext im Bild (`visual.text`) ist die Kernbehauptung („NIEMAND AN BORD“), nicht nur der Name.
+     Hook-Muster: Widerspruch/Wendung („…und alle überlebten“), absurdes Detail („an Nasenbluten“),
+     offene Frage/Spannung („Was dann geschah, …“). Keine Einleitung, kein Datum am Anfang.
    - **Kein „Folge …“-Abschluss.** Der letzte Satz führt inhaltlich zurück zum Hook (Loop-Effekt).
    - Jahreszahlen als Ziffern sind ok (1100–1999 werden korrekt ausgesprochen)
    - Stimme immer (vom Nutzer gewählte Stimme „V2“ = C1 + 8 % schneller, klar, ohne Hall):
