@@ -13,6 +13,8 @@ hier sind nur Aufhänger. Erledigte Themen abhaken (`[x]`) und Skript-ID dahinte
 - [x] Hannibal über die Alpen (218 v. Chr.) – `hannibal-alpen`
 - [x] Der Prager Fenstersturz (1618) – `prager-fenstersturz-1618`
 - [x] Barbarossas Tod (1190) – `barbarossa-1190`
+- [x] Vlad III. „Dracula“ (1462) – `dracula-1462`
+- [x] Der Fall Konstantinopels (1453) – `konstantin-1453`
 
 ## Mysterien & unglaubliche Ereignisse
 - [ ] **Die Tanzwut von Straßburg (1518)** – Menschen tanzen tagelang, die Stadt engagiert Musiker. *Szenen: village, map, document*
@@ -21,12 +23,10 @@ hier sind nur Aufhänger. Erledigte Themen abhaken (`[x]`) und Skript-ID dahinte
 - [ ] **Der Untergang der Vasa (1628)** – Schwedens Prunkschiff sinkt nach rund 1.300 Metern. *sea, title, document*
 
 ## Grausame Herrscher & vergessene Personen
-- [ ] **Vlad III. „Dracula“** – der Pfähler und die Wahrheit hinter dem Vampir. *portrait, castle, battle*
 - [ ] **Elisabeth Báthory** – die „Blutgräfin“: Verbrechen oder politische Intrige? *castle, portrait, dungeon*
 - [ ] **Peter Stumpp, der „Werwolf von Bedburg“ (1589)** – ein Prozess voller Folter und Aberglauben. *village, dungeon, document*
 
 ## Kriege & Schlachten
-- [ ] **Der Fall Konstantinopels (1453)** – Schiffe werden über Land gezogen. *map, battle, sea*
 - [ ] **Die Schlacht von Azincourt (1415)** – Langbögen gegen Ritter im Schlamm. *battle, map, portrait*
 - [ ] **Die Schlacht bei Liegnitz (1241)** – der Mongolensturm erreicht Mitteleuropa. *battle, map, document*
 
