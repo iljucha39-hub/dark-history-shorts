@@ -1,0 +1,203 @@
+{
+ "id": "hannibal-alpen",
+ "title": "Hannibal: Elefanten in den Alpen",
+ "status": "draft",
+ "category": "Kriege und Schlachten",
+ "topic": "Hannibals Alpenüberquerung 218 v. Chr.",
+ "description": "Er führte Kriegselefanten über die Alpen – nur um Rom anzugreifen. #darkhistory #geschichte #hannibal #rom",
+ "hashtags": [
+  "darkhistory",
+  "geschichte",
+  "hannibal",
+  "rom",
+  "antike"
+ ],
+ "sources": [
+  "Polybios, Historien III (Alpenüberquerung, 37 Elefanten)",
+  "Encyclopaedia Britannica: Hannibal – The Alpine crossing",
+  "Livius.org: Hannibal in the Alps",
+  "History.com: Hannibal crosses the Alps"
+ ],
+ "voice": {
+  "engine": "chatterbox",
+  "reference": "piper:de_DE-thorsten-high",
+  "exaggeration": 0.6,
+  "cfgWeight": 0.5,
+  "effect": "clear",
+  "speed": 1.08,
+  "seed": 218
+ },
+ "music": {
+  "seed": 218,
+  "key": "c"
+ },
+ "pronunciations": {
+  "218": "zweihundertachtzehn",
+  "216": "zweihundertsechzehn"
+ },
+ "scenes": [
+  {
+   "narration": "Er führte Kriegselefanten über die Alpen – nur um Rom anzugreifen.",
+   "visual": {
+    "type": "title",
+    "text": "ELEFANTEN IN DEN ALPEN",
+    "subtext": "HANNIBAL",
+    "mood": "fog"
+   },
+   "emphasis": [
+    "Kriegselefanten"
+   ]
+  },
+  {
+   "narration": "Hannibal aus Karthago. Sein Ziel: Rom in die Knie zwingen.",
+   "visual": {
+    "type": "portrait",
+    "text": "HANNIBAL",
+    "subtext": "FELDHERR KARTHAGOS",
+    "mood": "gold",
+    "characters": [
+     {
+      "kind": "soldier",
+      "action": "point"
+     }
+    ]
+   },
+   "emphasis": [
+    "Rom"
+   ]
+  },
+  {
+   "narration": "218 vor Christus zieht er los – mit Zehntausenden Soldaten und 37 Elefanten.",
+   "visual": {
+    "type": "map",
+    "map": {
+     "bounds": [
+      -6,
+      35,
+      16,
+      48
+     ],
+     "title": "HANNIBALS MARSCH",
+     "markers": [
+      {
+       "lon": -0.98,
+       "lat": 37.6,
+       "label": "Spanien"
+      },
+      {
+       "lon": 6.9,
+       "lat": 45.2,
+       "label": "Alpen"
+      },
+      {
+       "lon": 12.5,
+       "lat": 41.9,
+       "label": "Rom"
+      }
+     ],
+     "route": [
+      [
+       -0.98,
+       37.6
+      ],
+      [
+       1.5,
+       41.3
+      ],
+      [
+       3.2,
+       43.2
+      ],
+      [
+       4.8,
+       44.0
+      ],
+      [
+       6.9,
+       45.2
+      ],
+      [
+       8.0,
+       45.0
+      ]
+     ]
+    }
+   },
+   "emphasis": [
+    "Elefanten"
+   ]
+  },
+  {
+   "narration": "Dann die Alpen: Schnee, Eis, steile Pässe – und Angriffe von Bergvölkern.",
+   "visual": {
+    "type": "battle",
+    "mood": "fog",
+    "characters": [
+     {
+      "kind": "soldier"
+     },
+     {
+      "kind": "viking"
+     }
+    ]
+   },
+   "emphasis": [
+    "Alpen"
+   ]
+  },
+  {
+   "narration": "Tausende Männer und Tiere stürzen in den Tod oder erfrieren.",
+   "visual": {
+    "type": "document",
+    "text": "TAUSENDE TOTE",
+    "subtext": "beim Alpenübergang",
+    "mood": "gold"
+   },
+   "emphasis": [
+    "erfrieren"
+   ]
+  },
+  {
+   "narration": "Doch Hannibal schafft es nach Italien – und schlägt Rom gleich mehrmals.",
+   "visual": {
+    "type": "battle",
+    "mood": "blood",
+    "characters": [
+     {
+      "kind": "soldier"
+     },
+     {
+      "kind": "knight"
+     }
+    ]
+   },
+   "emphasis": [
+    "mehrmals"
+   ]
+  },
+  {
+   "narration": "Bei Cannae vernichtet er ein riesiges römisches Heer – an einem einzigen Tag.",
+   "visual": {
+    "type": "document",
+    "text": "CANNAE",
+    "subtext": "216 v. Chr.",
+    "mood": "gold"
+   },
+   "emphasis": [
+    "einzigen"
+   ]
+  },
+  {
+   "narration": "Doch Rom selbst erobert er nie…",
+   "visual": {
+    "type": "title",
+    "text": "ROM BLEIBT",
+    "mood": "night",
+    "lightning": false
+   },
+   "emphasis": [
+    "nie"
+   ]
+  }
+ ]
+}

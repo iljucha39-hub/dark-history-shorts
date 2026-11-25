@@ -1,0 +1,166 @@
+{
+ "id": "prager-fenstersturz-1618",
+ "title": "Prager Fenstersturz: Alle überlebten",
+ "status": "draft",
+ "category": "Kriege und Schlachten",
+ "topic": "Zweiter Prager Fenstersturz 1618",
+ "description": "Drei Männer fliegen aus dem Fenster – alle überleben. Und Europa versinkt im Krieg. #darkhistory #geschichte #prag #dreißigjährigerkrieg",
+ "hashtags": [
+  "darkhistory",
+  "geschichte",
+  "prag",
+  "dreißigjährigerkrieg",
+  "fenstersturz"
+ ],
+ "sources": [
+  "German History in Documents and Images (GHDI): Prager Fenstersturz am 23. Mai 1618",
+  "Planet Wissen: Was war der Prager Fenstersturz?",
+  "Universität Innsbruck (2018): Mordversuch mit verheerenden Folgen",
+  "Wikipedia: Defenestrations of Prague"
+ ],
+ "voice": {
+  "engine": "chatterbox",
+  "reference": "piper:de_DE-thorsten-high",
+  "exaggeration": 0.6,
+  "cfgWeight": 0.5,
+  "effect": "clear",
+  "speed": 1.08,
+  "seed": 1618
+ },
+ "music": {
+  "seed": 1618,
+  "key": "e"
+ },
+ "scenes": [
+  {
+   "narration": "Sie warfen drei Männer aus dem Fenster. Alle überlebten.",
+   "visual": {
+    "type": "title",
+    "text": "ALLE ÜBERLEBTEN",
+    "subtext": "PRAG · 1618",
+    "mood": "blood"
+   },
+   "emphasis": [
+    "überlebten"
+   ]
+  },
+  {
+   "narration": "Prag, dreiundzwanzigster Mai 1618. Wütende protestantische Adlige stürmen die Burg.",
+   "visual": {
+    "type": "castle",
+    "mood": "night",
+    "characters": [
+     {
+      "kind": "noble",
+      "action": "run",
+      "x": 0.1
+     },
+     {
+      "kind": "noble",
+      "action": "run",
+      "x": 0.3
+     }
+    ]
+   },
+   "emphasis": [
+    "stürmen"
+   ]
+  },
+  {
+   "narration": "Sie packen zwei habsburgische Statthalter und ihren Sekretär – und werfen sie aus dem Fenster.",
+   "visual": {
+    "type": "portrait",
+    "text": "23. MAI 1618",
+    "subtext": "PRAGER BURG",
+    "mood": "night",
+    "characters": [
+     {
+      "kind": "noble",
+      "action": "point"
+     }
+    ]
+   },
+   "emphasis": [
+    "werfen"
+   ]
+  },
+  {
+   "narration": "Rund siebzehn Meter tief stürzen sie in den Burggraben.",
+   "visual": {
+    "type": "document",
+    "text": "17 METER",
+    "subtext": "in die Tiefe",
+    "mood": "gold"
+   },
+   "emphasis": [
+    "siebzehn"
+   ]
+  },
+  {
+   "narration": "Und alle drei überleben.",
+   "visual": {
+    "type": "title",
+    "text": "ÜBERLEBT",
+    "mood": "fog",
+    "lightning": false
+   },
+   "emphasis": [
+    "überleben"
+   ]
+  },
+  {
+   "narration": "Katholiken sprechen von einem Wunder. Protestanten behaupten, sie seien auf einem Misthaufen gelandet.",
+   "visual": {
+    "type": "village",
+    "mood": "fog",
+    "characters": [
+     {
+      "kind": "monk",
+      "action": "pray",
+      "x": 0.25
+     },
+     {
+      "kind": "peasant",
+      "action": "point",
+      "x": 0.75,
+      "facing": "left"
+     }
+    ]
+   },
+   "emphasis": [
+    "Wunder",
+    "Misthaufen"
+   ]
+  },
+  {
+   "narration": "Doch der Sturz löst einen Krieg aus, der dreißig Jahre dauert.",
+   "visual": {
+    "type": "battle",
+    "mood": "blood",
+    "characters": [
+     {
+      "kind": "knight"
+     },
+     {
+      "kind": "soldier"
+     }
+    ]
+   },
+   "emphasis": [
+    "dreißig"
+   ]
+  },
+  {
+   "narration": "Ein Fenster – und ganz Europa versinkt im Krieg…",
+   "visual": {
+    "type": "document",
+    "text": "30 JAHRE",
+    "subtext": "Krieg in Europa",
+    "mood": "gold"
+   },
+   "emphasis": [
+    "Krieg"
+   ]
+  }
+ ]
+}

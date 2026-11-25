@@ -1,0 +1,189 @@
+{
+ "id": "attila-453",
+ "title": "Attila: Tod in der Hochzeitsnacht",
+ "status": "draft",
+ "category": "Grausame Herrscher",
+ "topic": "Der Tod Attilas 453",
+ "description": "Er versetzte halb Europa in Angst – und starb in seiner Hochzeitsnacht. #darkhistory #geschichte #attila #hunnen",
+ "hashtags": [
+  "darkhistory",
+  "geschichte",
+  "attila",
+  "hunnen",
+  "antike"
+ ],
+ "sources": [
+  "Priskos von Panion (überliefert bei Jordanes, Getica 254–258): Tod Attilas, Bestattung in drei Särgen",
+  "Wikipedia: Ildico (Quellenlage, spätere Version des Marcellinus Comes)",
+  "History.com: 8 things you might not know about Attila the Hun",
+  "Live Science: Where is Attila the Hun's tomb?"
+ ],
+ "voice": {
+  "engine": "chatterbox",
+  "reference": "piper:de_DE-thorsten-high",
+  "exaggeration": 0.6,
+  "cfgWeight": 0.5,
+  "effect": "clear",
+  "speed": 1.08,
+  "seed": 453
+ },
+ "music": {
+  "seed": 453,
+  "key": "a"
+ },
+ "pronunciations": {
+  "453": "vierhundertdreiundfünfzig"
+ },
+ "scenes": [
+  {
+   "narration": "Er versetzte halb Europa in Angst – und starb in seiner Hochzeitsnacht an Nasenbluten.",
+   "visual": {
+    "type": "title",
+    "text": "TOD DURCH NASENBLUTEN",
+    "subtext": "ATTILA · 453",
+    "mood": "blood"
+   },
+   "emphasis": [
+    "Nasenbluten"
+   ]
+  },
+  {
+   "narration": "Attila, König der Hunnen. Selbst das Römische Reich zahlte ihm Tribut.",
+   "visual": {
+    "type": "portrait",
+    "text": "ATTILA",
+    "subtext": "KÖNIG DER HUNNEN",
+    "mood": "fire",
+    "characters": [
+     {
+      "kind": "king",
+      "action": "point"
+     }
+    ]
+   },
+   "emphasis": [
+    "Tribut"
+   ]
+  },
+  {
+   "narration": "Seine Heere verwüsteten Städte von Gallien bis Italien.",
+   "visual": {
+    "type": "map",
+    "map": {
+     "bounds": [
+      -2,
+      38,
+      30,
+      54
+     ],
+     "title": "ATTILAS FELDZÜGE",
+     "markers": [
+      {
+       "lon": 4.0,
+       "lat": 48.9,
+       "label": "Gallien"
+      },
+      {
+       "lon": 12.5,
+       "lat": 41.9,
+       "label": "Rom"
+      },
+      {
+       "lon": 19.0,
+       "lat": 47.5,
+       "label": "Pannonien"
+      }
+     ],
+     "route": [
+      [
+       19.0,
+       47.5
+      ],
+      [
+       12,
+       48.5
+      ],
+      [
+       4.0,
+       48.9
+      ]
+     ]
+    }
+   },
+   "emphasis": [
+    "verwüsteten"
+   ]
+  },
+  {
+   "narration": "453 heiratet er die junge Ildiko. Es wird gefeiert und getrunken.",
+   "visual": {
+    "type": "castle",
+    "mood": "fire",
+    "fire": true,
+    "characters": [
+     {
+      "kind": "king",
+      "action": "raiseArm",
+      "x": 0.3
+     }
+    ]
+   },
+   "emphasis": [
+    "getrunken"
+   ]
+  },
+  {
+   "narration": "Am nächsten Morgen finden ihn seine Wachen. Tot. Ohne eine einzige Wunde.",
+   "visual": {
+    "type": "dungeon",
+    "mood": "night",
+    "characters": [
+     {
+      "kind": "soldier",
+      "action": "cower",
+      "x": 0.45
+     }
+    ]
+   },
+   "emphasis": [
+    "Tot"
+   ]
+  },
+  {
+   "narration": "Laut dem Chronisten Priskos erstickte er im Rausch am eigenen Blut.",
+   "visual": {
+    "type": "document",
+    "text": "ERSTICKT",
+    "subtext": "am eigenen Blut",
+    "mood": "gold"
+   },
+   "emphasis": [
+    "Blut"
+   ]
+  },
+  {
+   "narration": "Begraben wurde er angeblich in drei Särgen: Gold, Silber, Eisen.",
+   "visual": {
+    "type": "document",
+    "text": "3 SÄRGE",
+    "subtext": "Gold · Silber · Eisen",
+    "mood": "gold"
+   },
+   "emphasis": [
+    "Gold"
+   ]
+  },
+  {
+   "narration": "Sein Grab wurde bis heute nicht gefunden…",
+   "visual": {
+    "type": "title",
+    "text": "VERSCHOLLEN",
+    "mood": "night",
+    "lightning": false
+   },
+   "emphasis": [
+    "nicht"
+   ]
+  }
+ ]
+}

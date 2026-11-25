@@ -1,0 +1,233 @@
+{
+ "id": "barbarossa-1190",
+ "title": "Barbarossa: Besiegt von einem Fluss",
+ "status": "draft",
+ "category": "Unglaubliche Fakten",
+ "topic": "Tod Friedrich Barbarossas 1190",
+ "description": "Der mächtigste Kaiser seiner Zeit – besiegt von einem Fluss. #darkhistory #geschichte #barbarossa #kreuzzug",
+ "hashtags": [
+  "darkhistory",
+  "geschichte",
+  "barbarossa",
+  "kreuzzug",
+  "mittelalter"
+ ],
+ "sources": [
+  "Planet Wissen: Friedrich I. Barbarossa",
+  "Lernhelfer/Schülerlexikon: Friedrich I. Barbarossa (Tod im Saleph, Kyffhäuser-Sage)",
+  "Heidelberger Universitätsbibliothek, Fachartikel zu den widersprüchlichen Quellen über den 10. Juni 1190",
+  "Wikipedia: Frederick Barbarossa; Kyffhäuser"
+ ],
+ "voice": {
+  "engine": "chatterbox",
+  "reference": "piper:de_DE-thorsten-high",
+  "exaggeration": 0.6,
+  "cfgWeight": 0.5,
+  "effect": "clear",
+  "speed": 1.08,
+  "seed": 1190
+ },
+ "music": {
+  "seed": 1190,
+  "key": "d"
+ },
+ "scenes": [
+  {
+   "narration": "Der mächtigste Kaiser seiner Zeit – besiegt von einem Fluss.",
+   "visual": {
+    "type": "title",
+    "text": "BESIEGT VON EINEM FLUSS",
+    "subtext": "BARBAROSSA · 1190",
+    "mood": "storm"
+   },
+   "emphasis": [
+    "Fluss"
+   ]
+  },
+  {
+   "narration": "Friedrich Barbarossa. Fast vierzig Jahre herrschte er über das Heilige Römische Reich.",
+   "visual": {
+    "type": "portrait",
+    "text": "FRIEDRICH I.",
+    "subtext": "BARBAROSSA",
+    "mood": "gold",
+    "characters": [
+     {
+      "kind": "king",
+      "action": "idle"
+     }
+    ]
+   },
+   "emphasis": [
+    "vierzig"
+   ]
+  },
+  {
+   "narration": "1189 zieht der alte Kaiser mit einem riesigen Heer auf Kreuzzug.",
+   "visual": {
+    "type": "map",
+    "map": {
+     "bounds": [
+      8,
+      34,
+      40,
+      52
+     ],
+     "title": "DER WEG INS HEILIGE LAND",
+     "markers": [
+      {
+       "lon": 12.1,
+       "lat": 49.0,
+       "label": "Regensburg"
+      },
+      {
+       "lon": 28.98,
+       "lat": 41.01,
+       "label": "Konstantinopel"
+      },
+      {
+       "lon": 33.9,
+       "lat": 36.4,
+       "label": "Saleph"
+      }
+     ],
+     "route": [
+      [
+       12.1,
+       49.0
+      ],
+      [
+       19,
+       45
+      ],
+      [
+       25,
+       42.5
+      ],
+      [
+       28.98,
+       41.01
+      ],
+      [
+       32.5,
+       37.9
+      ],
+      [
+       33.9,
+       36.4
+      ]
+     ]
+    }
+   },
+   "emphasis": [
+    "Kreuzzug"
+   ]
+  },
+  {
+   "narration": "Er siegt sogar in einer Schlacht gegen die Seldschuken.",
+   "visual": {
+    "type": "battle",
+    "mood": "gold",
+    "characters": [
+     {
+      "kind": "knight"
+     },
+     {
+      "kind": "soldier"
+     }
+    ]
+   },
+   "emphasis": [
+    "siegt"
+   ]
+  },
+  {
+   "narration": "Am zehnten Juni 1190 will er den Fluss Saleph überqueren.",
+   "visual": {
+    "type": "map",
+    "map": {
+     "bounds": [
+      31.5,
+      35.6,
+      35.5,
+      38.2
+     ],
+     "title": "FLUSS SALEPH",
+     "markers": [
+      {
+       "lon": 33.93,
+       "lat": 36.38,
+       "label": "Saleph"
+      }
+     ],
+     "route": [
+      [
+       33.2,
+       37.3
+      ],
+      [
+       33.6,
+       36.9
+      ],
+      [
+       33.93,
+       36.38
+      ]
+     ]
+    }
+   },
+   "emphasis": [
+    "Saleph"
+   ]
+  },
+  {
+   "narration": "Der Kaiser ertrinkt. Wie genau, darüber widersprechen sich die Chronisten.",
+   "visual": {
+    "type": "title",
+    "text": "ERTRUNKEN",
+    "subtext": "10. JUNI 1190",
+    "mood": "storm"
+   },
+   "emphasis": [
+    "ertrinkt"
+   ]
+  },
+  {
+   "narration": "Ohne ihn zerfällt sein Heer. Die meisten kehren um.",
+   "visual": {
+    "type": "castle",
+    "mood": "night",
+    "characters": [
+     {
+      "kind": "soldier",
+      "action": "march",
+      "x": 0.7,
+      "facing": "left"
+     },
+     {
+      "kind": "knight",
+      "action": "walk",
+      "x": 0.9,
+      "facing": "left"
+     }
+    ]
+   },
+   "emphasis": [
+    "zerfällt"
+   ]
+  },
+  {
+   "narration": "Der Sage nach schläft er bis heute im Kyffhäuser – und wartet…",
+   "visual": {
+    "type": "title",
+    "text": "DER SCHLAFENDE KAISER",
+    "subtext": "KYFFHÄUSER",
+    "mood": "night",
+    "lightning": false
+   },
+   "emphasis": [
+    "wartet"
+   ]
+  }
+ ]
+}
