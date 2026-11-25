@@ -1,0 +1,200 @@
+{
+ "id": "konstantin-1453",
+ "title": "Der letzte Kaiser von Rom",
+ "status": "draft",
+ "category": "Kriege und Schlachten",
+ "topic": "Konstantin XI. und der Fall Konstantinopels 1453",
+ "description": "Er war der letzte Kaiser Roms – und er floh nicht. #darkhistory #geschichte #konstantinopel #byzanz",
+ "hashtags": [
+  "darkhistory",
+  "geschichte",
+  "konstantinopel",
+  "byzanz",
+  "1453"
+ ],
+ "sources": [
+  "Encyclopaedia Britannica: Constantine XI Palaeologus",
+  "World History Encyclopedia: 1453 – Der Fall Konstantinopels",
+  "Wikipedia: Fall of Constantinople (Truppenverhältnis, Belagerungsdauer)",
+  "History Hit: The Final Fall of the Roman Empire"
+ ],
+ "voice": {
+  "engine": "chatterbox",
+  "reference": "piper:de_DE-thorsten-high",
+  "exaggeration": 0.7,
+  "cfgWeight": 0.5,
+  "effect": "epic",
+  "speed": 1.3,
+  "pauses": "tight",
+  "seed": 1453
+ },
+ "music": {
+  "seed": 1453,
+  "key": "d"
+ },
+ "scenes": [
+  {
+   "narration": "Er war der letzte Kaiser Roms. Und als alles verloren war, floh er nicht.",
+   "visual": {
+    "type": "closeup",
+    "mood": "sunset",
+    "hook": {
+     "top": "DER LETZTE",
+     "main": "KAISER"
+    },
+    "characters": [
+     {
+      "kind": "king"
+     }
+    ],
+    "flags": [
+     "#6a1a8a",
+     "#d4a830"
+    ]
+   },
+   "emphasis": [
+    "floh"
+   ]
+  },
+  {
+   "narration": "Konstantinopel, 1453. Das letzte Stück des Römischen Reiches wird belagert.",
+   "visual": {
+    "type": "map",
+    "map": {
+     "bounds": [
+      26,
+      39.5,
+      32,
+      42.5
+     ],
+     "title": "KONSTANTINOPEL 1453",
+     "markers": [
+      {
+       "lon": 28.98,
+       "lat": 41.01,
+       "label": "Konstantinopel"
+      }
+     ]
+    }
+   },
+   "emphasis": [
+    "belagert"
+   ]
+  },
+  {
+   "narration": "Sultan Mehmed der Zweite hat mehr als zehnmal so viele Soldaten.",
+   "visual": {
+    "type": "closeup",
+    "mood": "dusk",
+    "characters": [
+     {
+      "kind": "sultan",
+      "facing": "left"
+     }
+    ],
+    "flags": [
+     "#c8102e",
+     "#c8102e"
+    ]
+   },
+   "emphasis": [
+    "zehnmal"
+   ]
+  },
+  {
+   "narration": "Riesige Kanonen beschießen die Mauern – dreiundfünfzig Tage lang.",
+   "visual": {
+    "type": "battle",
+    "mood": "sunset",
+    "characters": [
+     {
+      "kind": "sultan"
+     },
+     {
+      "kind": "knight"
+     }
+    ]
+   },
+   "emphasis": [
+    "Kanonen"
+   ]
+  },
+  {
+   "narration": "Der Kaiser hätte fliehen können. Doch er bleibt bei seinen Männern.",
+   "visual": {
+    "type": "closeup",
+    "mood": "dusk",
+    "characters": [
+     {
+      "kind": "king"
+     }
+    ]
+   },
+   "emphasis": [
+    "bleibt"
+   ]
+  },
+  {
+   "narration": "Am neunundzwanzigsten Mai beginnt der letzte große Sturm.",
+   "visual": {
+    "type": "castle",
+    "mood": "fire",
+    "fire": true,
+    "characters": [
+     {
+      "kind": "soldier",
+      "action": "run",
+      "x": 0.1
+     },
+     {
+      "kind": "soldier",
+      "action": "run",
+      "x": 0.3
+     }
+    ]
+   },
+   "emphasis": [
+    "Sturm"
+   ]
+  },
+  {
+   "narration": "Der Überlieferung nach legt Konstantin seine kaiserlichen Zeichen ab – und stürzt sich in den Kampf.",
+   "visual": {
+    "type": "closeup",
+    "mood": "blood",
+    "characters": [
+     {
+      "kind": "knight"
+     }
+    ]
+   },
+   "emphasis": [
+    "Kampf"
+   ]
+  },
+  {
+   "narration": "Sein Leichnam wurde nie sicher gefunden.",
+   "visual": {
+    "type": "title",
+    "text": "VERSCHOLLEN",
+    "mood": "night",
+    "lightning": false
+   },
+   "emphasis": [
+    "nie"
+   ]
+  },
+  {
+   "narration": "Mit ihm endet das Römische Reich – nach fast fünfzehnhundert Jahren…",
+   "visual": {
+    "type": "document",
+    "text": "1453",
+    "subtext": "Ende des Römischen Reiches",
+    "mood": "gold"
+   },
+   "emphasis": [
+    "endet"
+   ]
+  }
+ ]
+}

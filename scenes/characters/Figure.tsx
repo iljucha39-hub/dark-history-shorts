@@ -160,7 +160,7 @@ interface Look {
 	limbs: string;
 	robe?: string; // langes Gewand statt Beine
 	cape?: string;
-	head: 'helm' | 'kettle' | 'hood' | 'crown' | 'cowl' | 'coif' | 'beak' | 'executioner' | 'cap' | 'nasal' | 'bare';
+	head: 'helm' | 'kettle' | 'hood' | 'crown' | 'cowl' | 'coif' | 'beak' | 'executioner' | 'cap' | 'nasal' | 'bare' | 'turban';
 	weapon?: 'sword' | 'spear' | 'bow' | 'axe' | 'torch' | 'staff' | 'pitchfork' | 'book';
 	shield?: 'kite' | 'round';
 	beard?: boolean;
@@ -181,6 +181,7 @@ const LOOKS: Record<CharacterKind, Look> = {
 	executioner: {body: '#1a1010', limbs: '#3a2a22', head: 'executioner', weapon: 'axe', eyes: '#c8102e'},
 	noble: {body: '#1a2030', limbs: CLOTH, head: 'cap', cape: '#2a1030', weapon: 'sword', beard: true},
 	viking: {body: '#2a2218', limbs: '#221b13', head: 'nasal', weapon: 'axe', shield: 'round', beard: true},
+	sultan: {body: '#1d3a2a', limbs: CLOTH, head: 'turban', robe: '#16301f', cape: '#5a0d12', weapon: 'sword', beard: true},
 };
 
 const UPRIGHT = new Set(['spear', 'staff', 'pitchfork', 'torch', 'book']);
@@ -301,6 +302,14 @@ const Head: React.FC<{look: Look; p: Palette; frame: number}> = ({look, p}) => {
 			break;
 		case 'executioner':
 			items.push(<path key="h" d="M -18 22 Q -22 -24 0 -30 Q 22 -24 18 22 Z" fill="#0a0606" />);
+			break;
+		case 'turban':
+			items.push(
+				<g key="h">
+					<ellipse cx={0} cy={-18} rx={24} ry={18} fill="#ece4d4" />
+					<ellipse cx={0} cy={-32} rx={12} ry={9} fill="#c8102e" />
+				</g>,
+			);
 			break;
 		case 'nasal':
 			items.push(

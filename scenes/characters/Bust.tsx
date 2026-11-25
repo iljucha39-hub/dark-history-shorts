@@ -67,6 +67,15 @@ const Headwear: React.FC<{kind: CharacterKind; p: Palette; frame: number}> = ({k
 					<path d="M -110 -340 Q -100 -470 0 -470 Q 100 -470 110 -340 Z" fill={dark} />
 				</g>
 			);
+		case 'sultan':
+			return (
+				<g>
+					<path d="M -120 -250 Q -150 -380 0 -420 Q 150 -400 125 -250 Q 0 -280 -120 -250 Z" fill="#ece4d4" />
+					<path d="M -110 -300 Q 0 -330 115 -300 M -125 -265 Q 0 -300 120 -265" stroke="#c8baa0" strokeWidth={6} fill="none" />
+					<ellipse cx={0} cy={-415} rx={45} ry={30} fill="#c8102e" />
+					<path d={`M 20 -440 Q ${40 + Math.sin(frame / 9) * 6} -520 70 -540`} stroke="#f2ead8" strokeWidth={10} fill="none" />
+				</g>
+			);
 		case 'noble':
 			return (
 				<g>
@@ -87,6 +96,7 @@ const CLOTH: Partial<Record<CharacterKind, string>> = {
 	monk: '#3a2c1c',
 	plagueDoctor: '#141210',
 	executioner: '#100808',
+	sultan: '#1d3a2a',
 };
 
 export const Bust: React.FC<{
@@ -101,7 +111,7 @@ export const Bust: React.FC<{
 	const breathe = Math.sin(frame / 20) * 6;
 	const nod = Math.sin(frame / 37) * 1.8;
 	const blink = frame % 110 < 4 ? 0.1 : 1;
-	const beard = kind === 'king' || kind === 'viking' || kind === 'noble';
+	const beard = kind === 'king' || kind === 'viking' || kind === 'noble' || kind === 'sultan';
 	const eyeGlow = kind === 'executioner' ? '#c8102e' : null;
 	const cloth = CLOTH[kind] ?? p.near;
 	return (

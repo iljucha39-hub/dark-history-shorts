@@ -1,0 +1,222 @@
+{
+ "id": "dracula-1462",
+ "title": "Dracula: Das Heer kehrte um",
+ "status": "draft",
+ "category": "Grausame Herrscher",
+ "topic": "Vlad III. und der Nachtangriff von Târgoviște 1462",
+ "description": "Ein Sultan zog mit seinem Heer gegen ihn. Was er dann sah, ließ ihn umkehren. #darkhistory #geschichte #dracula #vlad",
+ "hashtags": [
+  "darkhistory",
+  "geschichte",
+  "dracula",
+  "vladthepfähler",
+  "osmanen"
+ ],
+ "sources": [
+  "Laonikos Chalkokondyles, Historien (Bericht über die Gepfählten bei Târgoviște und Mehmeds Ausspruch)",
+  "Wikipedia: Night attack at Târgoviște (Datierung 17. Juni 1462, Quellenlage, Truppenstärken umstritten)",
+  "Mental Floss: When Vlad the Impaler Repelled an Invasion With a Forest of Corpses",
+  "Encyclopaedia Britannica: Vlad III"
+ ],
+ "voice": {
+  "engine": "chatterbox",
+  "reference": "piper:de_DE-thorsten-high",
+  "exaggeration": 0.7,
+  "cfgWeight": 0.5,
+  "effect": "epic",
+  "speed": 1.3,
+  "pauses": "tight",
+  "seed": 1462
+ },
+ "music": {
+  "seed": 1462,
+  "key": "e"
+ },
+ "pronunciations": {
+  "Târgoviște": "Tirgowischte",
+  "Walachei": "Walachei"
+ },
+ "scenes": [
+  {
+   "narration": "Ein Sultan zog mit seinem Heer gegen ihn. Was er dann sah, ließ ihn umkehren.",
+   "visual": {
+    "type": "closeup",
+    "mood": "sunset",
+    "hook": {
+     "top": "DAS HEER",
+     "main": "KEHRTE UM"
+    },
+    "characters": [
+     {
+      "kind": "noble"
+     }
+    ],
+    "flags": [
+     "#c8102e",
+     "#c8102e"
+    ]
+   },
+   "emphasis": [
+    "umkehren"
+   ]
+  },
+  {
+   "narration": "Vlad der Dritte, Fürst der Walachei. Die Osmanen nannten ihn den Pfählerfürsten.",
+   "visual": {
+    "type": "closeup",
+    "mood": "dusk",
+    "characters": [
+     {
+      "kind": "noble",
+      "facing": "left"
+     }
+    ]
+   },
+   "emphasis": [
+    "Pfählerfürsten"
+   ]
+  },
+  {
+   "narration": "1462 marschiert Sultan Mehmed der Zweite mit einer gewaltigen Armee gegen ihn.",
+   "visual": {
+    "type": "map",
+    "map": {
+     "bounds": [
+      18,
+      38,
+      34,
+      49
+     ],
+     "title": "FELDZUG 1462",
+     "markers": [
+      {
+       "lon": 28.98,
+       "lat": 41.01,
+       "label": "Konstantinopel"
+      },
+      {
+       "lon": 25.46,
+       "lat": 44.93,
+       "label": "Târgoviște"
+      }
+     ],
+     "route": [
+      [
+       28.98,
+       41.01
+      ],
+      [
+       27.5,
+       42.6
+      ],
+      [
+       26.0,
+       43.9
+      ],
+      [
+       25.46,
+       44.93
+      ]
+     ]
+    }
+   },
+   "emphasis": [
+    "gewaltigen"
+   ]
+  },
+  {
+   "narration": "Vlad hat viel weniger Männer. Also greift er nachts das Lager des Sultans an.",
+   "visual": {
+    "type": "battle",
+    "mood": "dusk",
+    "characters": [
+     {
+      "kind": "soldier"
+     },
+     {
+      "kind": "sultan"
+     }
+    ]
+   },
+   "emphasis": [
+    "nachts"
+   ]
+  },
+  {
+   "narration": "Im Chaos sterben viele – doch der Sultan überlebt.",
+   "visual": {
+    "type": "closeup",
+    "mood": "blood",
+    "characters": [
+     {
+      "kind": "sultan",
+      "facing": "left"
+     }
+    ],
+    "flags": [
+     "#c8102e"
+    ]
+   },
+   "emphasis": [
+    "überlebt"
+   ]
+  },
+  {
+   "narration": "Dann erreicht das Heer Vlads Hauptstadt Târgoviște.",
+   "visual": {
+    "type": "castle",
+    "mood": "sunset",
+    "characters": [
+     {
+      "kind": "sultan",
+      "action": "march",
+      "x": 0.1
+     }
+    ]
+   },
+   "emphasis": [
+    "Hauptstadt"
+   ]
+  },
+  {
+   "narration": "Laut einem Chronisten erwarten sie dort zwanzigtausend gepfählte Gefangene.",
+   "visual": {
+    "type": "document",
+    "text": "20.000",
+    "subtext": "Gepfählte – laut Chronist",
+    "mood": "gold"
+   },
+   "emphasis": [
+    "gepfählte"
+   ]
+  },
+  {
+   "narration": "Der Sultan soll gesagt haben: Einem solchen Mann kann man sein Land nicht nehmen.",
+   "visual": {
+    "type": "closeup",
+    "mood": "sunset",
+    "characters": [
+     {
+      "kind": "sultan",
+      "facing": "left"
+     }
+    ]
+   },
+   "emphasis": [
+    "nicht"
+   ]
+  },
+  {
+   "narration": "Kurz darauf zieht sich das Heer zurück…",
+   "visual": {
+    "type": "title",
+    "text": "UMGEKEHRT",
+    "mood": "blood",
+    "lightning": false
+   },
+   "emphasis": [
+    "zurück"
+   ]
+  }
+ ]
+}

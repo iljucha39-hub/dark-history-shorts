@@ -36,7 +36,8 @@ export type CharacterKind =
 	| 'plagueDoctor'
 	| 'executioner'
 	| 'noble'
-	| 'viking';
+	| 'viking'
+	| 'sultan';
 
 export type CharacterAction =
 	| 'idle'
