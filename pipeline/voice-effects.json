@@ -4,5 +4,6 @@
   "dark": "asetrate={sr}*0.9,aresample={sr},atempo=1.1111111,bass=g=3:f=120,aecho=0.8:0.6:45|90:0.18|0.10",
   "deep": "asetrate={sr}*0.84,aresample={sr},atempo=1.1904762,bass=g=4:f=110,aecho=0.8:0.6:50|100:0.2|0.12",
   "room": "aecho=0.8:0.6:40|85:0.22|0.12",
-  "clear": "highpass=f=85,equalizer=f=220:t=q:w=1.2:g=-2,equalizer=f=3200:t=q:w=1.0:g=3,equalizer=f=9000:t=q:w=1.5:g=1.5"
+  "clear": "highpass=f=85,equalizer=f=220:t=q:w=1.2:g=-2,equalizer=f=3200:t=q:w=1.0:g=3,equalizer=f=9000:t=q:w=1.5:g=1.5",
+  "epic": "asetrate={sr}*0.965,aresample={sr},atempo=1.0362694,highpass=f=70,bass=g=3:f=110,equalizer=f=220:t=q:w=1.2:g=-1.5,equalizer=f=3200:t=q:w=1.0:g=2.5"
 }

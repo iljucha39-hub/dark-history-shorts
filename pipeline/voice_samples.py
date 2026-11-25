@@ -19,8 +19,9 @@ sys.path.insert(0, str(Path(__file__).parent))
 import numpy as np  # noqa: E402
 
 TEXT = (
-    "Dieses Schiff wurde mitten im Atlantik gefunden – ohne einen einzigen Menschen an Bord. "
-    "Der Kapitän, seine Frau, ihre kleine Tochter: verschwunden. Bis heute weiß niemand, warum…"
+    "Er versetzte halb Europa in Angst – und starb in seiner Hochzeitsnacht an Nasenbluten. "
+    "Attila, König der Hunnen. Selbst das Römische Reich zahlte ihm Tribut. "
+    "Am nächsten Morgen finden ihn seine Wachen. Tot. Ohne eine einzige Wunde."
 )
 
 # Piper: (Kennung, Beschreibung, Modell, Sprecher, Tempo, Effekt, noiseScale, noiseW)
@@ -37,13 +38,11 @@ PIPER = [
 # Referenz "default" = eingebaute Stimme; sonst wird die Klangfarbe aus einer Piper-Probe übernommen.
 # (Kennung, Beschreibung, Referenzstimme, exaggeration, cfg_weight, Effekt, Tempo)
 CHATTERBOX = [
-    ("V1", "C1 wie im Varusschlacht-Video (ohne Beschleunigung)", "de_DE-thorsten-high", 0.6, 0.5, "clear", 1.0),
-    ("V2", "C1 mit neuer, sauberer Beschleunigung (+8 %)", "de_DE-thorsten-high", 0.6, 0.5, "clear", 1.08),
-    ("V3", "Hörbuch-Sprecher A", "de_DE-mls-medium:0", 0.6, 0.5, "clear", 1.0),
-    ("V4", "Hörbuch-Sprecher B", "de_DE-mls-medium:3", 0.6, 0.5, "clear", 1.0),
-    ("V5", "Hörbuch-Sprecher C", "de_DE-mls-medium:8", 0.6, 0.5, "clear", 1.0),
-    ("V6", "Hörbuch-Sprecher D", "de_DE-mls-medium:12", 0.6, 0.5, "clear", 1.0),
-    ("V7", "Chatterbox-Standardstimme, ruhig & klar", "default", 0.5, 0.5, "clear", 1.0),
+    ("E1", "episch, Tempo 1,3× (vs. bisher ~1,2×)", "de_DE-thorsten-high", 0.7, 0.5, "epic", 1.3),
+    ("E2", "episch, Tempo 1,45×", "de_DE-thorsten-high", 0.7, 0.5, "epic", 1.45),
+    ("E3", "episch, Tempo 1,6×", "de_DE-thorsten-high", 0.7, 0.5, "epic", 1.6),
+    ("E4", "noch epischer (mehr Ausdruck), Tempo 1,45×", "de_DE-thorsten-high", 0.85, 0.45, "epic", 1.45),
+    ("E5", "Vergleich: ohne Tiefe (wie V2), Tempo 1,45×", "de_DE-thorsten-high", 0.7, 0.5, "clear", 1.45),
 ]
 
 

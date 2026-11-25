@@ -239,8 +239,16 @@ def make_engine(script: dict, voice_dir: Path, length_scale: float | None = None
                        vcfg.get("noiseScale"), vcfg.get("noiseW"))
 
 
+PAUSES = {
+    # Satzpause, Szenenpause, nach „…“, nach „?“
+    "normal": (SENTENCE_GAP, SCENE_GAP, 0.5, 0.28),
+    "tight": (0.04, 0.06, 0.18, 0.08),  # „durchgesprochen“
+}
+
+
 def build(script: dict, engine):
     """engine=None → Platzhalter (Stille, geschätzte Zeiten) für lokale Tests."""
+    sent_gap, scene_gap, ell_gap, q_gap = PAUSES.get((script.get("voice") or {}).get("pauses", "normal"), PAUSES["normal"])
     pron = script.get("pronunciations", {}) or {}
     sr = engine.sr if engine else 22050
     pieces: list[np.ndarray] = []
@@ -295,11 +303,11 @@ def build(script: dict, engine):
             if k < len(sents) - 1:
                 last = sent[-1]
                 # "…" = dramatische Pause, Frage = kurze Spannungspause
-                silence(0.5 if last.endswith(("…", "...")) else 0.28 if last.endswith("?") else SENTENCE_GAP)
+                silence(ell_gap if last.endswith(("…", "...")) else q_gap if last.endswith("?") else sent_gap)
         n_end = t
         scenes.append({"narrationStart": round(n_start, 3), "narrationEnd": round(n_end, 3)})
         if si < len(script["scenes"]) - 1:
-            silence(SCENE_GAP)
+            silence(scene_gap)
     silence(TAIL)
     duration = t
     for i, s in enumerate(scenes):
