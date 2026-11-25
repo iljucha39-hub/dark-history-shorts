@@ -9,6 +9,10 @@ hier sind nur Aufhänger. Erledigte Themen abhaken (`[x]`) und Skript-ID dahinte
 - [x] Die Mary Celeste (1872) – `mary-celeste-1872`
 - [x] Die Verhaftung der Templer (13. Oktober 1307) – `templer-1307`
 - [x] Ötzi (ca. 3300 v. Chr.) – `oetzi-mordfall`
+- [x] Der Tod Attilas (453) – `attila-453`
+- [x] Hannibal über die Alpen (218 v. Chr.) – `hannibal-alpen`
+- [x] Der Prager Fenstersturz (1618) – `prager-fenstersturz-1618`
+- [x] Barbarossas Tod (1190) – `barbarossa-1190`
 
 ## Mysterien & unglaubliche Ereignisse
 - [ ] **Die Tanzwut von Straßburg (1518)** – Menschen tanzen tagelang, die Stadt engagiert Musiker. *Szenen: village, map, document*
@@ -19,15 +23,12 @@ hier sind nur Aufhänger. Erledigte Themen abhaken (`[x]`) und Skript-ID dahinte
 ## Grausame Herrscher & vergessene Personen
 - [ ] **Vlad III. „Dracula“** – der Pfähler und die Wahrheit hinter dem Vampir. *portrait, castle, battle*
 - [ ] **Elisabeth Báthory** – die „Blutgräfin“: Verbrechen oder politische Intrige? *castle, portrait, dungeon*
-- [ ] **Der Tod Attilas (453)** – der Hunnenkönig stirbt in seiner Hochzeitsnacht. *portrait, map, document*
 - [ ] **Peter Stumpp, der „Werwolf von Bedburg“ (1589)** – ein Prozess voller Folter und Aberglauben. *village, dungeon, document*
 
 ## Kriege & Schlachten
 - [ ] **Der Fall Konstantinopels (1453)** – Schiffe werden über Land gezogen. *map, battle, sea*
-- [ ] **Hannibal über die Alpen (218 v. Chr.)** – mit Kriegselefanten durch Schnee und Eis. *map, battle, title*
 - [ ] **Die Schlacht von Azincourt (1415)** – Langbögen gegen Ritter im Schlamm. *battle, map, portrait*
 - [ ] **Die Schlacht bei Liegnitz (1241)** – der Mongolensturm erreicht Mitteleuropa. *battle, map, document*
-- [ ] **Der Prager Fenstersturz (1618)** – der Funke, der den Dreißigjährigen Krieg entfacht. *castle, portrait, map*
 
 ## Dunkle Kapitel
 - [ ] **Die Hexenprozesse von Bamberg (1626–1631)** – einer der schlimmsten Verfolgungswellen. *village, dungeon, document*
@@ -36,7 +37,6 @@ hier sind nur Aufhänger. Erledigte Themen abhaken (`[x]`) und Skript-ID dahinte
 - [ ] **Der Große Brand von London (1666)** – vier Tage Feuer. *village (fire), map, document*
 
 ## Neu
-- [ ] **Barbarossas Tod (1190)** – der mächtige Kaiser ertrinkt auf dem Kreuzzug in einem Fluss. *map, portrait, sea*
 - [ ] **Der Brief des Johannes Junius (1628)** – ein Bamberger Bürgermeister schreibt aus der Hexenhaft an seine Tochter. *dungeon, document, portrait*
 
 ## Mythen entlarvt
