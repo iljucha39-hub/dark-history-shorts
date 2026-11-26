@@ -1,0 +1,241 @@
+{
+ "id": "stirling-1297",
+ "title": "Stirling 1297: Die Brückenfalle",
+ "status": "draft",
+ "category": "Kriege & Schlachten",
+ "topic": "Die Schlacht von Stirling Bridge 1297",
+ "description": "Ein Ritterheer, besiegt auf einer einzigen schmalen Brücke. #darkhistory #geschichte #wallace #schottland",
+ "hashtags": [
+  "darkhistory",
+  "geschichte",
+  "williamwallace",
+  "schottland",
+  "mittelalter"
+ ],
+ "sources": [
+  "Wikipedia: Battle of Stirling Bridge (11. September 1297, Wallace und Moray, schmale Brücke)",
+  "Encyclopaedia Britannica: Battle of Stirling Bridge",
+  "National Wallace Monument: The Battle of Stirling Bridge",
+  "Smithsonian Magazine: William Wallace defeated the English at Stirling Bridge (Cressinghams Haut – Überlieferung)"
+ ],
+ "voice": {
+  "engine": "chatterbox",
+  "reference": "piper:de_DE-thorsten-high",
+  "exaggeration": 0.7,
+  "cfgWeight": 0.5,
+  "effect": "epic",
+  "speed": 1.3,
+  "pauses": "none",
+  "seed": 1297
+ },
+ "music": {
+  "seed": 1297,
+  "key": "a"
+ },
+ "pronunciations": {
+  "Stirling": "Störling",
+  "Cressingham": "Kressingham",
+  "Moray": "Morrey"
+ },
+ "scenes": [
+  {
+   "narration": "Ein ganzes Ritterheer, besiegt auf einer einzigen schmalen Brücke.",
+   "visual": {
+    "type": "closeup",
+    "mood": "sunset",
+    "hook": {
+     "top": "DIE",
+     "main": "BRÜCKENFALLE"
+    },
+    "characters": [
+     {
+      "kind": "peasant"
+     }
+    ],
+    "flags": [
+     "#1d4fa0"
+    ]
+   },
+   "emphasis": [
+    "Brücke"
+   ]
+  },
+  {
+   "narration": "Schottland, 1297. England hat das Land besetzt.",
+   "visual": {
+    "type": "castle",
+    "mood": "dusk",
+    "characters": [
+     {
+      "kind": "knight",
+      "action": "march",
+      "x": 0.2,
+      "travel": 0.3
+     }
+    ]
+   },
+   "emphasis": [
+    "besetzt"
+   ]
+  },
+  {
+   "narration": "William Wallace und Andrew Moray sammeln ein Heer aus Bauern.",
+   "visual": {
+    "type": "village",
+    "mood": "sunset",
+    "characters": [
+     {
+      "kind": "peasant",
+      "action": "raiseArm",
+      "x": 0.5,
+      "item": "sword"
+     },
+     {
+      "kind": "peasant",
+      "x": 0.25,
+      "item": "spear"
+     },
+     {
+      "kind": "peasant",
+      "x": 0.75,
+      "facing": "left",
+      "item": "spear"
+     }
+    ]
+   },
+   "emphasis": [
+    "Wallace"
+   ]
+  },
+  {
+   "narration": "Bei Stirling wartet die englische Armee mit schwerer Reiterei.",
+   "visual": {
+    "type": "closeup",
+    "mood": "dusk",
+    "characters": [
+     {
+      "kind": "knight",
+      "facing": "left"
+     }
+    ]
+   },
+   "emphasis": [
+    "Reiterei"
+   ]
+  },
+  {
+   "narration": "Zwischen ihnen liegen ein Fluss und eine schmale Holzbrücke.",
+   "visual": {
+    "type": "map",
+    "map": {
+     "bounds": [
+      -6.5,
+      55,
+      -1.4,
+      57.3
+     ],
+     "title": "STIRLING BRIDGE",
+     "markers": [
+      {
+       "lon": -3.94,
+       "lat": 56.12,
+       "label": "Stirling"
+      }
+     ]
+    }
+   },
+   "emphasis": [
+    "schmale"
+   ]
+  },
+  {
+   "narration": "Die Engländer marschieren hinüber, nur wenige gleichzeitig.",
+   "visual": {
+    "type": "castle",
+    "mood": "sunset",
+    "characters": [
+     {
+      "kind": "knight",
+      "action": "march",
+      "x": 0.05,
+      "travel": 0.4
+     },
+     {
+      "kind": "soldier",
+      "action": "march",
+      "x": 0.2,
+      "travel": 0.4
+     }
+    ]
+   },
+   "emphasis": [
+    "wenige"
+   ]
+  },
+  {
+   "narration": "Wallace wartet, bis genug von ihnen drüben sind.",
+   "visual": {
+    "type": "closeup",
+    "mood": "sunset",
+    "characters": [
+     {
+      "kind": "peasant",
+      "facing": "left"
+     }
+    ]
+   },
+   "emphasis": [
+    "wartet"
+   ]
+  },
+  {
+   "narration": "Dann greifen die Schotten an und schneiden die Brücke ab.",
+   "visual": {
+    "type": "battle",
+    "mood": "sunset",
+    "camera": "punchIn",
+    "characters": [
+     {
+      "kind": "peasant"
+     },
+     {
+      "kind": "knight"
+     }
+    ]
+   },
+   "emphasis": [
+    "Brücke"
+   ]
+  },
+  {
+   "narration": "Aus der Haut ihres Anführers Cressingham soll Wallace einen Gürtel gemacht haben.",
+   "visual": {
+    "type": "document",
+    "text": "GÜRTEL",
+    "subtext": "aus Menschenhaut – laut Überlieferung",
+    "mood": "gold"
+   },
+   "emphasis": [
+    "Haut"
+   ]
+  },
+  {
+   "narration": "Hunderte Ritter ertrunken, erschlagen, alles wegen einer schmalen Brücke.",
+   "visual": {
+    "type": "closeup",
+    "mood": "sunset",
+    "characters": [
+     {
+      "kind": "peasant"
+     }
+    ],
+    "flags": [
+     "#1d4fa0"
+    ]
+   },
+   "emphasis": [
+    "Brücke"
+   ]
+  }
+ ]
+}

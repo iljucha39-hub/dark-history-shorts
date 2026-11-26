@@ -1,0 +1,234 @@
+{
+ "id": "malta-1565",
+ "title": "Malta 1565: Köpfe als Munition",
+ "status": "draft",
+ "category": "Kriege & Schlachten",
+ "topic": "Die Große Belagerung von Malta 1565",
+ "description": "Die Osmanen schickten ihm Köpfe. Er schoss Köpfe zurück. #darkhistory #geschichte #malta #ritter #johanniter",
+ "hashtags": [
+  "darkhistory",
+  "geschichte",
+  "malta",
+  "ritter",
+  "osmanen"
+ ],
+ "sources": [
+  "Wikipedia: Great Siege of Malta (Truppenstärken, Fall von Fort St. Elmo am 23. Juni, Abzug im September)",
+  "Visit Malta (Tourismusbehörde): The Great Siege – 1565 (Köpfe der Gefangenen als Kanonenkugeln)",
+  "TheCollector: How the Knights Hospitaller Defended Malta (enthauptete Ritter über die Bucht, Kreuze – nur teils belegt)",
+  "HistoryNet: No Mercy at Malta",
+  "Francisco Balbi di Correggio: Augenzeugenbericht der Belagerung (1568)"
+ ],
+ "voice": {
+  "engine": "chatterbox",
+  "reference": "piper:de_DE-thorsten-high",
+  "exaggeration": 0.7,
+  "cfgWeight": 0.5,
+  "effect": "epic",
+  "speed": 1.3,
+  "pauses": "none",
+  "seed": 1565
+ },
+ "music": {
+  "seed": 1565,
+  "key": "d"
+ },
+ "pronunciations": {
+  "Valette": "Walett",
+  "500": "fünfhundert",
+  "70": "siebzig"
+ },
+ "scenes": [
+  {
+   "narration": "Die Osmanen schickten ihm Köpfe. Er schoss Köpfe zurück.",
+   "visual": {
+    "type": "closeup",
+    "mood": "sunset",
+    "hook": {
+     "top": "KÖPFE ALS",
+     "main": "MUNITION"
+    },
+    "characters": [
+     {
+      "kind": "knight"
+     }
+    ],
+    "flags": [
+     "#c8102e"
+    ]
+   },
+   "emphasis": [
+    "Köpfe"
+   ]
+  },
+  {
+   "narration": "Malta, 1565. Eine gewaltige osmanische Flotte landet auf der Insel.",
+   "visual": {
+    "type": "map",
+    "map": {
+     "bounds": [
+      8,
+      31,
+      21,
+      41
+     ],
+     "title": "MALTA 1565",
+     "markers": [
+      {
+       "lon": 14.51,
+       "lat": 35.9,
+       "label": "Malta"
+      }
+     ],
+     "route": [
+      [
+       21,
+       37.5
+      ],
+      [
+       18,
+       36.6
+      ],
+      [
+       14.6,
+       35.95
+      ]
+     ]
+    }
+   },
+   "emphasis": [
+    "gewaltige"
+   ]
+  },
+  {
+   "narration": "Gegen sie: rund 500 Ritter und ein paar tausend Soldaten.",
+   "visual": {
+    "type": "battle",
+    "mood": "sunset",
+    "characters": [
+     {
+      "kind": "knight"
+     },
+     {
+      "kind": "sultan"
+     }
+    ]
+   },
+   "emphasis": [
+    "500"
+   ]
+  },
+  {
+   "narration": "Ihr Anführer: Großmeister La Valette, über 70 Jahre alt.",
+   "visual": {
+    "type": "closeup",
+    "mood": "dusk",
+    "characters": [
+     {
+      "kind": "knight",
+      "facing": "left"
+     }
+    ]
+   },
+   "emphasis": [
+    "70"
+   ]
+  },
+  {
+   "narration": "Das kleine Fort Sankt Elmo hält fast einen Monat lang.",
+   "visual": {
+    "type": "castle",
+    "mood": "fire",
+    "fire": true,
+    "camera": "punchIn",
+    "characters": [
+     {
+      "kind": "sultan",
+      "action": "march",
+      "x": 0.1,
+      "travel": 0.3
+     }
+    ]
+   },
+   "emphasis": [
+    "Monat"
+   ]
+  },
+  {
+   "narration": "Als es fällt, treiben enthauptete Ritter über die Bucht, angeblich an Kreuze gebunden.",
+   "visual": {
+    "type": "sea",
+    "mood": "dusk"
+   },
+   "emphasis": [
+    "enthauptete"
+   ]
+  },
+  {
+   "narration": "La Valette lässt Gefangene köpfen und ihre Köpfe mit Kanonen zurückschießen.",
+   "visual": {
+    "type": "closeup",
+    "mood": "blood",
+    "characters": [
+     {
+      "kind": "knight",
+      "facing": "left"
+     }
+    ]
+   },
+   "emphasis": [
+    "Kanonen"
+   ]
+  },
+  {
+   "narration": "Fast vier Monate hält Malta jedem Angriff stand.",
+   "visual": {
+    "type": "battle",
+    "mood": "sunset",
+    "characters": [
+     {
+      "kind": "knight"
+     },
+     {
+      "kind": "sultan"
+     }
+    ]
+   },
+   "emphasis": [
+    "vier",
+    "Monate"
+   ]
+  },
+  {
+   "narration": "Im September zieht das osmanische Heer ab.",
+   "visual": {
+    "type": "closeup",
+    "mood": "dusk",
+    "characters": [
+     {
+      "kind": "sultan",
+      "facing": "left"
+     }
+    ]
+   },
+   "emphasis": [
+    "ab"
+   ]
+  },
+  {
+   "narration": "Besiegt von einem alten Mann, der mit Köpfen zurückschoss.",
+   "visual": {
+    "type": "closeup",
+    "mood": "sunset",
+    "characters": [
+     {
+      "kind": "knight"
+     }
+    ]
+   },
+   "emphasis": [
+    "Köpfen"
+   ]
+  }
+ ]
+}
