@@ -13,7 +13,7 @@ Vollständiges Beispiel: [`scripts/beispiel-pest-1347.json`](../scripts/beispiel
   "sources": ["Quelle 1", "Quelle 2"],
   // Standard (Stimme „E1“): episch, schnell, durchgesprochen
   "voice": {"engine": "chatterbox", "reference": "piper:de_DE-thorsten-high", "exaggeration": 0.7,
-            "cfgWeight": 0.5, "effect": "epic", "speed": 1.3, "pauses": "tight", "seed": 1347},
+            "cfgWeight": 0.5, "effect": "epic", "speed": 1.3, "pauses": "none", "seed": 1347},
   // Alternative Piper (schneller, monotoner):
   // "voice": {"model": "de_DE-thorsten-high", "lengthScale": 1.08, "noiseScale": 0.85,
   //           "noiseW": 1.0, "effect": "dark", "speaker": "whisper"}
@@ -45,12 +45,13 @@ oben weiß, unten groß in Rot. Während der Hook-Szene werden die Untertitel au
 **Stimmung** (`mood`): `sunset` (Abendrot, Sonne), `dusk` (Dämmerung, lila), `night`, `blood`, `fog`, `fire`, `storm`, `gold`
 
 **Figuren** (`characters: [{kind, action, x, scale, facing, travel}]`)
-- `kind`: `knight`, `soldier`, `archer`, `king`, `queen`, `monk`, `peasant`, `plagueDoctor`, `executioner`, `noble`, `viking`
+- `kind`: `knight`, `soldier`, `archer`, `king`, `queen`, `monk`, `peasant`, `plagueDoctor`, `executioner`, `noble`, `viking`, `sultan`
 - `action`: `idle`, `walk`, `run`, `march`, `fight`, `point`, `cower`, `raiseArm`, `pray`
+- `item`: `none` (leere Hände), `sword`, `spear`, `bow`, `axe`, `torch`, `staff`, `pitchfork`, `book`
 - `x`: 0–1 (Position), `facing`: `left`/`right`, `travel`: Laufstrecke in Bildbreiten
 
 ## Regeln
-- `"pauses": "tight"` = durchgesprochen (fast keine Pausen), `"normal"` = mit Spannungspausen.
+- `"pauses": "none"` = durchgesprochen (fast keine Pausen), `"normal"` = mit Spannungspausen.
 - Effekte: `none`, `clear`, `epic` (etwas tiefer/voller, kein Hall), `dark`/`deep`/`room` (mit Hall).
 - Shorts-Stil: 7–10 Szenen, Ziel 30–40 s (≈ 80–100 Wörter mit Stimme E1). Erlaubt sind 28–45 s;
   außerhalb wird das Tempo automatisch um bis zu ±15 % angepasst.

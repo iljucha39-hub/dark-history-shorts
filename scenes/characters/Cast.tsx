@@ -36,6 +36,7 @@ export const Cast: React.FC<{
 								y={groundY + (c.scale && c.scale < 1 ? -(1 - c.scale) * 60 : 0)}
 								scale={s}
 								facing={c.facing ?? 'right'}
+								item={c.item}
 								p={p}
 								seed={i * 1.9}
 							/>

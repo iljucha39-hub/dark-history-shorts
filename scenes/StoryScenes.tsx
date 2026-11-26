@@ -66,6 +66,7 @@ export const PortraitScene: React.FC<SceneProps> = ({visual, p, index}) => {
 							y={1880}
 							scale={3.1 * (ch.scale ?? 1)}
 							facing={ch.facing ?? 'right'}
+							item={ch.item}
 							p={p}
 						/>
 					</RimLight>
@@ -250,6 +251,7 @@ export const TitleScene: React.FC<SceneProps> = ({visual, p, index}) => {
 									y={1900}
 									scale={3.4 * (c.scale ?? 1)}
 									facing={c.facing ?? 'right'}
+								item={c.item}
 									p={p}
 								/>
 							))}

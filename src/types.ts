@@ -60,6 +60,8 @@ export interface CharacterSpec {
 	facing?: 'left' | 'right';
 	/** horizontale Bewegung über die Szene in Bildbreiten (z. B. 0.3) */
 	travel?: number;
+	/** Gegenstand statt Standardwaffe, 'none' = leere Hände */
+	item?: 'none' | 'sword' | 'spear' | 'bow' | 'axe' | 'torch' | 'staff' | 'pitchfork' | 'book';
 }
 
 export interface MapMarker {

@@ -26,8 +26,8 @@ Wenn der Nutzer `NEUES VIDEO` schreibt (optional mit Themenwunsch):
    - **Hell & warm**: Stimmungen `sunset`/`dusk` bevorzugen; `night`/`storm` nur gezielt. Hauptfigur mehrfach als `closeup`.
    - **Kein „Folge …“-Abschluss.** Der letzte Satz führt inhaltlich zurück zum Hook (Loop-Effekt).
    - Jahreszahlen als Ziffern sind ok (1100–1999 werden korrekt ausgesprochen)
-   - Stimme immer (vom Nutzer gewählte Stimme „E1“: männlich, episch, ca. 1,2× schneller als vorher, durchgesprochen, ohne Hall):
-     `"voice": {"engine": "chatterbox", "reference": "piper:de_DE-thorsten-high", "exaggeration": 0.7, "cfgWeight": 0.5, "effect": "epic", "speed": 1.3, "pauses": "tight", "seed": <Zahl>}`
+   - Stimme immer (vom Nutzer gewählte Stimme „E1“: männlich, episch, schnell, ohne Hall; Nutzer will KEINE Pausen – `pauses: none`, keine Gedankenstriche oder „…“ im Sprechtext):
+     `"voice": {"engine": "chatterbox", "reference": "piper:de_DE-thorsten-high", "exaggeration": 0.7, "cfgWeight": 0.5, "effect": "epic", "speed": 1.3, "pauses": "none", "seed": <Zahl>}`
 4. `node pipeline/validate.mjs scripts/<id>.json` und `node pipeline/preview.mjs scripts/<id>.json`
    (lokal mit `REMOTION_BROWSER=/opt/pw-browsers/chromium_headless_shell`) ausführen,
    Vorschaubild `output/<id>/vorschau.jpg` ansehen und dem Nutzer Skript + Vorschau zeigen.

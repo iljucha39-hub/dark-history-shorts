@@ -1,0 +1,222 @@
+{
+ "id": "junius-1628",
+ "title": "Der letzte Brief des Johannes Junius",
+ "status": "draft",
+ "category": "Dunkle Kapitel",
+ "topic": "Der Brief des Bamberger Bürgermeisters Johannes Junius aus der Hexenhaft 1628",
+ "description": "Ein Vater schreibt seiner Tochter aus dem Hexengefängnis: Unschuldig muss ich sterben. #darkhistory #geschichte #hexenverfolgung #bamberg",
+ "hashtags": [
+  "darkhistory",
+  "geschichte",
+  "hexenverfolgung",
+  "bamberg",
+  "hexenprozess"
+ ],
+ "sources": [
+  "Brief des Johannes Junius an seine Tochter Veronica, 24. Juli 1628 (Staatsbibliothek Bamberg)",
+  "R. Zink / H. Hasselbeck: „So wirdt die gantze Burgerschafft verbrendt …“ – der Brief des Bamberger Bürgermeisters Johannes Junius (Universität Bamberg)",
+  "Wikipedia: Johannes Junius (Folter, Geständnis 5. Juli, Hinrichtung 6. August 1628, Ehefrau zuvor hingerichtet)",
+  "Hanover College: The Witch Hunts at Bamberg (englische Übersetzung des Briefs)",
+  "Universität Bamberg: Hexenverfolgung in Bamberg"
+ ],
+ "voice": {
+  "engine": "chatterbox",
+  "reference": "piper:de_DE-thorsten-high",
+  "exaggeration": 0.7,
+  "cfgWeight": 0.5,
+  "effect": "epic",
+  "speed": 1.3,
+  "pauses": "none",
+  "seed": 1628
+ },
+ "music": {
+  "seed": 1628,
+  "key": "c"
+ },
+ "scenes": [
+  {
+   "narration": "Ein Vater schreibt seiner Tochter: Unschuldig muss ich sterben.",
+   "visual": {
+    "type": "closeup",
+    "mood": "sunset",
+    "hook": {
+     "top": "SEIN LETZTER",
+     "main": "BRIEF"
+    },
+    "characters": [
+     {
+      "kind": "noble",
+      "item": "none"
+     }
+    ]
+   },
+   "emphasis": [
+    "Unschuldig"
+   ]
+  },
+  {
+   "narration": "Johannes Junius, Bürgermeister von Bamberg.",
+   "visual": {
+    "type": "village",
+    "mood": "sunset",
+    "characters": [
+     {
+      "kind": "noble",
+      "action": "walk",
+      "x": 0.3,
+      "travel": 0.2,
+      "item": "none"
+     }
+    ]
+   },
+   "emphasis": [
+    "Bürgermeister"
+   ]
+  },
+  {
+   "narration": "1628 wird er als Hexer angeklagt.",
+   "visual": {
+    "type": "document",
+    "text": "HEXER",
+    "subtext": "Anklage, Bamberg 1628",
+    "mood": "gold"
+   },
+   "emphasis": [
+    "Hexer"
+   ]
+  },
+  {
+   "narration": "Seine eigene Frau wurde bereits als Hexe hingerichtet.",
+   "visual": {
+    "type": "village",
+    "mood": "fire",
+    "fire": true,
+    "characters": [
+     {
+      "kind": "peasant",
+      "action": "cower",
+      "x": 0.3,
+      "item": "none"
+     },
+     {
+      "kind": "monk",
+      "action": "pray",
+      "x": 0.65,
+      "facing": "left"
+     }
+    ]
+   },
+   "emphasis": [
+    "Frau",
+    "hingerichtet"
+   ]
+  },
+  {
+   "narration": "Man foltert ihn mit Daumenschrauben, bis er gesteht.",
+   "visual": {
+    "type": "dungeon",
+    "mood": "blood",
+    "fire": true,
+    "characters": [
+     {
+      "kind": "noble",
+      "action": "cower",
+      "x": 0.35,
+      "item": "none"
+     },
+     {
+      "kind": "executioner",
+      "action": "idle",
+      "x": 0.68,
+      "facing": "left"
+     }
+    ]
+   },
+   "emphasis": [
+    "Daumenschrauben"
+   ]
+  },
+  {
+   "narration": "Dann muss er Komplizen nennen, die es nie gab.",
+   "visual": {
+    "type": "closeup",
+    "mood": "dusk",
+    "characters": [
+     {
+      "kind": "executioner",
+      "facing": "left"
+     }
+    ]
+   },
+   "emphasis": [
+    "nie"
+   ]
+  },
+  {
+   "narration": "In der Zelle schreibt er tagelang an einem Brief, seine Hände sind verkrüppelt.",
+   "visual": {
+    "type": "dungeon",
+    "mood": "night",
+    "fire": true,
+    "characters": [
+     {
+      "kind": "noble",
+      "action": "pray",
+      "x": 0.45,
+      "item": "none"
+     }
+    ]
+   },
+   "emphasis": [
+    "Hände"
+   ]
+  },
+  {
+   "narration": "Ein Wächter schmuggelt ihn hinaus.",
+   "visual": {
+    "type": "castle",
+    "mood": "dusk",
+    "characters": [
+     {
+      "kind": "soldier",
+      "action": "run",
+      "x": 0.2,
+      "travel": 0.4
+     }
+    ]
+   },
+   "emphasis": [
+    "schmuggelt"
+   ]
+  },
+  {
+   "narration": "Am sechsten August 1628 wird Junius hingerichtet.",
+   "visual": {
+    "type": "title",
+    "text": "6. AUGUST 1628",
+    "mood": "blood"
+   },
+   "emphasis": [
+    "hingerichtet"
+   ]
+  },
+  {
+   "narration": "Seine letzten Worte an sie: Gute Nacht, dein Vater sieht dich nimmermehr.",
+   "visual": {
+    "type": "closeup",
+    "mood": "sunset",
+    "characters": [
+     {
+      "kind": "noble",
+      "facing": "left",
+      "item": "none"
+     }
+    ]
+   },
+   "emphasis": [
+    "nimmermehr"
+   ]
+  }
+ ],
+ "pronunciations": {}
+}

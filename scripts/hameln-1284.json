@@ -1,0 +1,273 @@
+{
+ "id": "hameln-1284",
+ "title": "Hameln: 130 Kinder spurlos verschwunden",
+ "status": "draft",
+ "category": "Mysterien",
+ "topic": "Der Kinderauszug von Hameln 1284",
+ "description": "130 Kinder verschwanden an einem einzigen Tag. Was steckt wirklich hinter der Sage vom Rattenfänger? #darkhistory #geschichte #hameln #rattenfänger",
+ "hashtags": [
+  "darkhistory",
+  "geschichte",
+  "hameln",
+  "rattenfänger",
+  "mittelalter"
+ ],
+ "sources": [
+  "Lüneburger Handschrift (um 1430–1450): 130 Kinder, 26. Juni 1284 (Johannis und Pauli), bunt gekleideter Pfeifer",
+  "Museum Hameln: Inschrift und verlorenes Kirchenfenster (um 1300)",
+  "Wikipedia: Pied Piper of Hamelin (Ratten erst im 16. Jh., Theorie Ostsiedlung, Bungelosenstraße)",
+  "t-online: Rattenfänger von Hameln – was geschah am 26. Juni 1284",
+  "Planet Wissen (WDR): Der Rattenfänger von Hameln"
+ ],
+ "voice": {
+  "engine": "chatterbox",
+  "reference": "piper:de_DE-thorsten-high",
+  "exaggeration": 0.7,
+  "cfgWeight": 0.5,
+  "effect": "epic",
+  "speed": 1.3,
+  "pauses": "none",
+  "seed": 1284
+ },
+ "music": {
+  "seed": 1284,
+  "key": "a"
+ },
+ "scenes": [
+  {
+   "narration": "130 Kinder verschwanden an einem einzigen Tag. Spurlos.",
+   "visual": {
+    "type": "closeup",
+    "mood": "sunset",
+    "hook": {
+     "top": "130 KINDER",
+     "main": "SPURLOS"
+    },
+    "characters": [
+     {
+      "kind": "noble",
+      "item": "none"
+     }
+    ]
+   },
+   "emphasis": [
+    "Spurlos"
+   ]
+  },
+  {
+   "narration": "Hameln, 1284. Ein Fremder in bunter Kleidung kommt in die Stadt.",
+   "visual": {
+    "type": "village",
+    "mood": "sunset",
+    "characters": [
+     {
+      "kind": "noble",
+      "action": "walk",
+      "x": 0.1,
+      "travel": 0.35,
+      "item": "none"
+     }
+    ]
+   },
+   "emphasis": [
+    "Fremder"
+   ]
+  },
+  {
+   "narration": "Er spielt auf seiner Pfeife.",
+   "visual": {
+    "type": "closeup",
+    "mood": "dusk",
+    "characters": [
+     {
+      "kind": "noble",
+      "facing": "left",
+      "item": "none"
+     }
+    ]
+   },
+   "emphasis": [
+    "Pfeife"
+   ]
+  },
+  {
+   "narration": "Und die Kinder folgen ihm durch das Stadttor hinaus.",
+   "visual": {
+    "type": "village",
+    "mood": "dusk",
+    "camera": "panRight",
+    "characters": [
+     {
+      "kind": "noble",
+      "action": "walk",
+      "x": 0.55,
+      "travel": 0.3,
+      "item": "none"
+     },
+     {
+      "kind": "peasant",
+      "action": "walk",
+      "x": 0.35,
+      "scale": 0.6,
+      "travel": 0.3,
+      "item": "none"
+     },
+     {
+      "kind": "peasant",
+      "action": "walk",
+      "x": 0.2,
+      "scale": 0.55,
+      "travel": 0.3,
+      "item": "none"
+     },
+     {
+      "kind": "peasant",
+      "action": "walk",
+      "x": 0.05,
+      "scale": 0.6,
+      "travel": 0.3,
+      "item": "none"
+     }
+    ]
+   },
+   "emphasis": [
+    "Kinder"
+   ]
+  },
+  {
+   "narration": "Laut der ältesten Chronik kehrt keines zurück.",
+   "visual": {
+    "type": "document",
+    "text": "130",
+    "subtext": "Kinder – verloren am 26. Juni 1284",
+    "mood": "gold"
+   },
+   "emphasis": [
+    "keines"
+   ]
+  },
+  {
+   "narration": "Und die Ratten? Die tauchen erst rund 300 Jahre später in der Geschichte auf.",
+   "visual": {
+    "type": "title",
+    "text": "DIE RATTEN?",
+    "subtext": "erst im 16. Jahrhundert",
+    "mood": "sunset"
+   },
+   "emphasis": [
+    "Ratten",
+    "später"
+   ]
+  },
+  {
+   "narration": "Historiker vermuten, die jungen Leute zogen als Siedler nach Osten.",
+   "visual": {
+    "type": "map",
+    "map": {
+     "bounds": [
+      6,
+      46,
+      28,
+      56
+     ],
+     "title": "NACH OSTEN?",
+     "markers": [
+      {
+       "lon": 9.36,
+       "lat": 52.1,
+       "label": "Hameln"
+      }
+     ],
+     "route": [
+      [
+       9.36,
+       52.1
+      ],
+      [
+       13,
+       52.6
+      ],
+      [
+       17,
+       52.3
+      ],
+      [
+       21,
+       51.5
+      ]
+     ]
+    }
+   },
+   "emphasis": [
+    "Osten"
+   ]
+  },
+  {
+   "narration": "Andere glauben an eine Seuche oder ein schreckliches Unglück.",
+   "visual": {
+    "type": "village",
+    "mood": "fog",
+    "characters": [
+     {
+      "kind": "plagueDoctor",
+      "action": "walk",
+      "x": 0.3,
+      "travel": 0.2
+     }
+    ]
+   },
+   "emphasis": [
+    "Seuche",
+    "Unglück"
+   ]
+  },
+  {
+   "narration": "Bis heute darf in einer Gasse in Hameln keine Musik gespielt werden.",
+   "visual": {
+    "type": "village",
+    "mood": "sunset",
+    "camera": "pushIn",
+    "characters": [
+     {
+      "kind": "peasant",
+      "action": "idle",
+      "x": 0.3,
+      "item": "none"
+     },
+     {
+      "kind": "peasant",
+      "action": "idle",
+      "x": 0.7,
+      "facing": "left",
+      "item": "none"
+     }
+    ]
+   },
+   "emphasis": [
+    "keine",
+    "Musik"
+   ]
+  },
+  {
+   "narration": "Zur Erinnerung an 130 Kinder, die nie zurückkamen.",
+   "visual": {
+    "type": "closeup",
+    "mood": "sunset",
+    "characters": [
+     {
+      "kind": "noble",
+      "facing": "left",
+      "item": "none"
+     }
+    ]
+   },
+   "emphasis": [
+    "nie"
+   ]
+  }
+ ],
+ "pronunciations": {
+  "130": "hundertdreißig",
+  "300": "dreihundert"
+ }
+}

@@ -344,9 +344,12 @@ export const Figure: React.FC<{
 	/** Animationsgeschwindigkeit */
 	speed?: number;
 	seed?: number;
-}> = ({kind, action = 'idle', x, y, scale = 1, facing = 'right', p, speed = 1, seed = 0}) => {
+	/** Gegenstand in der Hand statt Standardwaffe; 'none' = leere Hände */
+	item?: Look['weapon'] | 'none';
+}> = ({kind, action = 'idle', x, y, scale = 1, facing = 'right', p, speed = 1, seed = 0, item}) => {
 	const frame = useCurrentFrame();
-	const look = LOOKS[kind] ?? LOOKS.peasant;
+	const base = LOOKS[kind] ?? LOOKS.peasant;
+	const look: Look = item ? {...base, weapon: item === 'none' ? undefined : item} : base;
 	const rate = action === 'run' ? 0.36 : action === 'fight' ? 0.16 : action === 'idle' || action === 'pray' ? 0.08 : 0.22;
 	const pose = poseFor(action, frame * rate * speed, seed);
 	const thigh = 46;

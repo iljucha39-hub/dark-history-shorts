@@ -232,7 +232,8 @@ def make_engine(script: dict, voice_dir: Path, length_scale: float | None = None
                                 cfg_weight=float(vcfg.get("cfgWeight", 0.3)),
                                 temperature=float(vcfg.get("temperature", 0.8)),
                                 reference=ref,
-                                seed=int(vcfg.get("seed", 1)))
+                                seed=int(vcfg.get("seed", 1)),
+                                max_gap=0.08 if vcfg.get("pauses") == "none" else None)
     model = vcfg.get("model", "de_DE-thorsten-high")
     ls = length_scale if length_scale is not None else float(vcfg.get("lengthScale", 1.0))
     return PiperEngine(load_voice(model, voice_dir), ls, vcfg.get("speaker"),
@@ -243,6 +244,7 @@ PAUSES = {
     # Satzpause, Szenenpause, nach „…“, nach „?“
     "normal": (SENTENCE_GAP, SCENE_GAP, 0.5, 0.28),
     "tight": (0.04, 0.06, 0.18, 0.08),  # „durchgesprochen“
+    "none": (0.0, 0.0, 0.05, 0.02),  # ohne Pausen, auch innerhalb der Sätze gekürzt
 }
 
 
@@ -365,7 +367,9 @@ def main() -> int:
     # Dauer automatisch in den Zielbereich 35–60 s bringen (Tempo max. ±15 %)
     adjusted = False
     tempo = 1.0
-    if engine is not None and (tl["duration"] > MAX_DUR or tl["duration"] < MIN_DUR):
+    # ohne Pausen ("none") nie künstlich verlangsamen – kurz ist dann gewollt
+    too_short = tl["duration"] < MIN_DUR and vcfg.get("pauses") != "none"
+    if engine is not None and (tl["duration"] > MAX_DUR or too_short):
         target = MAX_DUR - 1.5 if tl["duration"] > MAX_DUR else MIN_DUR + 1.0
         speech = tl["duration"] - LEAD_IN - TAIL
         factor = max(0.85, min(1.15, (target - LEAD_IN - TAIL) / speech))

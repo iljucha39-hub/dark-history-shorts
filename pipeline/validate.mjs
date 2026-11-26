@@ -9,13 +9,14 @@ export const SCENE_TYPES = ['title', 'castle', 'village', 'battle', 'map', 'port
 export const CAMERAS = ['pushIn', 'pullOut', 'panLeft', 'panRight', 'tiltUp', 'tiltDown', 'drift', 'punchIn'];
 export const MOODS = ['night', 'blood', 'fog', 'fire', 'storm', 'gold', 'sunset', 'dusk'];
 export const KINDS = ['knight', 'soldier', 'archer', 'king', 'queen', 'monk', 'peasant', 'plagueDoctor', 'executioner', 'noble', 'viking', 'sultan'];
+export const ITEMS = ['none', 'sword', 'spear', 'bow', 'axe', 'torch', 'staff', 'pitchfork', 'book'];
 export const ACTIONS = ['idle', 'walk', 'run', 'march', 'fight', 'point', 'cower', 'raiseArm', 'pray'];
 
 const WORDS_PER_SECOND = 2.5; // grobe Schätzung für Piper/Thorsten bei lengthScale 1.0
 
 export const estimateSeconds = (script) => {
 	const words = script.scenes.reduce((a, s) => a + s.narration.split(/\s+/).filter(Boolean).length, 0);
-	return {words, seconds: words / WORDS_PER_SECOND / (script.voice?.speed ?? 1) + script.scenes.length * (script.voice?.pauses === 'tight' ? 0.08 : 0.25) + 0.5};
+	return {words, seconds: words / WORDS_PER_SECOND / (script.voice?.speed ?? 1) + script.scenes.length * ({tight: 0.08, none: 0.02}[script.voice?.pauses] ?? 0.25) + 0.5};
 };
 
 /** @returns {{errors: string[], warnings: string[]}} */

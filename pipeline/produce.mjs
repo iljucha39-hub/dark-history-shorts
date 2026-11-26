@@ -225,7 +225,7 @@ async function produce(scriptFile, serveUrl) {
 	const checks = [
 		['Auflösung 1080×1920', info.width === 1080 && info.height === 1920, `${info.width}×${info.height}`],
 		['30 FPS', Math.abs(info.fps - 30) < 0.01, `${info.fps.toFixed(2)}`],
-		['Dauer 28–45 s (Ziel 30–40)', frameRange ? null : info.duration >= 28 && info.duration <= 45.5, `${info.duration.toFixed(2)} s`],
+		['Dauer 20–45 s (Ziel 25–40)', frameRange ? null : info.duration >= 20 && info.duration <= 45.5, `${info.duration.toFixed(2)} s`],
 		['Tonspur vorhanden', Boolean(info.audioCodec), info.audioCodec ?? '—'],
 		['Echte Stimme (kein Platzhalter)', !String(timeline.meta.voice).startsWith('PLATZHALTER'), timeline.meta.voice],
 		['Szenenanzahl 6–10', script.scenes.length >= 6 && script.scenes.length <= 10, String(script.scenes.length)],

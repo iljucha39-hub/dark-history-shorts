@@ -22,7 +22,7 @@ class ChatterboxEngine:
     name = "chatterbox"
 
     def __init__(self, exaggeration: float = 0.9, cfg_weight: float = 0.3, temperature: float = 0.8,
-                 reference: str | None = None, seed: int = 1):
+                 reference: str | None = None, seed: int = 1, max_gap: float | None = None):
         import torch
         import torchaudio
         from chatterbox.mtl_tts import ChatterboxMultilingualTTS
@@ -35,6 +35,8 @@ class ChatterboxEngine:
         self.cfg_weight = cfg_weight
         self.temperature = temperature
         self.seed = seed
+        # max_gap: Sprechpausen innerhalb eines Satzes auf höchstens so viele Sekunden kürzen
+        self.max_gap = max_gap
         if reference:
             self.model.prepare_conditionals(reference, exaggeration=exaggeration)
         from faster_whisper import WhisperModel
@@ -59,6 +61,32 @@ class ChatterboxEngine:
         b = min(len(audio), idx[-1] + int(0.08 * sr))
         return audio[a:b]
 
+    @staticmethod
+    def tighten(audio: np.ndarray, sr: int, max_gap: float, thresh: float = 0.012) -> np.ndarray:
+        """Kürzt stille Stellen (Atempausen, Komma-Pausen) auf max_gap Sekunden."""
+        hop = int(0.01 * sr)
+        n = len(audio) // hop
+        if n < 3:
+            return audio
+        rms = np.sqrt(np.mean(audio[: n * hop].reshape(n, hop) ** 2, axis=1))
+        silent = rms < thresh
+        keep = int(max_gap / 0.01)
+        out, pos, i = [], 0, 0
+        while i < n:
+            if silent[i]:
+                j = i
+                while j < n and silent[j]:
+                    j += 1
+                if j - i > keep and i > 0 and j < n:  # nur Pausen zwischen Wörtern
+                    half = keep // 2
+                    out.append(audio[pos:(i + half) * hop])
+                    pos = (j - (keep - half)) * hop
+                i = j
+            else:
+                i += 1
+        out.append(audio[pos:])
+        return np.concatenate(out)
+
     def synth(self, text: str, words: list[str], pace: float = 1.0):
         """→ (audio, Wort-Spannen in Samples oder None, Abtastrate)"""
         self.calls += 1
@@ -67,6 +95,8 @@ class ChatterboxEngine:
         best = None
         for attempt in range(4):
             audio = self._trim(self._generate(text, self.seed * 1000 + self.calls * 10 + attempt), self.sr)
+            if self.max_gap:
+                audio = self.tighten(audio, self.sr, self.max_gap)
             dur = len(audio) / self.sr
             spans = self.align(audio, words)
             ok_len = 0.55 * expected <= dur <= 2.2 * expected + 0.8
