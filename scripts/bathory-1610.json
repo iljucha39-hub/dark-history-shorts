@@ -1,0 +1,71 @@
+{
+ "id": "bathory-1610",
+ "title": "Die Blutgräfin: Mord oder Intrige?",
+ "status": "draft",
+ "category": "Grausame Herrscher",
+ "topic": "Elisabeth Báthory und die Untersuchung von 1610",
+ "description": "Sie soll im Blut junger Mädchen gebadet haben. Doch die Wahrheit ist noch verrückter. #darkhistory #geschichte #báthory #blutgräfin",
+ "hashtags": ["darkhistory", "geschichte", "bathory", "blutgräfin", "mittelalter"],
+ "sources": [
+  "Encyclopaedia Britannica: Elizabeth Báthory (Haft in Čachtice, Tod 21.8.1614, nie verurteilt)",
+  "Wikipedia: Elizabeth Báthory (Untersuchung durch Thurzó 1610, Zeugenaussagen, Zahl 650 aus einer Aussage)",
+  "National Geographic: The bloody legend of Hungary's serial killer countess (Blutbad-Legende erst 1744 durch László Turóczi)",
+  "History Hit: 10 Facts About Elizabeth Báthory (Hinrichtung der Diener 1611)",
+  "Der Standard: Der Fall Elisabeth Báthory – Serienmörderin oder Intrigenopfer? (Schulden der Krone, politische Motive umstritten)"
+ ],
+ "voice": {"engine": "chatterbox", "reference": "piper:de_DE-thorsten-high", "exaggeration": 0.7, "cfgWeight": 0.5, "effect": "epic", "speed": 1.3, "pauses": "tight", "seed": 1610},
+ "music": {"seed": 1610, "key": "d"},
+ "pronunciations": {"Báthory": "Batori", "Čachtice": "Tschachtitze", "Thurzó": "Turso"},
+ "scenes": [
+  {
+   "narration": "Sie soll im Blut junger Mädchen gebadet haben – um ewig jung zu bleiben.",
+   "visual": {"type": "closeup", "mood": "sunset", "hook": {"top": "DIE BLUT", "main": "GRÄFIN"}, "characters": [{"kind": "queen"}], "flags": ["#c8102e"]},
+   "emphasis": ["Blut"]
+  },
+  {
+   "narration": "Elisabeth Báthory, eine der reichsten Frauen Ungarns.",
+   "visual": {"type": "closeup", "mood": "dusk", "characters": [{"kind": "queen", "facing": "left"}]},
+   "emphasis": ["reichsten"]
+  },
+  {
+   "narration": "Doch auf ihrer Burg Čachtice verschwinden Dienstmädchen – eines nach dem anderen.",
+   "visual": {"type": "castle", "mood": "dusk", "characters": [{"kind": "peasant", "action": "cower", "x": 0.3}]},
+   "emphasis": ["verschwinden"]
+  },
+  {
+   "narration": "1610 stürmt Graf Thurzó die Burg und nimmt sie fest.",
+   "visual": {"type": "castle", "mood": "fire", "camera": "punchIn", "characters": [{"kind": "knight", "action": "march", "x": 0.15, "travel": 0.3}, {"kind": "soldier", "action": "march", "x": 0.05, "travel": 0.3}]},
+   "emphasis": ["stürmt"]
+  },
+  {
+   "narration": "Hunderte Zeugen sagen gegen sie aus.",
+   "visual": {"type": "village", "mood": "sunset", "characters": [{"kind": "peasant", "action": "point", "x": 0.3}, {"kind": "monk", "action": "point", "x": 0.55}, {"kind": "peasant", "action": "point", "x": 0.75, "facing": "left"}]},
+   "emphasis": ["Hunderte"]
+  },
+  {
+   "narration": "Eine Zeugin behauptet sogar: 650 Tote.",
+   "visual": {"type": "document", "text": "650", "subtext": "Tote – laut einer Zeugin", "mood": "gold"},
+   "emphasis": ["650"]
+  },
+  {
+   "narration": "Ihre Diener werden hingerichtet. Sie selbst wird nie verurteilt.",
+   "visual": {"type": "dungeon", "mood": "blood", "fire": true, "characters": [{"kind": "executioner", "action": "idle", "x": 0.6, "facing": "left"}]},
+   "emphasis": ["nie"]
+  },
+  {
+   "narration": "Man sperrt sie in ihre Gemächer, angeblich zugemauert, bis zu ihrem Tod 1614.",
+   "visual": {"type": "closeup", "mood": "night", "characters": [{"kind": "queen", "facing": "left"}]},
+   "emphasis": ["zugemauert"]
+  },
+  {
+   "narration": "Der König schuldete ihr ein Vermögen. Mord oder Intrige?",
+   "visual": {"type": "closeup", "mood": "gold", "characters": [{"kind": "king"}], "flags": ["#e0b23a"]},
+   "emphasis": ["Vermögen", "Intrige"]
+  },
+  {
+   "narration": "Und das Blutbad? Das tauchte erst über hundert Jahre später auf.",
+   "visual": {"type": "title", "text": "ERFUNDEN?", "mood": "blood"},
+   "emphasis": ["Blutbad", "später"]
+  }
+ ]
+}
