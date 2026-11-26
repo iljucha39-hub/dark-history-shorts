@@ -15,15 +15,16 @@ hier sind nur Aufhänger. Erledigte Themen abhaken (`[x]`) und Skript-ID dahinte
 - [x] Barbarossas Tod (1190) – `barbarossa-1190`
 - [x] Vlad III. „Dracula“ (1462) – `dracula-1462`
 - [x] Der Fall Konstantinopels (1453) – `konstantin-1453`
+- [x] Elisabeth Báthory, die Blutgräfin (1610) – `bathory-1610`
+- [x] Der Rattenfänger von Hameln (1284) – `hameln-1284`
+- [x] Der Brief des Johannes Junius (1628) – `junius-1628`
 
 ## Mysterien & unglaubliche Ereignisse
 - [ ] **Die Tanzwut von Straßburg (1518)** – Menschen tanzen tagelang, die Stadt engagiert Musiker. *Szenen: village, map, document*
-- [ ] **Der Rattenfänger von Hameln (1284)** – 130 Kinder verschwinden; was steckt hinter der Sage? *village, document, map*
 - [ ] **Kaspar Hauser (1828)** – ein Junge taucht in Nürnberg auf, angeblich jahrelang im Dunkeln gefangen. *dungeon, portrait, document*
 - [ ] **Der Untergang der Vasa (1628)** – Schwedens Prunkschiff sinkt nach rund 1.300 Metern. *sea, title, document*
 
 ## Grausame Herrscher & vergessene Personen
-- [ ] **Elisabeth Báthory** – die „Blutgräfin“: Verbrechen oder politische Intrige? *castle, portrait, dungeon*
 - [ ] **Peter Stumpp, der „Werwolf von Bedburg“ (1589)** – ein Prozess voller Folter und Aberglauben. *village, dungeon, document*
 
 ## Kriege & Schlachten
@@ -37,7 +38,6 @@ hier sind nur Aufhänger. Erledigte Themen abhaken (`[x]`) und Skript-ID dahinte
 - [ ] **Der Große Brand von London (1666)** – vier Tage Feuer. *village (fire), map, document*
 
 ## Neu
-- [ ] **Der Brief des Johannes Junius (1628)** – ein Bamberger Bürgermeister schreibt aus der Hexenhaft an seine Tochter. *dungeon, document, portrait*
 
 ## Mythen entlarvt
 - [ ] **Die Eiserne Jungfrau** – das berühmte Folterinstrument gab es im Mittelalter wohl gar nicht. *dungeon, document, portrait*
