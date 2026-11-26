@@ -18,6 +18,9 @@ hier sind nur Aufhänger. Erledigte Themen abhaken (`[x]`) und Skript-ID dahinte
 - [x] Elisabeth Báthory, die Blutgräfin (1610) – `bathory-1610`
 - [x] Der Rattenfänger von Hameln (1284) – `hameln-1284`
 - [x] Der Brief des Johannes Junius (1628) – `junius-1628`
+- [x] Die Große Belagerung von Malta (1565) – `malta-1565`
+- [x] Die Schlacht bei Liegnitz (1241) – `liegnitz-1241`
+- [x] Die Schlacht von Stirling Bridge (1297) – `stirling-1297`
 
 ## Mysterien & unglaubliche Ereignisse
 - [ ] **Die Tanzwut von Straßburg (1518)** – Menschen tanzen tagelang, die Stadt engagiert Musiker. *Szenen: village, map, document*
@@ -29,7 +32,6 @@ hier sind nur Aufhänger. Erledigte Themen abhaken (`[x]`) und Skript-ID dahinte
 
 ## Kriege & Schlachten
 - [ ] **Die Schlacht von Azincourt (1415)** – Langbögen gegen Ritter im Schlamm. *battle, map, portrait*
-- [ ] **Die Schlacht bei Liegnitz (1241)** – der Mongolensturm erreicht Mitteleuropa. *battle, map, document*
 
 ## Dunkle Kapitel
 - [ ] **Die Hexenprozesse von Bamberg (1626–1631)** – einer der schlimmsten Verfolgungswellen. *village, dungeon, document*
